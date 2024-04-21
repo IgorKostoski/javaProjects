@@ -25,7 +25,18 @@ public class PassengersController {
 		passenger.setEmail(email);
 		ArrayList<Passenger> passengers = database.getAllPassengers();
 		
-		passenger.setId(passengers.get(passengers.size()-1).getId()+1);
+		int id;
+		
+		if(passengers.size()!=0) {
+			id = passengers.get(passengers.size()-1).getId()+1;
+		} else {
+			id = 0;
+		}
+		
+		passenger.setId(id);
+		database.AddPassenger(passenger);
+		System.out.println("Passenger added successfully!");
+		
 		
 		
 	}

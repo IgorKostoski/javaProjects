@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 public class Database {
 	
-	private  String url = "jdbc:mysql://localhost/Airline Management System";
+	private  String url = "jdbc:mysql://localhost:3306/Airline Management System";
 	
-	private  String user = "user";
-	private  String pass = "123456";
+	private  String user = "igor";
+	private  String pass = "";
 	
 	private  Statement statement;
 	
@@ -25,6 +25,16 @@ public class Database {
 								ResultSet.CONCUR_READ_ONLY);
 		
 
+		
+	}
+	
+	
+	public void AddPassenger(Passenger p) throws SQLException {
+		  String insert = "INSERT INTO `Passengers`(`id`, `firstName`, `lastName`, `Phone`, `email`) "
+		  		+ "VALUES ('" + p.getId() + "','" + p.getFirstName() + "','" + p.getLastName()
+		  		+ "','" + p.getPhone() + "','" + p.getEmail() + "');";
+		
+		statement.execute(insert);
 		
 	}
 	
