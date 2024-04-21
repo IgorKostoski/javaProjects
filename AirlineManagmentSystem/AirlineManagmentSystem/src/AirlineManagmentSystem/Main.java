@@ -2,22 +2,26 @@ package AirlineManagmentSystem;
 
 
 import java.sql.*;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class Main {
 	
-	private String url = "jdbc:mysql://localhost/Airline Management System";
+	private static String url = "jdbc:mysql://localhost/Airline Management System";
 	
-	private String user = "user";
-	private String pass = "123456";
+	private static String user = "user";
+	private static String pass = "123456";
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws SQLException {
+		
+		
+		PassengersController passengersController = new PassengersController(connection());
 
 	}
 	
 	
 	
-	private Connection connection() throws SQLException  {
+	private static Connection connection() throws SQLException  {
 		return DriverManager.getConnection(url, user, pass);
 	}
 
