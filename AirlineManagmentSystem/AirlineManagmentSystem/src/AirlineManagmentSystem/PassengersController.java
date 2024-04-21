@@ -1,14 +1,18 @@
 package AirlineManagmentSystem;
 
-import java.sql.Connection;
+import java.util.Scanner;
 
 public class PassengersController {
 	
-	private Connection connection;
-	
-	public PassengersController(Connection connection) {
-		this.connection = connection;
+	public static void AddNewPassenger(Database database, Scanner s) {
+		
+		
+		System.out.println("");
 		
 	}
+	
+
+	
+	
 
 }

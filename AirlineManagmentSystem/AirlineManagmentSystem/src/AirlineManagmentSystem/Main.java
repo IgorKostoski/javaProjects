@@ -1,28 +1,20 @@
 package AirlineManagmentSystem;
 
-
-import java.sql.*;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class Main {
 	
-	private static String url = "jdbc:mysql://localhost/Airline Management System";
 	
-	private static String user = "user";
-	private static String pass = "123456";
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException{
 		
 		
-		PassengersController passengersController = new PassengersController(connection());
+		Database database = new Database();
+		Scanner s = new Scanner(System.in);
 
 	}
 	
 	
-	
-	private static Connection connection() throws SQLException  {
-		return DriverManager.getConnection(url, user, pass);
-	}
 
 }
