@@ -71,6 +71,12 @@ public class PassengersController {
 		System.out.println("Enter email : \n(-1 to keep old value)");
 		String email = s.next();
 		if(email.equals("-1")) email = passenger.getEmail();
+		
+		passenger.setFirstName(firstName);
+		passenger.setLastName(lastName);
+		passenger.setPhone(Phone);
+		passenger.setEmail(email);
+		
 		}
 	
 	public static void  printAllpasangers(Database database) throws SQLException {
