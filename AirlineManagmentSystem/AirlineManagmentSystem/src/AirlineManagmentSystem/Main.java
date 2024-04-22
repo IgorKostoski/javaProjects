@@ -18,6 +18,7 @@ public class Main {
 		do {
 			System.out.println("Welcome to Airline Manager System");
 			System.out.println("1. Add new passenger");
+			System.out.println("2. Edit passanger");
 			System.out.println("2. Quit");
 			
 			i = s.nextInt();
@@ -26,7 +27,7 @@ public class Main {
 				PassengersController.AddNewPassenger(database, s);
 				break;
 			}
-		} while (i!=2);
+		} while (i!=3);
 		
 	
 
