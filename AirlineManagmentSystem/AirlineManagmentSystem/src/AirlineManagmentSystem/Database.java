@@ -52,6 +52,17 @@ public class Database {
 		
 	}
 	
+	
+	public  void editPassenger(Passenger p) throws SQLException {
+		  String update = "UPDATE `Passengers` SET `id`='"+p.getId()+"',`firstName`='"+p.getFirstName()+"',"
+		  		+ "`lastName`='"+p.getLastName()+"',`Phone`='"+p.getPhone()+"',"
+		  				+ "`email`='"+p.getEmail()+"' WHERE `id` = '"+p.getId()+"';";
+			
+			statement.execute(update);
+		
+		
+	}
+	
 	public ArrayList<Passenger> getAllPassengers() throws SQLException{
 		String get = "SELECT * FROM `Passengers`;";
 		ResultSet rs = statement.executeQuery(get);
