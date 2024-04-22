@@ -41,6 +41,38 @@ public class PassengersController {
 		
 	}
 	
+	public static void EditPassenger(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter passenger id(int): \n(-1 to show all passengers)");
+		int id = s.nextInt();
+		if(id == -1) {
+			printAllpasangers(database);
+			System.out.println("Enter passenger id(int):");
+			id = s.nextInt();
+		}
+		
+		Passenger passenger = database.getPassenger(id);
+		
+		
+		
+		
+		
+		System.out.println("Enter first name: \n(-1 to keep old values)");
+		String firstName =  s.next();
+	}
+	
+	public static void  printAllpasangers(Database database) throws SQLException {
+		ArrayList<Passenger> passengers = database.getAllPassengers();
+		System.out.println("\n-------------------------------");
+		for (Passenger p : passengers) {
+			System.out.println("id: " + p.getId());
+			System.out.println("Name" + p.getFirstName()+ " " + p.getLastName());
+			System.out.println("Phone: " + p.getPhone());
+			System.out.println("Email :" + p.getEmail());
+			System.out.println();
+		}
+		System.out.println("\n-------------------------------");
+	}
+	
 
 	
 	
