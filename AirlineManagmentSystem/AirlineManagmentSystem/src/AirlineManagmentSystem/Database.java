@@ -43,6 +43,7 @@ public class Database {
 
 		ResultSet rs = statement.executeQuery(get);
 		Passenger p = new Passenger();
+		rs.next();
 		p.setId(Integer.parseInt(rs.getString("id")));
 		p.setFirstName(rs.getString("firstName"));
 		p.setLastName(rs.getString("lastName"));

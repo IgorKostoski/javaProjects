@@ -26,6 +26,9 @@ public class Main {
 			case 1: 
 				PassengersController.AddNewPassenger(database, s);
 				break;
+			case 2:
+				PassengersController.EditPassenger(database, s);
+				break;
 			}
 		} while (i!=3);
 		

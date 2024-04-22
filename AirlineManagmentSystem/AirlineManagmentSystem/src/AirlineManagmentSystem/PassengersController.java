@@ -76,6 +76,8 @@ public class PassengersController {
 		passenger.setLastName(lastName);
 		passenger.setPhone(Phone);
 		passenger.setEmail(email);
+		database.editPassenger(passenger);
+		System.out.println("Passenger edited succesfuly");
 		
 		}
 	
