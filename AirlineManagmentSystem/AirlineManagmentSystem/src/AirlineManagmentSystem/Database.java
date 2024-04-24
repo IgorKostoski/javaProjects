@@ -28,6 +28,22 @@ public class Database {
 		
 	}
 	
+	
+	public void AddPassenger(Passenger p) throws SQLException {
+		
+		String insert = "INSERT INTO `Passengers`(`id`, `firstName`, `lastName`,"
+				+ " `Phone`, `email`)"
+				+ " VALUES "
+				+ "('"+p.getId()+"','"+p.getFirstName()+"',"
+						+ "'"+p.getLastName()+"',"
+								+ "'"+p.getPhone()+"','"+p.getEmail()+"');";
+		
+		statement.execute(insert);
+		
+		
+		
+	}
+	
 	public ArrayList<Passenger> getAllPassengers() throws SQLException{
 		
 		String get = "SELECT * FROM `Passengers`;";
