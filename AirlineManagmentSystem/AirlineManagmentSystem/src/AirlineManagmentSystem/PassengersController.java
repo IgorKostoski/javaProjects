@@ -77,6 +77,13 @@ import java.sql.SQLException;
 			String email = s.next();
 			if(email.equals("-1")) email = passenger.getEmail();
 			
+			
+			passenger.setFirstName(firstName);
+			passenger.setLastName(lastName);
+			passenger.setPhone(Phone);
+			passenger.setEmail(email);
+			
+			
 		}
 		
 		
