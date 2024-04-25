@@ -46,21 +46,27 @@ import java.sql.SQLException;
 			
 		}
 		
-		public static void EditPassenger(Database database, Scanner s) {
+		public static void EditPassenger(Database database, Scanner s) throws SQLException {
 			System.out.println("Enter passenger id(int): \n(-1 to show all passengers)");
 			int id = s.nextInt();
 			if (id == -1) {
-				printAllPassenger(database);
+				printAllPassengers(database);
 			}
 		}
 		
 		public static void printAllPassengers(Database database) throws SQLException {
 			ArrayList<Passenger> passengers = database.getAllPassengers();
 			
+			System.out.println("\n---------------------------");
+			
 			for  (Passenger p : passengers) {
 				System.out.println("id: " + p.getId());
 				System.out.println("Name :" + p.getFirstName()+" " +p.getLastName());
+				System.out.println("Phone: " + p.getPhone());
+				System.out.println("Email :" + p.getEmail());
+				System.out.println();				
 			}
+			System.out.println("---------------------------\n");
 		}
 		
 		
