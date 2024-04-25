@@ -21,7 +21,8 @@ public class Main {
 		do {
 			System.out.println("Welcome to Airline Managment System");
 			System.out.println("1. Add new passenger");
-			System.out.println("2. Quit");
+			System.out.println("2. Edit passengers");
+			System.out.println("3. Quit");
 			
 			
 			i = s.nextInt();
@@ -31,7 +32,7 @@ public class Main {
 				break;
 			}
 			} 
-		while( i != 2);
+		while( i != 3);
 		
 		
 		

@@ -46,6 +46,23 @@ import java.sql.SQLException;
 			
 		}
 		
+		public static void EditPassenger(Database database, Scanner s) {
+			System.out.println("Enter passenger id(int): \n(-1 to show all passengers)");
+			int id = s.nextInt();
+			if (id == -1) {
+				printAllPassenger(database);
+			}
+		}
+		
+		public static void printAllPassengers(Database database) throws SQLException {
+			ArrayList<Passenger> passengers = database.getAllPassengers();
+			
+			for  (Passenger p : passengers) {
+				System.out.println("id: " + p.getId());
+				System.out.println("Name :" + p.getFirstName()+" " +p.getLastName());
+			}
+		}
+		
 		
 		
 	}
