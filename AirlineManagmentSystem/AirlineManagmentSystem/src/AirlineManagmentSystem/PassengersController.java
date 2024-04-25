@@ -12,7 +12,7 @@ import java.sql.SQLException;
 		
 		
 		public static void AddNewPassenger(Database database, Scanner s) throws SQLException {
-			System.out.println("Enter first name :");
+			System.out.println("Enter first name : ");
 			String firstName = s.next();
 			System.out.println("Enter last name: ");
 			String lastName = s.next();
@@ -82,8 +82,19 @@ import java.sql.SQLException;
 			passenger.setLastName(lastName);
 			passenger.setPhone(Phone);
 			passenger.setEmail(email);
+			database.editPassenger(passenger);
+			System.out.println("Passenger edited succesfully!");
 			
 			
+		}
+		
+		
+		public static void findPassengerIdByName(Database database, Scanner s) throws SQLException {
+			System.out.println("Enter first name: ");
+			String firstName = s.next();
+			System.out.println("Enter last name: ");
+			String lastName = s.next();
+			Passenger p = database.getPassenger(firstName, lastName);
 		}
 		
 		
@@ -98,9 +109,9 @@ import java.sql.SQLException;
 			
 			for  (Passenger p : passengers) {
 				System.out.println("id: " + p.getId());
-				System.out.println("Name :" + p.getFirstName()+" " +p.getLastName());
+				System.out.println("Name : " + p.getFirstName()+" " +p.getLastName());
 				System.out.println("Phone: " + p.getPhone());
-				System.out.println("Email :" + p.getEmail());
+				System.out.println("Email : " + p.getEmail());
 				System.out.println();				
 			}
 			System.out.println("---------------------------\n");

@@ -50,7 +50,7 @@ public class Database {
 		
 		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `id` = "+id+";";
 		ResultSet rs = statement.executeQuery(get);
-		
+		rs.next();
 		Passenger p = new Passenger();
 		p.setId(Integer.parseInt(rs.getString("id")));
 		p.setFirstName(rs.getString("firstName"));
@@ -65,7 +65,44 @@ public class Database {
 		
 	}
 	
-	public static void editPassenger(Passenger p) {
+	
+public Passenger getPassenger(String firstName, String lastName) throws SQLException {
+		
+		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `firstName` = "+firstName+";";
+		ResultSet rs = statement.executeQuery(get);
+		Passenger passenger = new Passenger();
+		while(rs.next()) {
+			
+			Passenger p = new Passenger();
+			rs.next();
+			p.setId(Integer.parseInt(rs.getString("id")));
+			p.setFirstName(rs.getString("firstName"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPhone(rs.getString("Phone"));
+			p.setEmail(rs.getString("email"));
+			
+			if(p.getLastName().equals(lastName)) passenger = p; break;
+			
+			
+		}
+		
+		
+		
+		return passenger;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public  void editPassenger(Passenger p) throws SQLException {
 		
 		
 		
