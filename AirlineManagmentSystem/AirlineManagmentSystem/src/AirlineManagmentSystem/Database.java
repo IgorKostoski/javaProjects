@@ -65,6 +65,23 @@ public class Database {
 		
 	}
 	
+	public static void editPassenger(Passenger p) {
+		
+		
+		
+		
+		
+		
+		String update = "UPDATE `Passengers` SET `id`='"+p.getId()+"',"
+				+ "`firstName`='"+p.getFirstName()+"',"
+				+ "`lastName`='"+p.getLastName()+"',"
+				+ "`Phone`='"+p.getPhone()+"',"
+				+ "`email`='"+p.getEmail()+"' WHERE `id` = '"+p.getId()+"';";
+		
+		
+		statement.execute(update);
+	}
+	
 	
 	
 	
