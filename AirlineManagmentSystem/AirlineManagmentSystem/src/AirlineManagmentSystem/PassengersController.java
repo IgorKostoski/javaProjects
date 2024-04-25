@@ -51,8 +51,38 @@ import java.sql.SQLException;
 			int id = s.nextInt();
 			if (id == -1) {
 				printAllPassengers(database);
+				System.out.println("Enter passenger id(int): ");
+				id = s.nextInt();
 			}
+			
+			Passenger passenger = database.getPassenger(id);
+			
+		
+			
+			
+			
+			System.out.println("Enter first name: \n(-1 to keep old value)");
+			String firstName = s.next();
+			if(firstName.equals("-1")) firstName = passenger.getFirstName();
+			
+			System.out.println("Enter last name: \n(-1 to keep old value)");
+			String lastName = s.next();
+			if(lastName.equals("-1")) lastName = passenger.getLastName();
+			
+			System.out.println("Enter phone: \n(-1 to keep old value)");
+			String Phone = s.next();
+			if(Phone.equals("-1")) Phone = passenger.getPhone();
+			
+			System.out.println("Enter email: \n(-1 to keep old value)");
+			String email = s.next();
+			if(email.equals("-1")) email = passenger.getEmail();
+			
 		}
+		
+		
+		
+		
+		
 		
 		public static void printAllPassengers(Database database) throws SQLException {
 			ArrayList<Passenger> passengers = database.getAllPassengers();

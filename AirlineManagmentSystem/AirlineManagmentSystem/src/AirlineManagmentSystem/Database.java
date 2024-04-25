@@ -44,6 +44,36 @@ public class Database {
 		
 	}
 	
+	
+	
+	public Passenger getPassenger(int id) throws SQLException {
+		
+		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `id` = "+id+";";
+		ResultSet rs = statement.executeQuery(get);
+		
+		Passenger p = new Passenger();
+		p.setId(Integer.parseInt(rs.getString("id")));
+		p.setFirstName(rs.getString("firstName"));
+		p.setLastName(rs.getString("lastName"));
+		p.setPhone(rs.getString("Phone"));
+		p.setEmail(rs.getString("email"));
+		
+		
+		return p;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public ArrayList<Passenger> getAllPassengers() throws SQLException{
 		
 		String get = "SELECT * FROM `Passengers`;";
