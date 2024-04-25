@@ -22,8 +22,10 @@ public class Main {
 			System.out.println("Welcome to Airline Managment System");
 			System.out.println("1. Add new passenger");
 			System.out.println("2. Get passenger id by name");
-			System.out.println("3. Edit passengers");
-			System.out.println("4. Quit");
+			System.out.println("3. Print all passengers");
+			System.out.println("4. Edit passengers");
+			System.out.println(" Delete passenger");
+			System.out.println("20. Quit");
 			
 			
 			i = s.nextInt();
@@ -32,14 +34,17 @@ public class Main {
 				PassengersController.AddNewPassenger(database, s);
 				break;
 			case 2: 
-				PassengersController.findPassengerIdByName(database, s);
+				PassengersController.findPassengerByName(database, s);
 				break;
 			case 3:
+				PassengersController.printAllPassengers(database);
+				break;
+			case 4:
 				PassengersController.EditPassenger(database, s);
 				break;
 			}
 		} 
-		while( i != 4);
+		while( i != 5);
 		
 		
 		
