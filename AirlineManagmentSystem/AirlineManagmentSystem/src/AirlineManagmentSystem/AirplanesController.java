@@ -40,6 +40,19 @@ public class AirplanesController {
 		airplane.setId(id);
 		
 		
+		String insert = "INSERT INTO `airplanes`(`id`, `EconomyCapacity`, `BusinessCapacity`, `model`)"
+				+ " VALUES ('"+airplane.getId()+"',"
+						+ "'"+airplane.getEconomyCapacity()+"',"
+				+ "'"+airplane.getBusinessCapacity()+"',"
+				+ "'"+airplane.getModel()+"');";
+		
+		database.getStatement().execute(insert);
+		System.out.println("Airplane added succesfully!");
+		
+		
+		
+		
+		
 	
 	}
 	

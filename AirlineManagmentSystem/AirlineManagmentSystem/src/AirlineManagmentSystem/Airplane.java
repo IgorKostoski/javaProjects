@@ -39,7 +39,7 @@ public class Airplane {
 		this.model = model;
 	}
 	
-	public String model() {
+	public String getModel() {
 		return model;
 	}
 
