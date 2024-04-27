@@ -232,6 +232,42 @@ public class EmployeesController {
 	
 	
 	
+	public static void deleteEmployee(Database database, Scanner s) throws SQLException {
+		
+		System.out.println("Enter id(int): \n(-1 to get employee by name)");
+		
+		int id = s.nextInt();
+		Employee employee;
+		if( id ==-1) {
+			employee = getEmployeeByName(database, s);
+			
+		} else {
+			String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email`, `salary`,"
+					+ " `position` FROM `employees` WHERE `id` = "+id+";";
+			
+			ResultSet rs = database.getStatement().executeQuery(get);
+			
+			Employee p = new Employee();
+			rs.next();
+			p.setId(Integer.parseInt(rs.getString("id")));
+			p.setFirstName(rs.getString("firstName"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPhone(rs.getString("Phone"));
+			p.setEmail(rs.getString("email"));
+			p.setSalary(rs.getDouble("salary"));
+			p.setPosition(rs.getString("position"));
+			
+			
+			employee = p;
+		}
+		
+		String delete = "DELETE FROM `employees` WHERE `id` = "+employee.getId()+";";
+		database.getStatement().execute(delete);
+		System.out.println("Employee deleted successfully!");
+	}
+	
+	
+	
 	private static ArrayList<Employee> getAllEmployees(Database database) throws SQLException{
 		
 		String get = "SELECT * FROM `employees`;";
