@@ -92,6 +92,12 @@ public Passenger getPassenger(String firstName, String lastName) throws SQLExcep
 		
 		
 	}
+
+	public void deletePassenger(Passenger p) throws SQLException {
+		
+		String delete = "DELETE FROM `Passengers` WHERE `id` ="+p.getId()+";";
+		statement.execute(delete);
+	}
 	
 	
 	

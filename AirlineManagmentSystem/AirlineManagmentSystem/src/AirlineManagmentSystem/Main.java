@@ -24,7 +24,7 @@ public class Main {
 			System.out.println("2. Get passenger id by name");
 			System.out.println("3. Print all passengers");
 			System.out.println("4. Edit passengers");
-			System.out.println(" Delete passenger");
+			System.out.println("5. Delete passenger");
 			System.out.println("20. Quit");
 			
 			
@@ -42,9 +42,13 @@ public class Main {
 			case 4:
 				PassengersController.EditPassenger(database, s);
 				break;
+			case 5:
+				PassengersController.DeletePassenger(database, s);
+				break;
+		
 			}
 		} 
-		while( i != 5);
+		while( i != 20);
 		
 		
 		
