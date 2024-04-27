@@ -8,6 +8,7 @@ public class Employee {
 	private String email;
 	private String Phone;
 	private double salary;
+	private String position;
 	
 	
 	public Employee() {
@@ -60,6 +61,14 @@ public class Employee {
 	
 	public double getSalary() {
 		return salary;
+	}
+	
+	public void setPosition(String position) {
+		this.position = position;
+	}
+	
+	public String getPosition() {
+		return position;
 	}
 	
 	

@@ -17,6 +17,8 @@ public class EmployeesController {
 		String Phone = s.next();
 		System.out.println("Enter salary (double):  ");
 		double salary = s.nextDouble();
+		System.out.println("Enter position: ");
+		String position = s.next();
 		
 		Employee employee = new Employee();
 		employee.setFirstName(firstName);
@@ -24,6 +26,7 @@ public class EmployeesController {
 		employee.setEmail(email);
 		employee.setPhone(Phone);
 		employee.setSalary(salary);
+		employee.setPosition(position);
 		
 		ArrayList<Employee> employees = getAllEmployees(database);	
 		
@@ -39,11 +42,15 @@ public class EmployeesController {
 		
 		
 		String insert = "INSERT INTO `employees`(`id`, `firstName`, `lastName`,"
-				+ " `Phone`, `email`,`salary`)"
+				+ " `Phone`, `email`,`salary`,`position`)"
 				+ " VALUES "
-				+ "('"+employee.getId()+"','"+employee.getFirstName()+"',"
+				+ "('"+employee.getId()+"',"
+						+ "'"+employee.getFirstName()+"',"
 						+ "'"+employee.getLastName()+"',"
-								+ "'"+employee.getPhone()+"','"+employee.getEmail()+"','"+employee.getSalary()+"');";
+								+ "'"+employee.getPhone()+"',"
+										+ "'"+employee.getEmail()+"',"
+												+ "'"+employee.getSalary()+"',"
+														+ "'"+employee.getPosition()+"');";
 		
 		database.getStatement().execute(insert);
 		
@@ -67,6 +74,7 @@ public class EmployeesController {
 			p.setPhone(rs.getString("Phone"));
 			p.setEmail(rs.getString("email"));
 			p.setSalary(Double.parseDouble(rs.getString("salary")));
+			p.setPosition(rs.getString("position"));
 			
 			employees.add(p);
 			
