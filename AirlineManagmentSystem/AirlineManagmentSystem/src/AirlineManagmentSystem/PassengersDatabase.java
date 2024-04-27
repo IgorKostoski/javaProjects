@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class Database {
+public class PassengersDatabase {
 	
 	private  String url = "jdbc:mysql://localhost:3306/Airline Management System";
 	
@@ -17,7 +17,7 @@ public class Database {
 	private Statement statement;
 	
 	
-	public Database() throws SQLException {
+	public PassengersDatabase() throws SQLException {
 		
 		Connection connection = DriverManager.getConnection(url, user, pass);
 		
