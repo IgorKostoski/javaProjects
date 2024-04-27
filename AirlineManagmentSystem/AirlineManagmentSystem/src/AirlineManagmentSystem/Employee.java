@@ -71,6 +71,15 @@ public class Employee {
 		return position;
 	}
 	
+	public void print() {
+		System.out.println("id: " +id);
+		System.out.println("Name: " +firstName+ lastName);
+		System.out.println("Email: " +email);
+		System.out.println("Phone: " +Phone);
+		System.out.println("Position: " +position);
+		System.out.println("");
+	}
+	
 	
 
 }

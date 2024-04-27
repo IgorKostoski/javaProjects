@@ -177,7 +177,7 @@ import java.sql.SQLException;
 			
 			
 			
-			passenger.print();
+			
 			return passenger;
 		}
 		
