@@ -46,6 +46,9 @@ public class Main {
 			case 5:
 				PassengersController.DeletePassenger(database, s);
 				break;
+			case 6:
+				EmployeesController.AddNewEmployee(database, s);
+				break;
 		
 			}
 		} 
