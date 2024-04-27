@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 	public  class  PassengersController {
 		
 		
-		public static void AddNewPassenger(PassengersDatabase database, Scanner s) throws SQLException {
+		public static void AddNewPassenger(Database database, Scanner s) throws SQLException {
 			System.out.println("Enter first name : ");
 			String firstName = s.next();
 			System.out.println("Enter last name: ");
@@ -22,12 +23,12 @@ import java.sql.SQLException;
 			String email = s.next();
 			
 			
-			Passenger passenger = new Passenger();
-			passenger.setFirstName(firstName);
-			passenger.setLastName(lastName);
-			passenger.setPhone(Phone);
-			passenger.setEmail(email);
-			ArrayList<Passenger> passengers = database.getAllPassengers();
+			Passenger p = new Passenger();
+			p.setFirstName(firstName);
+			p.setLastName(lastName);
+			p.setPhone(Phone);
+			p.setEmail(email);
+			ArrayList<Passenger> passengers = getAllPassengers(database);
 			
 			int id;
 			
@@ -37,8 +38,19 @@ import java.sql.SQLException;
 			} else {
 				id = 0;
 			}
-			passenger.setId(id);
-			database.AddPassenger(passenger);
+			p.setId(id);
+			
+			String insert = "INSERT INTO `Passengers`(`id`, `firstName`, `lastName`,"
+					+ " `Phone`, `email`)"
+					+ " VALUES "
+					+ "('"+p.getId()+"','"+p.getFirstName()+"',"
+							+ "'"+p.getLastName()+"',"
+									+ "'"+p.getPhone()+"','"+p.getEmail()+"');";
+			
+			database.getStatement().execute(insert);
+			
+			
+			
 			System.out.println("Passenger added successfully!");
 		
 			
@@ -46,7 +58,7 @@ import java.sql.SQLException;
 			
 		}
 		
-		public static void EditPassenger(PassengersDatabase database, Scanner s) throws SQLException {
+		public static void EditPassenger(Database database, Scanner s) throws SQLException {
 			System.out.println("Enter passenger id(int): \n(-1 to get passenger by name)");
 			int id = s.nextInt();
 			Passenger passenger;
@@ -54,7 +66,18 @@ import java.sql.SQLException;
 				passenger = getPassengerByName(database, s);
 				
 			} else {
-				 passenger = database.getPassenger(id);
+				String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `id` = "+id+";";
+				ResultSet rs = database.getStatement().executeQuery(get);
+				rs.next();
+				Passenger p = new Passenger();
+				p.setId(Integer.parseInt(rs.getString("id")));
+				p.setFirstName(rs.getString("firstName"));
+				p.setLastName(rs.getString("lastName"));
+				p.setPhone(rs.getString("Phone"));
+				p.setEmail(rs.getString("email"));
+				
+				passenger = p;
+				
 			}
 			
 			
@@ -84,30 +107,78 @@ import java.sql.SQLException;
 			passenger.setLastName(lastName);
 			passenger.setPhone(Phone);
 			passenger.setEmail(email);
-			database.editPassenger(passenger);
+			String update = "UPDATE `Passengers` SET `id`='"+passenger.getId()+"',"
+					+ "`firstName`='"+passenger.getFirstName()+"',"
+					+ "`lastName`='"+passenger.getLastName()+"',"
+					+ "`Phone`='"+passenger.getPhone()+"',"
+					+ "`email`='"+passenger.getEmail()+"' WHERE `id` = '"+passenger.getId()+"';";
+			
+			
+			database.getStatement().execute(update);
 			System.out.println("Passenger edited succesfully!");
 			
 			
 		}
 		
 		
-		public static void findPassengerByName(PassengersDatabase database, Scanner s) throws SQLException {
+		public static void findPassengerByName(Database database, Scanner s) throws SQLException {
 			System.out.println("Enter first name: ");
 			String firstName = s.next();
 			System.out.println("Enter last name: ");
 			String lastName = s.next();
-			Passenger p = database.getPassenger(firstName, lastName);
-			p.print();
+			String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `firstName` = \""+firstName+"\";";
+			ResultSet rs = database.getStatement().executeQuery(get);
+			Passenger passenger = new Passenger();
+			while(rs.next()) {
+				
+				Passenger p = new Passenger();
+				p.setId(Integer.parseInt(rs.getString("id")));
+				p.setFirstName(rs.getString("firstName"));
+				p.setLastName(rs.getString("lastName"));
+				p.setPhone(rs.getString("Phone"));
+				p.setEmail(rs.getString("email"));
+				
+				if(p.getLastName().equals(lastName)) passenger = p; break;
+				
+				
+			}
+			
+			
+			
+			
+			passenger.print();
 		}
 		
 		
-		public static Passenger getPassengerByName(PassengersDatabase database, Scanner s) throws SQLException {
+		public static Passenger getPassengerByName(Database database, Scanner s) throws SQLException {
 			System.out.println("Enter first name: ");
 			String firstName = s.next();
 			System.out.println("Enter last name: ");
 			String lastName = s.next();
-			Passenger p = database.getPassenger(firstName, lastName);
-			return p;
+			
+			
+			String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `firstName` = \""+firstName+"\";";
+			ResultSet rs = database.getStatement().executeQuery(get);
+			Passenger passenger = new Passenger();
+			while(rs.next()) {
+				
+				Passenger p = new Passenger();
+				p.setId(Integer.parseInt(rs.getString("id")));
+				p.setFirstName(rs.getString("firstName"));
+				p.setLastName(rs.getString("lastName"));
+				p.setPhone(rs.getString("Phone"));
+				p.setEmail(rs.getString("email"));
+				
+				if(p.getLastName().equals(lastName)) passenger = p; break;
+				
+				
+			}
+			
+			
+			
+			
+			passenger.print();
+			return passenger;
 		}
 		
 		
@@ -115,8 +186,8 @@ import java.sql.SQLException;
 		
 		
 		
-		public static void printAllPassengers(PassengersDatabase database) throws SQLException {
-			ArrayList<Passenger> passengers = database.getAllPassengers();
+		public static void printAllPassengers(Database database) throws SQLException {
+			ArrayList<Passenger> passengers = getAllPassengers(database );
 			
 			System.out.println("\n---------------------------");
 			
@@ -126,7 +197,7 @@ import java.sql.SQLException;
 			System.out.println("---------------------------\n");
 		}
 		
-		public static void DeletePassenger(PassengersDatabase database, Scanner s) throws SQLException {
+		public static void DeletePassenger(Database database, Scanner s) throws SQLException {
 			
 			System.out.println("Enter id(int): \n(-1 to get passenger by name)");
 			
@@ -136,11 +207,48 @@ import java.sql.SQLException;
 				passenger = getPassengerByName(database, s);
 				
 			} else {
-				passenger = database.getPassenger(id);
+				String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `id` = "+id+";";
+				ResultSet rs = database.getStatement().executeQuery(get);
+				rs.next();
+				Passenger p = new Passenger();
+				p.setId(Integer.parseInt(rs.getString("id")));
+				p.setFirstName(rs.getString("firstName"));
+				p.setLastName(rs.getString("lastName"));
+				p.setPhone(rs.getString("Phone"));
+				p.setEmail(rs.getString("email"));
+				
+				passenger = p;
 			}
 			
-			database.deletePassenger(passenger);
+			String delete = "DELETE FROM `Passengers` WHERE `id` ="+passenger.getId()+";";
+			database.getStatement().execute(delete);
 			System.out.println("Passenger deleted successfully!");
+		}
+		
+		public static ArrayList<Passenger> getAllPassengers(Database database) throws SQLException{
+			
+			String get = "SELECT * FROM `Passengers`;";
+			ResultSet rs = database.getStatement().executeQuery(get);
+			
+			ArrayList<Passenger> passengers = new ArrayList<>();
+			
+			
+			
+			while(rs.next()) {
+				Passenger p = new Passenger();
+				p.setId(Integer.parseInt(rs.getString("id")));
+				p.setFirstName(rs.getString("firstName"));
+				p.setLastName(rs.getString("lastName"));
+				p.setPhone(rs.getString("Phone"));
+				p.setEmail(rs.getString("email"));
+				
+				passengers.add(p);
+				
+				
+			}
+			return  passengers;
+			
+			
 		}
 		
 		
