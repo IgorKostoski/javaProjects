@@ -33,6 +33,7 @@ public class Main {
 			System.out.println("11. Add new plane");
 			System.out.println("12. Print all planes");
 			System.out.println("13. Edited a plane");
+			System.out.println("14. Delete a plane");
 			System.out.println("20. Quit");
 			
 			
@@ -75,6 +76,9 @@ public class Main {
 				break;
 			case 13:
 				AirplanesController.EditAirplane(database, s);
+				break;
+			case 14: 
+				AirplanesController.DeletePlane(database, s);
 				break;
 		
 			}
