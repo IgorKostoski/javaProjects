@@ -69,6 +69,9 @@ public class Main {
 				break;
 			case 11:
 				AirplanesController.AddNewAirplane(database, s);
+			case 12: 
+				AirplanesController.PrintAllPlanes(database);
+				break;
 		
 			}
 		} 

@@ -64,9 +64,13 @@ public class AirplanesController {
 		System.out.println("------------------------");
 	}
 	
+	
+	
+	
+	
 	public static ArrayList<Airplane> getAllPlanes(Database database) throws SQLException{
 		ArrayList<Airplane> planes = new ArrayList<>();
-		String get = "SELECT * FROM `employees`;";
+		String get = "SELECT * FROM `airplanes`;";
 		
 		ResultSet rs = database.getStatement().executeQuery(get);	
 		
@@ -80,6 +84,33 @@ public class AirplanesController {
 			
 		}
 		return planes;
+	}
+	
+	public static void EditAirplane(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter id (int) :\n(-1 to show all planes)");
+		int id = s.nextInt();
+		if(id ==-1) {
+			PrintAllPlanes(database);
+			System.out.println("Enter id (int): ");
+			id = s.nextInt();
+			
+			
+		}
+		
+		Airplane p = getPlaneByID(database,id);
+		System.out.println("Enter economy capacity (int): \n(-1 to keep old value)");
+		int EconomyCapacity = s.nextInt();
+		
+		System.out.println("Enter busness capacity(int): ");
+		int BusinessCapacity = s.nextInt();
+		System.out.println("Enter model: ");
+		String model = s.next();
+	}
+	
+	public static Airplane getPlaneByID(Database database, int id) {
+		Airplane  a = new Airplane();
+		String get = "";
+		return a;
 	}
 	
 	

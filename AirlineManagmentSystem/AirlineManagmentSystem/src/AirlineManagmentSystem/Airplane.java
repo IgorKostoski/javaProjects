@@ -48,6 +48,7 @@ public class Airplane {
 		System.out.println("Economy Capacity: " + EconomyCapacity);
 		System.out.println("Bussines Capacity: " + BusinessCapacity);
 		System.out.println("Model:  " + model);
+		System.out.println();
 	}
 
 }
