@@ -100,16 +100,42 @@ public class AirplanesController {
 		Airplane p = getPlaneByID(database,id);
 		System.out.println("Enter economy capacity (int): \n(-1 to keep old value)");
 		int EconomyCapacity = s.nextInt();
+		if (EconomyCapacity == -1) EconomyCapacity = p.getEconomyCapacity();
 		
-		System.out.println("Enter busness capacity(int): ");
+		System.out.println("Enter busness capacity(int): \n(-1 to keep old value)");
 		int BusinessCapacity = s.nextInt();
-		System.out.println("Enter model: ");
+		if (BusinessCapacity == -1) BusinessCapacity = p.getBusinessCapacity();
+		
+		System.out.println("Enter model: \n(-1 to keep old value)");
 		String model = s.next();
+		if(model.equals("-1")) model = p.getModel();
+		
+		p.setEconomyCapacity(EconomyCapacity);
+		p.setBusinessCapacity(BusinessCapacity);
+		p.setModel(model);
+		
+		String update = "UPDATE `airplanes` SET `id`='"+p.getId()+"',"
+				+ "`EconomyCapacity`='"+p.getEconomyCapacity()+"',"
+				+ "`BusinessCapacity`='"+p.getBusinessCapacity()+"',"
+				+ "`model`='"+p.getModel()+"' "
+				+ "WHERE `id` = "+p.getId()+";";
+		
+		
+		database.getStatement().execute(update);
+		System.out.println("Airplane edited succesfully!");
 	}
 	
-	public static Airplane getPlaneByID(Database database, int id) {
+	public static Airplane getPlaneByID(Database database, int id) throws SQLException {
 		Airplane  a = new Airplane();
-		String get = "";
+		String get = "SELECT `id`, `EconomyCapacity`, `BusinessCapacity`,"
+				+ " `model` FROM `airplanes` WHERE `id` = "+id+";";
+		ResultSet rs = database.getStatement().executeQuery(get);
+		rs.next();
+		a.setId(rs.getInt("id"));
+		a.setEconomyCapacity(rs.getInt("EconomyCapacity"));
+		a.setBusinessCapacity(rs.getInt("BusinessCapacity"));
+		a.setModel(rs.getString("model"));
+		
 		return a;
 	}
 	
