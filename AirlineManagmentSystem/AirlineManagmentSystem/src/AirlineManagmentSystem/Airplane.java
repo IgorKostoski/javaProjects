@@ -42,5 +42,12 @@ public class Airplane {
 	public String getModel() {
 		return model;
 	}
+	
+	public void print() {
+		System.out.println("id: " + id);
+		System.out.println("Economy Capacity: " + EconomyCapacity);
+		System.out.println("Bussines Capacity: " + BusinessCapacity);
+		System.out.println("Model:  " + model);
+	}
 
 }

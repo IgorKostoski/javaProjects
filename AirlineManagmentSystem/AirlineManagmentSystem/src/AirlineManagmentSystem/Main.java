@@ -31,6 +31,7 @@ public class Main {
 			System.out.println("09. Edit employee");
 			System.out.println("10. Fire employee ");
 			System.out.println("11. Add new plane");
+			System.out.println("12. Print all planes");
 			System.out.println("20. Quit");
 			
 			

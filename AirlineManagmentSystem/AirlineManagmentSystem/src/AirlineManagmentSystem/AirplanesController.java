@@ -56,6 +56,13 @@ public class AirplanesController {
 	
 	}
 	
+	public static void PrintAllPlanes(Database database) throws SQLException {
+		System.out.println("------------------------");
+		for(Airplane plane : getAllPlanes(database)) {
+			plane.print();
+		}
+		System.out.println("------------------------");
+	}
 	
 	public static ArrayList<Airplane> getAllPlanes(Database database) throws SQLException{
 		ArrayList<Airplane> planes = new ArrayList<>();
