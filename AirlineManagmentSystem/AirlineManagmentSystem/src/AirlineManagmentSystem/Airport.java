@@ -25,5 +25,11 @@ public class Airport {
 	public String getCity() {
 		return city;
 	}
+	
+	public void print() {
+		System.out.println(id+"\t" +city);
+		
+		
+	}
 
 }

@@ -53,5 +53,15 @@ public class AirportsController {
 		return airports;
 		
 	}
+	public static void PrintAllAirports(Database database) throws SQLException {
+		System.out.println("--------------------------------------");
+		System.out.println("id\tcity");
+		
+		for(Airport a: getAllAirports(database)) {
+			a.print();
+		}
+		System.out.println("--------------------------------------");
+	}
+	
 
 }

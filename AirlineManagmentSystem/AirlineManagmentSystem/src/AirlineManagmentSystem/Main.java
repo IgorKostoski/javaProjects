@@ -19,7 +19,7 @@ public class Main {
 		int i = 0;
 		
 		do {
-			System.out.println("Welcome to Airline Managment System");
+			System.out.println("\nWelcome to Airline Managment System");
 			System.out.println("01. Add new passenger");
 			System.out.println("02. Get passenger  by name");
 			System.out.println("03. Print all passengers");
@@ -35,6 +35,7 @@ public class Main {
 			System.out.println("13. Edited a plane");
 			System.out.println("14. Delete a plane");
 			System.out.println("15. Add new Airport");
+			System.out.println("16. Print all airports");
 			System.out.println("20. Quit");
 			
 			
@@ -83,6 +84,9 @@ public class Main {
 				break;
 			case 15: 
 				AirportsController.AddNewAirport(database, s);
+				break;
+			case 16:
+				AirportsController.PrintAllAirports(database);
 				break;
 		
 			}
