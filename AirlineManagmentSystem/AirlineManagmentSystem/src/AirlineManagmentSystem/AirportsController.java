@@ -12,8 +12,17 @@ public class AirportsController {
 		System.out.println("Enter city: ");
 		String city = s.next();
 		
+		int id;
 		ArrayList<Airport> airports = getAllAirports(database);
-		int id = airports.get(airports.size()-1).getID()+1;
+		
+		
+		if(airports.size()!=0) {
+			id = airports.get(airports.size()-1).getID()+1;
+			
+		} else {
+			id = 0;
+		}
+		
 		
 		
 		Airport airport = new Airport();
@@ -23,6 +32,9 @@ public class AirportsController {
 		
 		String insert = "INSERT INTO `airports`(`id`, `city`) "
 				+ "VALUES ('"+airport.getID()+"','"+airport.getCity()+"');";
+		
+		database.getStatement().execute(insert);
+		System.out.println("AIrport added successfully");
 		
 	}
 	
