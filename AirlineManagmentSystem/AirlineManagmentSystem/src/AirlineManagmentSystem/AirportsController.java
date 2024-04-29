@@ -72,15 +72,21 @@ public class AirportsController {
 			id = s.nextInt();
 		}
 		
+		Airport airport = GetAirport(database, id);
+		airport.print();
+		
 	}
 	
 	
-	public static Airport GetAirport(Database database, int id) {
+	public static Airport GetAirport(Database database, int id) throws SQLException {
 		
 		Airport airport = new Airport();
 		
-		
-		
+		String select = "SELECT `id`, `city` FROM `airports` WHERE `id` = "+id+";";
+		ResultSet rs = database.getStatement().executeQuery(select);
+		rs.next();
+		airport.setID(rs.getInt("id"));
+		airport.setCity(rs.getString("city"));
 		return airport;
 	}
 	
