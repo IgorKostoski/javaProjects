@@ -83,8 +83,7 @@ public class AirportsController {
 		
 		
 		database.getStatement().execute(update);
-	
-		System.out.println("Airport edited successfully");
+	    System.out.println("Airport edited successfully");
 		
 		
 		
@@ -102,6 +101,24 @@ public class AirportsController {
 		airport.setID(rs.getInt("id"));
 		airport.setCity(rs.getString("city"));
 		return airport;
+	}
+	
+	public static void DeleteAirport(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter aiport id(int): \n(-1 to print all airports)");
+		int id = s.nextInt();
+		if(id == -1) {
+			PrintAllAirports(database);
+			System.out.println("Enter airport id(int): ");
+			id = s.nextInt();
+			
+		}
+		
+		
+		String delete = "DELETE FROM `airports` WHERE `id` = "+id+";";
+		
+		database.getStatement().execute(delete);
+		System.out.println("Airport deleted successfully!");
+		
 	}
 	
 
