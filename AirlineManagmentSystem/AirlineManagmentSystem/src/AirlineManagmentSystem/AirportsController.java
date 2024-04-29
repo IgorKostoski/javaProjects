@@ -63,5 +63,26 @@ public class AirportsController {
 		System.out.println("--------------------------------------");
 	}
 	
+	public static void EditAirport(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter aiport id(int) : \n(-1 to print all airports)");
+		int id = s.nextInt();
+		if(id ==- 1) {
+			PrintAllAirports(database);
+			System.out.println("Enter airport id(int): ");
+			id = s.nextInt();
+		}
+		
+	}
+	
+	
+	public static Airport GetAirport(Database database, int id) {
+		
+		Airport airport = new Airport();
+		
+		
+		
+		return airport;
+	}
+	
 
 }
