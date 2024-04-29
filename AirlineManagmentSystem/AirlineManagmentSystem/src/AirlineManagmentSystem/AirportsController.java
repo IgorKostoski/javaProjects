@@ -73,7 +73,21 @@ public class AirportsController {
 		}
 		
 		Airport airport = GetAirport(database, id);
-		airport.print();
+		System.out.println("Enter city: ");
+		String city = s.next();
+		airport.setCity(city);
+		
+		String update = "UPDATE `airports` SET `id`='"+airport.getID()+"',"
+				+ "`city`='"+airport.getCity()+
+				"' WHERE `id` = "+airport.getID()+";";
+		
+		
+		database.getStatement().execute(update);
+	
+		System.out.println("Airport edited successfully");
+		
+		
+		
 		
 	}
 	
