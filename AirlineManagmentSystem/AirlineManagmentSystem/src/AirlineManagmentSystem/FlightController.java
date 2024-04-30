@@ -1,6 +1,7 @@
 package AirlineManagmentSystem;
 
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -70,8 +71,74 @@ public class FlightController {
 	}
 	
 	
-	public static ArrayList<Flight> getAllFlights() {
+	public static ArrayList<Flight> getAllFlights(Database database) throws SQLException {
 		ArrayList<Flight> flights = new ArrayList<> ();
+		
+		String select = "SELECT * FROM `flights` ;";
+		
+		ResultSet rs = database.getStatement().executeQuery(select);
+		while (rs.next()) {
+			Flight flight = new Flight();
+			flight.setID(rs.getInt("id"));
+			
+			int planeID = rs.getInt("airplane");
+			Airplane plane = AirplanesController.getPlaneByID(database, planeID);
+			flight.setAirplane(plane);
+			
+			int originID = rs.getInt("origin");
+			flight.setOriginAirport(AirportsController.GetAirport(database, originID));
+			
+			int destID = rs.getInt("destination");
+			flight.setDestinationAirport(AirportsController.GetAirport(database, destID));
+			
+			String depTime = rs.getString("departure");
+			LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
+			flight.setDepartureTime(departure);
+			
+			String arrTime = rs.getString("arrival");
+			LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
+			flight.setArrivalTime(arrival);
+			
+			boolean delayed = rs.getBoolean("isDelayed");
+			if (delayed) flight.delay();
+			
+			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
+			flight.setBookedBusiness(rs.getInt("bookedBusiness"));
+			
+			String st = rs.getString("stuff");
+			String[] stuffID = st.split("<%%/>");
+			
+			Employee[] stuff = new Employee[10];
+			
+			for (int i=0; i < stuffID.length; i++ ) {
+				int id = Integer.parseInt(stuffID[i]);
+				stuff[i] = EmployeesController.getEmployeeByID(database, id);
+				
+			}
+			
+			flight.setStuff(stuff);
+			
+			String pas = rs.getString("passengers");
+			String[] passengersID = pas.split("<%%/>");
+			
+			
+			int totalCapacity = plane.getEconomyCapacity()+plane.getBusinessCapacity();
+			Passenger[] passengers = new Passenger[totalCapacity];
+			
+			for (int j = 0; j<passengersID.length; j++) {
+				
+				int id = Integer.parseInt(passengersID[j]);
+				passengers[j] = PassengersController.getPassengerByID(database, id);
+				
+				
+			}
+			
+			flight.setPassengers(passengers);
+			
+			
+			
+		}
+		
 		
 		
 		return flights;

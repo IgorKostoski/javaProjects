@@ -251,6 +251,32 @@ import java.sql.SQLException;
 			
 		}
 		
+		public static Passenger getPassengerByID(Database database, int id) throws SQLException {
+			
+			
+			
+			String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE `id` = "+id+";";
+			ResultSet rs = database.getStatement().executeQuery(get);
+			Passenger passenger = new Passenger();
+			rs.next();
+			
+				
+			Passenger p = new Passenger();
+			p.setId(Integer.parseInt(rs.getString("id")));
+			p.setFirstName(rs.getString("firstName"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPhone(rs.getString("Phone"));
+			p.setEmail(rs.getString("email"));
+				
+			return p;
+				
+				
+			
+			
+			
+	
+		}
+		
 		
 		
 	}

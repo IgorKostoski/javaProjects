@@ -218,6 +218,9 @@ public class EmployeesController {
 		return employee;
 	}
 	
+
+	
+	
 	
 	public static void printAllEmployees(Database database) throws SQLException {
 		ArrayList<Employee> employees = getAllEmployees(database );
@@ -292,6 +295,40 @@ public class EmployeesController {
 		
 		return employees;
 		
+	}
+	
+	
+public static Employee getEmployeeByID(Database database, int id) throws SQLException {
+		
+		
+		
+		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email`, `salary`,"
+				+ " `position` FROM `employees` WHERE `id` = "+id+" ;";
+		ResultSet rs = database.getStatement().executeQuery(get);
+		
+		
+		rs.next();
+		
+		
+		Employee p = new Employee();
+		p.setId(Integer.parseInt(rs.getString("id")));
+		p.setFirstName(rs.getString("firstName"));
+		p.setLastName(rs.getString("lastName"));
+		p.setPhone(rs.getString("Phone"));
+		p.setEmail(rs.getString("email"));
+		p.setSalary(rs.getDouble("salary"));
+		p.setPosition(rs.getString("position"));
+			
+			
+			
+			
+		
+		
+		
+		
+		
+		
+		return p;
 	}
 
 }
