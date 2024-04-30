@@ -4,6 +4,7 @@ package AirlineManagmentSystem;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FlightController {
@@ -21,6 +22,9 @@ public class FlightController {
 			planeID = s.nextInt();
 		}
 		
+		
+		Airplane plane = AirplanesController.getPlaneByID(database, planeID);
+		
 		System.out.println("Enter origin airport id(int): \n(-1 to show all airports)");
 		int originID = s.nextInt();
 		if (originID == -1) {
@@ -29,6 +33,8 @@ public class FlightController {
 			originID = s.nextInt();
 			
 		}
+		
+		Airport origin = AirportsController.GetAirport(database, originID);
 		
 		System.out.println("Enter destination airport id (int): \n(-1 to show all airports)");
 		int destinationID = s.nextInt();
@@ -39,6 +45,8 @@ public class FlightController {
 			destinationID = s.nextInt();
 		}
 		
+		Airport destination = AirportsController.GetAirport(database, destinationID);
+		
 		System.out.println("Enter departure time (yyyy-MM-dd HH:mm:ss): ");
 		String dTime = s.next();
 		LocalDateTime departureTime = LocalDateTime.parse(dTime, formatter);
@@ -47,9 +55,26 @@ public class FlightController {
 		String aTime = s.next();
 		LocalDateTime arrivalTime = LocalDateTime.parse(aTime, formatter);
 		
+	
+		Flight flight = new Flight();
+		flight.setAirplane(plane);
+		flight.setOriginAirport(origin);
+		flight.setDestinationAirport(destination);
+		flight.setDepartureTime(departureTime);
+		flight.setArrivalTime(arrivalTime);
 		
 		
 		
+		
+		
+	}
+	
+	
+	public static ArrayList<Flight> getAllFlights() {
+		ArrayList<Flight> flights = new ArrayList<> ();
+		
+		
+		return flights;
 		
 		
 	}
