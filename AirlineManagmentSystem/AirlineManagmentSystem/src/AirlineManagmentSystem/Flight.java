@@ -17,6 +17,10 @@ public class Flight {
 	
 	
 	public Flight() {
+		delayed = false;
+		stuff = new Employee[10];
+		int totalCapacity = airplane.getBusinessCapacity()+airplane.getEconomyCapacity();
+		passengers = new Passenger[totalCapacity];
 		
 	}
 	

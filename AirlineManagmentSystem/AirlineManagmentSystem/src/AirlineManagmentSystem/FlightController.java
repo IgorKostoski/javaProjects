@@ -1,9 +1,14 @@
 package AirlineManagmentSystem;
 
+
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class FlightController {
+	
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	
 	public static void AddNewFlight(Database database, Scanner s) throws SQLException {
 		
@@ -33,6 +38,20 @@ public class FlightController {
 			System.out.println("Enter destination airport id(int): ");
 			destinationID = s.nextInt();
 		}
+		
+		System.out.println("Enter departure time (yyyy-MM-dd HH:mm:ss): ");
+		String dTime = s.next();
+		LocalDateTime departureTime = LocalDateTime.parse(dTime, formatter);
+		
+		System.out.println("Enter arrival time (yyyy-MM-dd HH:mm:ss): ");
+		String aTime = s.next();
+		LocalDateTime arrivalTime = LocalDateTime.parse(aTime, formatter);
+		
+		
+		
+		
+		
+		
 	}
 
 }
