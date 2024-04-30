@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class FlightController {
 	
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd::HH:mm:ss");
 	
 	public static void AddNewFlight(Database database, Scanner s) throws SQLException {
 		
@@ -48,11 +48,11 @@ public class FlightController {
 		
 		Airport destination = AirportsController.GetAirport(database, destinationID);
 		
-		System.out.println("Enter departure time (yyyy-MM-dd HH:mm:ss): ");
+		System.out.println("Enter departure time (yyyy-MM-dd::HH:mm:ss): ");
 		String dTime = s.next();
 		LocalDateTime departureTime = LocalDateTime.parse(dTime, formatter);
 		
-		System.out.println("Enter arrival time (yyyy-MM-dd HH:mm:ss): ");
+		System.out.println("Enter arrival time (yyyy-MM-dd::HH:mm:ss): ");
 		String aTime = s.next();
 		LocalDateTime arrivalTime = LocalDateTime.parse(aTime, formatter);
 		
@@ -63,6 +63,32 @@ public class FlightController {
 		flight.setDestinationAirport(destination);
 		flight.setDepartureTime(departureTime);
 		flight.setArrivalTime(arrivalTime);
+		
+		ArrayList<Flight> flights = getAllFlights(database);
+		int id = 0;
+		
+		if (flights.size()!=0) id = flights.size();
+		
+		flight.setID(id);
+		
+		String insert = "INSERT INTO `flights`(`id`, `airplane`, `origin`, `destination`, `departureTime`,"
+				+ " `arrivalTime`, `isDelayed`, `bookedEconomy`, `bookedBusiness`, `stuff`, `passengers`)"
+				+ " VALUES ('"+flight.getID()+"',"
+				+ "'"+planeID+"',"
+				+ "'"+originID+"',"
+				+ "'"+destinationID+"',"
+				+ "'"+dTime+"',"
+				+ "'"+aTime+"',"
+				+ "'false',"
+				+ "'0',"
+				+ "'0',"
+				+ "'<%%/>',"
+				+ "'<%%/>');";
+		
+		database.getStatement().execute(insert);
+		System.out.println("Flight added successfully!");
+		
+		
 		
 		
 		
@@ -134,6 +160,8 @@ public class FlightController {
 			}
 			
 			flight.setPassengers(passengers);
+			
+			flights.add(flight);
 			
 			
 			
