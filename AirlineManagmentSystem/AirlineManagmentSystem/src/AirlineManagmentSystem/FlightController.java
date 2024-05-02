@@ -229,8 +229,8 @@ public class FlightController {
 		
 		ArrayList<Flight> flights = getAllFlights(database);
 		
-		System.out.println("Ariplane\tOrigin Airport\tDestination Aiport\tDeparture Time "
-				+ "\tArrival Time\tstatus\tBooked Ecoonomy Seats\tBooked Business Seats ");
+		System.out.println("Ariplane\tOrigin\tDestination\tDeparture Time"
+				+ "\tArrival Time\tstatus\tAvailable Economy\tAvailable Business");
 		
 		for (Flight f : flights) {
 			f.print();

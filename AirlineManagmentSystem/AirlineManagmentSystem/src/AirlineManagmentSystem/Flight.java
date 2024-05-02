@@ -133,18 +133,24 @@ public class Flight {
 	
 	public void print() {
 		
-		System.out.println(airplane.getId()+" " + airplane.getModel() + "\t");
-		System.out.print(origin.getID()+ " " + origin.getCity()+ "\t") ;
-		System.out.print(destination.getID()+" "+ destination.getCity()+ "\t");
-		System.out.print(formatter.format(departureTime)+ "\t");
-		System.out.print(formatter.format(arrivalTime)+ "\t");
+		System.out.print(airplane.getId()+" "+airplane.getModel()+"\t");
+		System.out.print(origin.getID()+" " +origin.getCity()) ;
+		System.out.print(destination.getID()+" "+destination.getCity()+"\t\t");
+		System.out.print(formatter.format(departureTime)+"\t");
+		System.out.print(formatter.format(arrivalTime)+"\t");
 		if (delayed) {
-			System.out.print("delayed" + "\t");
+			System.out.print("delayed\t");
 		} else {
-			System.out.print("estimated" + "\t");
+			System.out.print("estimated\t");
 		}
-		System.out.print(bookedEconomy+"\t\t");
-		System.out.print(bookedBusiness+ "\t\t");
+		
+		int availableE = airplane.getEconomyCapacity() - bookedEconomy;
+		System.out.print(availableE+"\t\t");
+		int availableB = airplane.getBusinessCapacity() - bookedBusiness;
+		System.out.print(availableB+"\t\t");
+		
+		
+		System.out.println();
 		
 		
 	}
