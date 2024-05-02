@@ -108,24 +108,30 @@ public class FlightController {
 			flight.setID(rs.getInt("id"));
 			
 			int planeID = rs.getInt("airplane");
+			int originID = rs.getInt("origin");
+			int destID = rs.getInt("destination");
+			String depTime = rs.getString("departure");
+			String arrTime = rs.getString("arrival");
+			String delayed = rs.getString("isDelayed");
+			
 			Airplane plane = AirplanesController.getPlaneByID(database, planeID);
 			flight.setAirplane(plane);
 			
-			int originID = rs.getInt("origin");
+			
 			flight.setOriginAirport(AirportsController.GetAirport(database, originID));
 			
-			int destID = rs.getInt("destination");
+			
 			flight.setDestinationAirport(AirportsController.GetAirport(database, destID));
 			
-			String depTime = rs.getString("departure");
+			
 			LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
 			flight.setDepartureTime(departure);
 			
-			String arrTime = rs.getString("arrival");
+			
 			LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
 			flight.setArrivalTime(arrival);
 			
-			boolean delayed = rs.getBoolean("isDelayed");
+			
 			if (delayed) flight.delay();
 			
 			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
@@ -173,5 +179,19 @@ public class FlightController {
 		
 		
 	}
+	
+	public static void showAllFlights(Database database) throws SQLException {
+		
+		
+		ArrayList<Flight> flights = getAllFlights(database);
+		
+		System.out.println("Ariplane\tOrigin Airport\tDestination Aiport\tDeparture Time "
+				+ "\tArrival Time\tstatus\tBooked Ecoonomy Seats\tBooked Business Seats ");
+		
+		for (Flight f : flights) {
+			f.print();
+		}
+	}
+	
 
 }
