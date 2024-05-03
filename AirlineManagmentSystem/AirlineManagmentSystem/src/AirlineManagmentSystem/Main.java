@@ -4,20 +4,20 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-	
-	
-	
-	
+
+
+
+
 
 	public static void main(String[] args) throws SQLException{
-		
-		
+
+
 		Database database = new Database();
 		Scanner s = new Scanner(System.in);
-		
-		
+
+
 		int i = 0;
-		
+
 		do {
 			System.out.println("\nWelcome to Airline Managment System");
 			System.out.println("01. Add new passenger");
@@ -45,14 +45,14 @@ public class Main {
 			System.out.println("23. Set flight stuff");
 			System.out.println("24. Delete flight");
 			System.out.println("25. Quit");
-			
-			
+
+
 			i = s.nextInt();
 			switch (i) {
 			case 1:
 				PassengersController.AddNewPassenger(database, s);
 				break;
-			case 2: 
+			case 2:
 				PassengersController.findPassengerByName(database, s);
 				break;
 			case 3:
@@ -81,16 +81,16 @@ public class Main {
 				break;
 			case 11:
 				AirplanesController.AddNewAirplane(database, s);
-			case 12: 
+			case 12:
 				AirplanesController.PrintAllPlanes(database);
 				break;
 			case 13:
 				AirplanesController.EditAirplane(database, s);
 				break;
-			case 14: 
+			case 14:
 				AirplanesController.DeletePlane(database, s);
 				break;
-			case 15: 
+			case 15:
 				AirportsController.AddNewAirport(database, s);
 				break;
 			case 16:
@@ -102,30 +102,25 @@ public class Main {
 			case 18:
 				AirportsController.DeleteAirport(database, s);
 				break;
-			case 19: 
+			case 19:
 				FlightController.AddNewFlight(database, s);
 				break;
-			case 20: 
+			case 20:
 				FlightController.showAllFlights(database);
 				break;
-			case 21:
-				FlightController.delayFlight(database, s);
-				break;
-			case 22:
-				FlightController.bookFlight(database, s);
-				break;
-		
+			
+
 			}
-		} 
+		}
 		while( i != 25);
-		
-		
-		
-		
-	
+
+
+
+
+
 
 	}
-	
-	
+
+
 
 }
