@@ -50,17 +50,15 @@ public class PassengersController {
 	
 	
 	public static void EditPassenger(Database database, Scanner s) throws SQLException {
-		System.out.println("Enter passenger id (int): \n(-1 to show all passengers)");
+		System.out.println("Enter passenger id (int): \n(-1 to get passengers by name)");
 		int id = s.nextInt();
+		Passenger passenger;
 		if (id == -1) {
-			printAllPassengers(database);
-			System.out.println("Enter passenger id (int): ");
-			id = s.nextInt();
+
+			passenger = getPassengerByName(database,  s);
+		} else {
+			passenger = database.getPassenger(id);
 		}
-		
-		Passenger passenger = database.getPassenger(id);
-		
-		
 		
 		
 		System.out.println("Enter first name: \n(-1 to keep old value)");
@@ -89,7 +87,7 @@ public class PassengersController {
 	}
 	
 	
-	public static void findPassengerIdByName(Database database, Scanner s) throws SQLException {
+	public static void findPassengerByName(Database database, Scanner s) throws SQLException {
 		System.out.println("Enter first name: ");
 		String firstName = s.next();
 		System.out.println("Enter last name: ");
@@ -97,6 +95,17 @@ public class PassengersController {
 		Passenger p = database.getPassenger(firstName, lastName);
 		
 		p.print();
+	}
+	
+	
+	public static Passenger getPassengerByName(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter first name: ");
+		String firstName = s.next();
+		System.out.println("Enter last name: ");
+		String lastName = s.next();
+		Passenger p = database.getPassenger(firstName, lastName);
+		
+		return p;
 	}
 	
 	
