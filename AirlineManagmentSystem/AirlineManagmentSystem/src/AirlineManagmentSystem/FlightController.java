@@ -230,11 +230,151 @@ public class FlightController {
 		ArrayList<Flight> flights = getAllFlights(database);
 		
 		System.out.println("Ariplane\tOrigin\tDestination\tDeparture Time"
-				+ "\tArrival Time\tstatus\tAvailable Economy\tAvailable Business");
+				+ "\t\tArrival Time\t\tstatus\t\tAvailable Economy\tAvailable Business");
 		
 		for (Flight f : flights) {
 			f.print();
 		}
+	}
+	
+	public static void delayFlight(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		if (id == -1) {
+			showAllFlights(database);
+			System.out.println("Enter flight id int(int): ");
+			id = s.nextInt();			
+		}
+		
+		String update = "UPDATE `flights` SET `isDelayed`='true' WHERE `id` = "+id+";";
+		database.getStatement().executeQuery(update);
+		System.out.println("Flight delatyed succesfully");
+		
+		
+	}
+	
+	public static void bookFlight(Database database, Scanner s) throws SQLException {
+		System.out.println("enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		if (id == -1) {
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();			
+		}
+		
+		Flight flight = getFlight(database, id);		
+		
+		
+		
+		Passenger passenger;
+		System.out.println("Enter passenger id(int): \n(-1 to get all passenger by name)");
+		int passengerID = s.nextInt();
+		
+		if (passengerID ==-1) {
+			passenger = PassengersController.getPassengerByName(database, s);
+		} else {
+			passenger = PassengersController.getPassengerByID(database, passengerID);
+		}
+		
+		System.out.println("1. Economy seat");
+		System.out.println("2. Business seat");
+		
+		int n = s.nextInt();
+		
+		System.out.println("Enter number of seat(int): ");
+		int num = s.nextInt();
+		
+		
+		if (n == 1) {
+			flight.setBookedEconomy(flight.getBookedEconomy()-num);
+			
+		} else {
+			flight.setBookedEconomy(flight.getBookedBusiness() -num);
+		}
+		
+		Passenger[] passengers = flight.getPassengers();
+		for (int i=0; i<passengers.length;i++) {
+			if (passengers[i]==null) {
+				passengers[i] = passenger;
+				break;
+			}
+			
+			
+			
+		}
+		
+		String update = "UPDATE `flights` SET `bookedEconomy`='[value-8]',`bookedBusiness`='[value-9]',`passengers`='[value-11]' WHERE `id` = "+id+";";
+		
+	}
+	
+	public static Flight getFlight(Database database, int id) throws SQLException {
+		Flight flight = new Flight();
+		
+		String select = "SELECT `id`, `airplane`, `origin`, `destination`, `departureTime`, `arrivalTime`, `isDelayed`,"
+				+ " `bookedEconomy`, `bookedBusiness`, `stuff`, `passengers` FROM `flights` WHERE `id` = "+id+" ;";
+		ResultSet rs = database.getStatement().executeQuery(select);
+		int ID = rs.getInt("id");
+		int planeID= rs.getInt("airplane");
+		int originID = rs.getInt("origin");
+		int destID = rs.getInt("destination");
+		String depTime = rs.getString("departureTime");
+		String arrTime  =  rs.getString("arrivalTime");
+		String  del = rs.getString("isDelayed");
+		int bookedEconomy =  rs.getInt("bookedEconomy");
+		int bookedBusiness = rs.getInt("bookedBusiness");
+		String  st = rs.getString("stuff");
+		String pas = rs.getString("passengers");
+		boolean delayed = Boolean.parseBoolean(del);
+		
+		
+		flight.setID(ID);
+		Airplane plane = AirplanesController.getPlaneByID(database, planeID);
+		flight.setAirplane(plane);
+		flight.setOriginAirport(AirportsController.GetAirport(database, originID));
+		flight.setDestinationAirport(AirportsController.GetAirport(database, destID));
+		LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
+		flight.setDepartureTime(departure);
+		LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
+		flight.setArrivalTime(arrival);
+		
+		
+		if (delayed) flight.delay();
+		
+		
+		flight.setBookedEconomy(bookedEconomy);
+		flight.setBookedBusiness(bookedBusiness);
+		
+		
+	
+		String[] stuffID = st.split("<%%/>");
+		
+		Employee[] stuff = new Employee[10];
+		
+		for (int j=0; j < stuffID.length; j++ ) {
+			int idst = Integer.parseInt(stuffID[j]);
+			stuff[j] = EmployeesController.getEmployeeByID(database, idst);
+			
+		}
+		
+		flight.setStuff(stuff);
+		
+		
+		String[] passengersID = pas.split("<%%/>");
+		
+		
+		int totalCapacity = plane.getEconomyCapacity()+plane.getBusinessCapacity();
+		Passenger[] passengers = new Passenger[totalCapacity];
+		
+		for (int j = 0; j<passengersID.length; j++) {
+			
+			int idpass = Integer.parseInt(passengersID[j]);
+			passengers[j] = PassengersController.getPassengerByID(database, idpass);
+			
+			
+		}
+		
+		flight.setPassengers(passengers);
+		return flight;
 	}
 	
 

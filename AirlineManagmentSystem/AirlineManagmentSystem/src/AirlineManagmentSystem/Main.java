@@ -40,6 +40,10 @@ public class Main {
 			System.out.println("18. Delete an airport");
 			System.out.println("19. Create new flight");
 			System.out.println("20. SHow all flights");
+			System.out.println("21. Delay flight");
+			System.out.println("22. Book flight");
+			System.out.println("23. Set flight stuff");
+			System.out.println("24. Delete flight");
 			System.out.println("25. Quit");
 			
 			
@@ -103,6 +107,12 @@ public class Main {
 				break;
 			case 20: 
 				FlightController.showAllFlights(database);
+				break;
+			case 21:
+				FlightController.delayFlight(database, s);
+				break;
+			case 22:
+				FlightController.bookFlight(database, s);
 				break;
 		
 			}

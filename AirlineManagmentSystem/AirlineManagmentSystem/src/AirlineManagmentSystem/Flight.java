@@ -133,9 +133,9 @@ public class Flight {
 	
 	public void print() {
 		
-		System.out.print(airplane.getId()+" "+airplane.getModel()+"\t");
-		System.out.print(origin.getID()+" " +origin.getCity()) ;
-		System.out.print(destination.getID()+" "+destination.getCity()+"\t\t");
+		System.out.print(airplane.getModel()+"\t\t");
+		System.out.print(origin.getCity()+"\t");
+		System.out.print(destination.getCity()+"\t\t");
 		System.out.print(formatter.format(departureTime)+"\t");
 		System.out.print(formatter.format(arrivalTime)+"\t");
 		if (delayed) {
@@ -145,9 +145,9 @@ public class Flight {
 		}
 		
 		int availableE = airplane.getEconomyCapacity() - bookedEconomy;
-		System.out.print(availableE+"\t\t");
+		System.out.print(availableE+"\t\t\t");
 		int availableB = airplane.getBusinessCapacity() - bookedBusiness;
-		System.out.print(availableB+"\t\t");
+		System.out.print(availableB);
 		
 		
 		System.out.println();
