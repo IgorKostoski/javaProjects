@@ -247,8 +247,8 @@ public class FlightController {
 		}
 		
 		String update = "UPDATE `flights` SET `isDelayed`='true' WHERE `id` = "+id+";";
-		database.getStatement().executeQuery(update);
-		System.out.println("Flight delatyed succesfully");
+		database.getStatement().executeUpdate(update);
+		System.out.println("Flight delatyed succesfully!");
 		
 		
 	}
@@ -303,7 +303,18 @@ public class FlightController {
 			
 		}
 		
-		String update = "UPDATE `flights` SET `bookedEconomy`='[value-8]',`bookedBusiness`='[value-9]',`passengers`='[value-11]' WHERE `id` = "+id+";";
+		
+		StringBuilder sb = new StringBuilder();
+		for (Passenger p: flight.getPassengers()) {
+			sb.append(p.getId()).append("<%%/>");
+			
+		}
+		
+		String update = "UPDATE `flights` SET `bookedEconomy`='"+flight.getBookedEconomy()+"',"
+				+ "`bookedBusiness`='"+flight.getBookedBusiness()+"',"
+				+ "`passengers`='"+sb.toString()+"' WHERE `id` = "+flight.getID()+";";
+		database.getStatement().executeQuery(update);
+		System.out.println("Booked successfully!");
 		
 	}
 	
@@ -313,6 +324,7 @@ public class FlightController {
 		String select = "SELECT `id`, `airplane`, `origin`, `destination`, `departureTime`, `arrivalTime`, `isDelayed`,"
 				+ " `bookedEconomy`, `bookedBusiness`, `stuff`, `passengers` FROM `flights` WHERE `id` = "+id+" ;";
 		ResultSet rs = database.getStatement().executeQuery(select);
+		rs.next();
 		int ID = rs.getInt("id");
 		int planeID= rs.getInt("airplane");
 		int originID = rs.getInt("origin");
