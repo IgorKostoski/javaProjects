@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class Database {
 
-	private  String url = "jdbc:mysql://localhost:3306/Airline Management System";
+	private  String url = "jdbc:mysql://localhost:3306/Airline Managment System";
 
 	private  String user = "igor";
 	private  String pass = "";
@@ -31,6 +32,35 @@ public class Database {
 
 	public Statement getStatement() {
 		return statement;
+	}
+	
+	
+	public void Addpassenger(Passenger p) throws SQLException  {
+		String insert = "INSERT INTO `Passengers`(`id`, `firstName`, `lastName`, `Phone`, `email`) "
+				+ "VALUES ('"+p.getId()+"','"+p.getFirstName()+"','"+p.getLastName()+"','"+p.getPhone()+"','"+p.getEmail()+"')";
+		
+		statement.execute(insert);
+		
+		
+	}
+	
+	public ArrayList<Passenger> getAllPassengers() throws SQLException{
+		String get = "SELECT * FROM `Passengers`;";
+		ResultSet rs = statement.executeQuery(get);
+		
+		ArrayList<Passenger > passengers = new ArrayList<>();
+		
+		
+		while (rs.next()) {
+			Passenger p = new Passenger();
+			p.setId(Integer.parseInt(rs.getString("id")));
+			p.setFirstName(rs.getString("firstName"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPhone(rs.getString("Phone"));
+			p.setEmail(rs.getString("email"));
+			passengers.add(p);
+		}
+		return passengers;
 	}
 }
 
