@@ -10,7 +10,7 @@ public class PassengersController {
 	
 	
 	
-	public static void AddNewPassenger(Database database, Scanner s) throws SQLException {
+	public static void AddNewPassenger(PassengersDatabase database, Scanner s) throws SQLException {
 		
 		
 		
@@ -49,7 +49,7 @@ public class PassengersController {
 	}
 	
 	
-	public static void EditPassenger(Database database, Scanner s) throws SQLException {
+	public static void EditPassenger(PassengersDatabase database, Scanner s) throws SQLException {
 		System.out.println("Enter passenger id (int): \n(-1 to get passengers by name)");
 		int id = s.nextInt();
 		Passenger passenger;
@@ -87,7 +87,7 @@ public class PassengersController {
 	}
 	
 	
-	public static void findPassengerByName(Database database, Scanner s) throws SQLException {
+	public static void findPassengerByName(PassengersDatabase database, Scanner s) throws SQLException {
 		System.out.println("Enter first name: ");
 		String firstName = s.next();
 		System.out.println("Enter last name: ");
@@ -98,7 +98,7 @@ public class PassengersController {
 	}
 	
 	
-	public static Passenger getPassengerByName(Database database, Scanner s) throws SQLException {
+	public static Passenger getPassengerByName(PassengersDatabase database, Scanner s) throws SQLException {
 		System.out.println("Enter first name: ");
 		String firstName = s.next();
 		System.out.println("Enter last name: ");
@@ -111,7 +111,7 @@ public class PassengersController {
 	
 	
 	
-	public static void printAllPassengers(Database database) throws SQLException {
+	public static void printAllPassengers(PassengersDatabase database) throws SQLException {
 		
 		ArrayList<Passenger> passengers = database.getAllPassengers();
 		
@@ -124,7 +124,7 @@ public class PassengersController {
 		
 	}
 	
-	public static void DeletePassenger(Database database, Scanner s) throws SQLException {
+	public static void DeletePassenger(PassengersDatabase database, Scanner s) throws SQLException {
 		
 		System.out.println("Enter id(int): \n(-1 to get passenger by name)");
 		
