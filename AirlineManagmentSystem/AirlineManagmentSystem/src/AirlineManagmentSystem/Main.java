@@ -13,7 +13,7 @@ public class Main {
 	public static void main(String[] args) throws SQLException{
 
 
-		PassengersDatabase database = new PassengersDatabase();
+		Database database = new Database();
 		Scanner s = new Scanner(System.in);
 		
 		

@@ -55,5 +55,13 @@ public class Employee {
 	public String getPhone() {
 		return Phone;
 	}
+	
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+	
+	public double getSalary() {
+		return salary;
+	}
 
 }
