@@ -112,6 +112,13 @@ public class Database {
 		}
 		return passengers;
 	}
+	
+	
+	public void deletePassenger(Passenger p) throws SQLException {
+		String delete = "DELETE FROM `Passengers` WHERE `id` = "+p.getId()+";";
+		
+		statement.execute(delete);
+	}
 }
 
 

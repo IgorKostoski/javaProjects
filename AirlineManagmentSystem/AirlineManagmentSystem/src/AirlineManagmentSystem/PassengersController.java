@@ -137,6 +137,9 @@ public class PassengersController {
 			passenger  = database.getPassenger(id);
 		}
 		
+		database.deletePassenger(passenger);
+		System.out.println("Passneger deleted successfully!");
+		
 	}
 	
 	
