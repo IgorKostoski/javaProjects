@@ -28,6 +28,7 @@ public class Main {
 			System.out.println("3. Print all passengers");
 			System.out.println("4. Edit passenger");
 			System.out.println("5. Delete passenger");
+			System.out.println("6. Add new employee");
 			System.out.println("20. Quit");
 			
 			i = s.nextInt();
@@ -47,6 +48,9 @@ public class Main {
 				break;
 			case 5:
 				PassengersController.DeletePassenger(database, s);
+				break;
+			case 6: 
+				EmployeesController.AddNewEmployee(database, s);
 				break;
 			
 			}
