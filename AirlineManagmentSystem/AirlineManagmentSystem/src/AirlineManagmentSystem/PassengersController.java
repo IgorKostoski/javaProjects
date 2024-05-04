@@ -124,6 +124,21 @@ public class PassengersController {
 		
 	}
 	
+	public static void DeletePassenger(Database database, Scanner s) throws SQLException {
+		
+		System.out.println("Enter id(int): \n(-1 to get passenger by name)");
+		
+		
+		int id = s.nextInt();
+		Passenger passenger;
+		if (id == -1) {
+			passenger = getPassengerByName(database, s);
+		} else {
+			passenger  = database.getPassenger(id);
+		}
+		
+	}
+	
 	
 
 }
