@@ -27,7 +27,7 @@ public class Main {
 			System.out.println("2. Get passenger id by name");
 			System.out.println("3. Print all passengers");
 			System.out.println("4. Edit passenger");
-			System.out.println("5. Quit");
+			System.out.println("20. Quit");
 			
 			i = s.nextInt();
 			
