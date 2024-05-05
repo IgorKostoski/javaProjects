@@ -62,6 +62,75 @@ public class EmployeesController {
 		
 	}
 	
+	public static void editEmployee(Database database, Scanner s ) {
+		
+		System.out.println("Enter employee id (int): \n(-1 to get passengers by name)");
+		int id = s.nextInt();
+		Employee employee;
+		if (id == -1) {
+
+			employee = getEmployeeByName(database,  s);
+		} else {
+			String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email`, `salary`, `position` FROM `employees` WHERE `id` = "+id+";";
+			ResultSet rs = database.getStatement().executeQuery(get);
+			
+			Employee p = new Employee();
+			rs.next();
+			p.setId(Integer.parseInt(rs.getString("id")));
+			p.setFirstName(rs.getString("firstName"));
+			p.setLastName(rs.getString("lastName"));
+			p.setPhone(rs.getString("Phone"));
+			p.setEmail(rs.getString("email"));
+			p.setSalary(rs.getDouble("salary"));
+			p.setPosition(rs.getString("position"));
+			employee = p;
+		}
+		
+		
+		System.out.println("Enter first name: \n(-1 to keep old value)");
+		String firstName = s.next();
+		if (firstName.equals("-1")) firstName = employee.getFirstName();
+		
+		System.out.println("Enter last name: \n(-1 to keep old value)");
+		String lastName = s.next();
+		if (lastName.equals("-1")) lastName = employee.getLastName();
+		
+		System.out.println("Enter Phone: \n(-1 to keep old value)");
+		String Phone = s.next();
+		if (Phone.equals("-1")) Phone = employee.getPhone();
+		
+		System.out.println("Enter email: \n(-1 to keep old value)");
+		String email = s.next();
+		if (email.equals("-1")) email = employee.getEmail();
+		
+		System.out.println("Enter salary: (double) \n(-1 to keep old value)");
+		double salary = s.nextDouble();
+		if(salary == -1) salary = employee.getSalary();
+		
+		System.out.println("Enter position: \n(-1 to keep old value)");
+		String position = s.next();
+		if(position.equals("-1")) position = employee.getPosition();
+		
+	
+		
+		
+		employee.setFirstName(firstName);
+		employee.setLastName(lastName);
+		employee.setPhone(Phone);
+		employee.setEmail(email);
+		employee.setSalary(salary);
+		employee.setPosition(position);
+		
+		String update = "UPDATE `employees` SET `id`='"+employee.getId()+"',`firstName`='"+employee.getFirstName()+"',"
+				+ "`lastName`='"+employee.getLastName()+"',"
+				+ "`Phone`='"+employee.getPhone()+"',`email`='"+employee.getEmail()+"',`salary`='"+employee.getSalary()+"',"
+						+ "`position`='"+employee.getPosition()+"' WHERE `id` = "+employee.getId()+" ;";
+		
+		database.getStatement().execute(update);
+		System.out.println("Passenger edited successfully!");
+		
+	}
+	
 	private static ArrayList<Employee> getAllEmployees(Database database) throws SQLException {
 		
 		String get = "SELECT * FROM `employees`;";

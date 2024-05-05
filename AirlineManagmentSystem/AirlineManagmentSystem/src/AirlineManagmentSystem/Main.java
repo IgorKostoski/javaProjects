@@ -29,6 +29,8 @@ public class Main {
 			System.out.println("4. Edit passenger");
 			System.out.println("5. Delete passenger");
 			System.out.println("6. Add new employee");
+			System.out.println("7. Edit employee");
+			
 			System.out.println("20. Quit");
 			
 			i = s.nextInt();
@@ -52,6 +54,8 @@ public class Main {
 			case 6: 
 				EmployeesController.AddNewEmployee(database, s);
 				break;
+			case 7:
+				EmployeesController.editEmployee(database, s);
 			
 			}
 		} while (i!=20);
