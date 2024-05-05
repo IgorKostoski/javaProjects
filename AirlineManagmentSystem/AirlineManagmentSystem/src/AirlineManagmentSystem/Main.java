@@ -23,13 +23,16 @@ public class Main {
 		
 		do {
 			System.out.println("Welcome to Airline Managment System");
-			System.out.println("1. Add new passenger");
-			System.out.println("2. Get passenger id by name");
-			System.out.println("3. Print all passengers");
-			System.out.println("4. Edit passenger");
-			System.out.println("5. Delete passenger");
-			System.out.println("6. Add new employee");
-			System.out.println("7. Edit employee");
+			System.out.println("01. Add new passenger");
+			System.out.println("02. Get passenger by name");
+			System.out.println("03. Print all passengers");
+			System.out.println("04. Edit passenger");
+			System.out.println("05. Delete passenger");
+			System.out.println("06. Add new employee");
+			System.out.println("07. Get employee by name");
+			System.out.println("08. Print all employees");
+			System.out.println("09. Edit employee");
+			System.out.println("10. Delete employee");
 			
 			System.out.println("20. Quit");
 			
@@ -55,7 +58,17 @@ public class Main {
 				EmployeesController.AddNewEmployee(database, s);
 				break;
 			case 7:
+				EmployeesController.findEmployeeByName(database, s);
+				break;
+			case 8:
+				EmployeesController.printAllEmployees(database);
+				break;
+			case 9:
 				EmployeesController.editEmployee(database, s);
+				break;
+			case 10:
+				EmployeesController.deleteEmployee(database, s);
+				break;
 			
 			}
 		} while (i!=20);
