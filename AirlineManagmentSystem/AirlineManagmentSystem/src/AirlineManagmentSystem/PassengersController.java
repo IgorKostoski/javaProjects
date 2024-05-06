@@ -206,7 +206,7 @@ public class PassengersController {
 		String delete = "DELETE FROM `Passengers` WHERE `id` = "+passenger.getId()+";";
 		
 		database.getStatement().execute(delete);
-		System.out.println("Passneger deleted successfully!");
+		System.out.println("Passeneger deleted successfully!");
 		
 	}
 	

@@ -241,7 +241,7 @@ public static void deleteEmployee(Database database, Scanner s) throws SQLExcept
 	String delete = "DELETE FROM `employees` WHERE `id` = "+employee.getId()+";";
 	
 	database.getStatement().execute(delete);
-	System.out.println("Passneger deleted successfully!");
+	System.out.println("Employee deleted successfully!");
 	
 }
 
