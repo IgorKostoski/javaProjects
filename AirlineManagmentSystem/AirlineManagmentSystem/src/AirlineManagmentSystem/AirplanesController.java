@@ -40,11 +40,14 @@ public class AirplanesController {
 						+ "'"+airplane.getEconomyCapacity()+"',"
 								+ "'"+airplane.getBusinessCapacity()+"',"
 										+ "'"+airplane.getModel()+"');";
+		database.getStatement().execute(insert);
+		System.out.println("Airplane added successfully!");
+		
 		
 	}
 	
 	
-	public static ArrayList<Airplane> getAllPlanes(Database database) throws SQLException {
+	private static ArrayList<Airplane> getAllPlanes(Database database) throws SQLException {
 
 		ArrayList<Airplane> planes = new ArrayList<>();
 		String get = "SELECT * FROM `airplanes`;";
