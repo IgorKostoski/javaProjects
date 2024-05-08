@@ -88,10 +88,43 @@ public class AirplanesController {
 			System.out.println("Enter id (int): ");
 			id = s.nextInt();
 		}
-		System.out.println("Enter economy capacity (int): ");
+		
+		Airplane p = getPlaneByID(database, id);
+		
+		
+		
+		System.out.println("Enter economy capacity (int): \n(-1 to keep old value)");
 		int EconomyCapacity = s.nextInt();
-		System.out.println("Enter business capacity (int): ");
+		if  (EconomyCapacity == -1) EconomyCapacity = p.getEconomyCapacity();
+		
+		
+		
+		
+		System.out.println("Enter business capacity (int): \n(-1 to keep old value)");
 		int BusinessCapacity = s.nextInt();
+		if (BusinessCapacity == - 1) BusinessCapacity = p.getBusinessCapacity();
+	
+		
+		System.out.println();
+	}
+	
+	
+	public static Airplane getPlaneByID(Database database, int id) throws SQLException {
+		Airplane a = new Airplane();
+		
+		String get  = "SELECT `id`, `EconomyCapacity`, `BusinessCapacity`,"
+				+ " `model` FROM `airplanes` WHERE `id` = "+id+" ;";
+		
+		ResultSet rs = database.getStatement().executeQuery(get);
+		rs.next();
+		a.setId(rs.getInt("id"));
+		a.setEconomyCapacity(rs.getInt("EconomyCapacity"));
+		a.setBusinessCapacity(rs.getInt("BusinessCapacity"));
+		a.setModel(rs.getString("model"));
+		
+		
+		return a;
+		
 	}
 
 }
