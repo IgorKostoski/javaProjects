@@ -78,5 +78,20 @@ public class AirplanesController {
 		
 		return planes;
 	}
+	
+	public static void EditAirplane(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter id (int):  \n(-1 to show all planes)");
+		int id = s.nextInt();
+		if (id == -1) {
+			printAllPlanes(database);
+			
+			System.out.println("Enter id (int): ");
+			id = s.nextInt();
+		}
+		System.out.println("Enter economy capacity (int): ");
+		int EconomyCapacity = s.nextInt();
+		System.out.println("Enter business capacity (int): ");
+		int BusinessCapacity = s.nextInt();
+	}
 
 }
