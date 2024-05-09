@@ -40,13 +40,23 @@ public class AirportsController {
 		
 		while (rs.next()) {
 			Airport a = new Airport();
-			a.setID(rs.getInt(rs.getInt("id")));
+			a.setID(rs.getInt("id"));
 			a.setCity(rs.getString("city"));
 			airports.add(a);
 		}
 		
 		return airports;
 		
+		
+	}
+	
+	public static void PrintAllAirports(Database database) throws SQLException {
+		System.out.println("================================");
+		System.out.println("id\tcity");
+		for (Airport a : getAllAirports(database)) {
+			a.print();
+		}
+		System.out.println("================================");
 		
 	}
 
