@@ -139,5 +139,20 @@ public class AirplanesController {
 		return a;
 		
 	}
+	
+	public static void DeletePlane(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter id(int): \n(-1 to show all planes)");
+		int id = s.nextInt();
+		if (id == -1) {
+			PrintAllPlanes(database);
+			System.out.println("Enter id (int): ");
+			id = s.nextInt();
+		}
+		
+		String delete = "DELETE FROM `airplanes` WHERE `id` = "+id+";";
+		database.getStatement().execute(delete);
+		System.out.println("Plane deleted successfully!");
+		
+	}
 
 }
