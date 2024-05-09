@@ -27,10 +27,10 @@ public class AirplanesController {
 		int id;
 		ArrayList<Airplane> planes = getAllPlanes(database);
 		
-		if (planes.size() != 0) {
+		if(planes.size() != 0) {
 			
 			 id = planes.get(planes.size()-1).getId()+1;
-		} else {
+		} else{
 			id = 0;
 		}
 		airplane.setId(id);
@@ -46,10 +46,10 @@ public class AirplanesController {
 		
 	}
 	
-	public static void printAllPlanes(Database database) throws SQLException {
+	public static void PrintAllPlanes(Database database) throws SQLException {
 		System.out.println("==========================");
 		
-		for (Airplane plane : getAllPlanes(database)) {
+		for(Airplane plane : getAllPlanes(database)) {
 			plane.print();
 		}
 		
@@ -80,32 +80,45 @@ public class AirplanesController {
 	}
 	
 	public static void EditAirplane(Database database, Scanner s) throws SQLException {
-		System.out.println("Enter id (int):  \n(-1 to show all planes)");
-		int id = s.nextInt();
-		if (id == -1) {
-			printAllPlanes(database);
-			
-			System.out.println("Enter id (int): ");
-			id = s.nextInt();
-		}
-		
-		Airplane p = getPlaneByID(database, id);
-		
-		
-		
-		System.out.println("Enter economy capacity (int): \n(-1 to keep old value)");
-		int EconomyCapacity = s.nextInt();
-		if  (EconomyCapacity == -1) EconomyCapacity = p.getEconomyCapacity();
-		
-		
-		
-		
-		System.out.println("Enter business capacity (int): \n(-1 to keep old value)");
-		int BusinessCapacity = s.nextInt();
-		if (BusinessCapacity == - 1) BusinessCapacity = p.getBusinessCapacity();
-	
-		
-		System.out.println();
+	    System.out.println("Enter airplane id (int): \n(-1 to show all planes)");
+	    int id = s.nextInt();
+	    if (id == -1) {
+	        PrintAllPlanes(database);
+
+	        System.out.println("Enter id (int): ");
+	        id = s.nextInt();
+	    }
+
+	    Airplane p = getPlaneByID(database, id);
+
+
+	    System.out.println("Enter economy capacity (int): \n(-1 to keep old value)");
+	    int economyCapacity = s.nextInt();
+	    if (economyCapacity == -1) {
+	        economyCapacity = p.getEconomyCapacity();
+	    }
+
+
+	    System.out.println("Enter business capacity (int): \n(-1 to keep old value)");
+	    int businessCapacity = s.nextInt();
+	    if (businessCapacity == -1) {
+	        businessCapacity = p.getBusinessCapacity();
+	    }
+
+
+	    System.out.println("Enter model: \n(-1 to keep old value)");
+	    String model = s.next();
+	    if (model.equals("-1")) {
+	        model = p.getModel();
+	    }
+
+
+	    String update = "UPDATE `airplanes` SET `id`='" + p.getId() + "',`EconomyCapacity`='" + economyCapacity + "',"
+	            + "`BusinessCapacity`='" + businessCapacity + "',`model`='" + model + "' WHERE `id` =" + p.getId() + ";";
+
+	    database.getStatement().execute(update);
+	    System.out.println("Airplane edited successfully!");
+
 	}
 	
 	

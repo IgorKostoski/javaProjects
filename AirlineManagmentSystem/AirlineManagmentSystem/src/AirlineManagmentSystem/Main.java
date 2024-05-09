@@ -35,6 +35,7 @@ public class Main {
 			System.out.println("10. Delete employee");
 			System.out.println("11. Add new plane");
 			System.out.println("12. Print all planes");
+			System.out.println("13. Edit plane");
 			
 			System.out.println("20. Quit");
 			
@@ -75,7 +76,10 @@ public class Main {
 				AirplanesController.AddNewAirplane(database, s);
 				break;
 			case 12: 
-				AirplanesController.printAllPlanes(database);
+				AirplanesController.PrintAllPlanes(database);
+				break;
+			case 13: 
+				AirplanesController.EditAirplane(database, s);
 				break;
 			
 			}
