@@ -24,6 +24,7 @@ public class Flight {
 	
 	
 	public Flight() {
+		delayed = false;
 		
 	}
 	
@@ -67,6 +68,47 @@ public class Flight {
 	
 	public void setArrivalTime(LocalDateTime arrivalTime) {
 		this.arrivalTime = arrivalTime;
+	}
+	
+	public boolean isDelayed() {
+		return delayed;
+		
+	}
+	
+	public void delay() {
+		delayed = true;
+	}
+	
+	public int getBookedEconomy() {
+		return bookedEconomy;
+	}
+	
+	public void setBookedEconomy(int bookedEconomy) {
+		this.bookedEconomy = bookedEconomy;
+	}
+	
+	public int getBookedBusiness() {
+		return bookedBusiness;
+	}
+	
+	public void setBookedBusiness(int bookedBusiness) {
+		this.bookedBusiness = bookedBusiness;
+	}
+	
+	public Employee[] getStuff() {
+		return stuff;
+	}
+	
+	public void setStuff(Employee[] stuff) {
+		this.stuff = stuff;
+	}
+	
+	public Passenger[] getPassengers() {
+		return passengers;
+	}
+	
+	public void setPassengers(Passenger[] passengers) {
+		this.passengers = passengers;
 	}
 	
 	
