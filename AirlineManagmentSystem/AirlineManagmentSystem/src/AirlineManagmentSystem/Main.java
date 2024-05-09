@@ -39,6 +39,8 @@ public class Main {
 			System.out.println("14. Delete plane");
 			System.out.println("15. Add new airport");
 			System.out.println("16. Print all airports");
+			System.out.println("17. Edit Airport");
+			System.out.println("18. Delete Airport");
 			
 			System.out.println("20. Quit");
 			
@@ -92,6 +94,12 @@ public class Main {
 				break;
 			case 16:
 				AirportsController.PrintAllAirports(database);
+			case 17:
+				AirportsController.EditAirport(database, s);
+				break;
+			case 18:
+				AirportsController.DeleteAirport(database, s);
+				break;
 			
 			}
 		} while (i!=20);
