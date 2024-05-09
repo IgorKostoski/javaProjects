@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class FlightsController {
 	
 	
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd::HH:mm:ss");
 	
 	public static void AddNewFlight(Database database, Scanner s) throws SQLException {
 		
@@ -45,11 +45,11 @@ public class FlightsController {
 		
 		Airport destination = AirportsController.GetAllAirport(database, destinationID);
 		
-		System.out.println("Enter departure time(yyyy-MM-dd HH:mm:ss): ");
+		System.out.println("Enter departure time(yyyy-MM-dd::HH:mm:ss): ");
 		String dTime = s.next();
 		LocalDateTime departureTime = LocalDateTime.parse(dTime, formatter);
 		
-		System.out.println("Enter departure time(yyyy-MM-dd HH:mm:ss): ");
+		System.out.println("Enter arrival time(yyyy-MM-dd::HH:mm:ss): ");
 		String aTime = s.next();
 		LocalDateTime arrivalTime = LocalDateTime.parse(aTime, formatter);
 		
@@ -61,6 +61,23 @@ public class FlightsController {
 		flight.setDestinationAirport(destination);
 		flight.setArrivalTime(arrivalTime);
 		flight.setDepartureTime(departureTime);
+		
+		
+		ArrayList<Flight> flights = getAllFlights(database);
+		
+		int id = 0;
+		
+		if (flights.size()!=0) id = flights.size();
+		
+		flight.setID(id);
+		
+		String insert = "INSERT INTO `flights`(`id`, `airplane`, `origin`, `destination`, `departureTime`, `arrivalTime`, `isDelayed`,"
+				+ " `bookedEconomy`, `bookedBusiness`, `stuff`, `passengers`) "
+				+ "VALUES ('"+flight.getID()+"','"+planeID+"','"+originID+"',"
+						+ "'"+destinationID+"','"+dTime+"',"
+				+ "'"+aTime+"','false','0','0','<%%/>','<%%/>');";
+		database.getStatement().execute(insert);
+		System.out.println("Flight added successfully");
 		
 		
 	}
@@ -77,7 +94,8 @@ public class FlightsController {
 			
 			
 			int planeID =  rs.getInt("airplane");
-			flight.setAirplane(AirplanesController.getPlaneByID(database, planeID));
+			Airplane plane = AirplanesController.getPlaneByID(database, planeID);
+			flight.setAirplane(plane);
 			
 			
 			int originID = rs.getInt("origin");
@@ -94,6 +112,39 @@ public class FlightsController {
 			String arrTime = rs.getString("arrival");
 			LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
 			flight.setArrivalTime(arrival);
+			
+			boolean delayed = rs.getBoolean("isDelayed");
+			if (delayed) flight.delay();
+			
+			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
+			flight.setBookedBusiness(rs.getInt("bookedBusiness"));
+			
+			String st = rs.getString("stuff");
+			String[] stuffID = st.split("<%%/>");
+			Employee[] stuff = new Employee[10];
+			
+			for (int i=0; i<stuffID.length;i++) {
+				int id = Integer.parseInt(stuffID[i]);
+				stuff[i] = EmployeesController.getEmployeeByID(database, id);
+			}
+			flight.setStuff(stuff);
+			
+			
+			String pas = rs.getString("passengers");
+			String[] passengersID = pas.split("<%%/>");
+			int totalCapacity = plane.getEconomyCapacity()+plane.getBusinessCapacity();
+			Passenger[] passengers = new Passenger[totalCapacity];
+			for (int j=0;j<passengersID.length;j++) {
+				
+				int id = Integer.parseInt(passengersID[j]);
+				passengers[j] = PassengersController.getPassengerByID(database, id);
+			}
+			
+			flight.setPassengers(passengers);
+			
+			
+			flights.add(flight);
+					
 		}
 				
 				

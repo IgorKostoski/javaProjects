@@ -41,6 +41,7 @@ public class Main {
 			System.out.println("16. Print all airports");
 			System.out.println("17. Edit Airport");
 			System.out.println("18. Delete Airport");
+			System.out.println("19. Create new flight");
 			
 			System.out.println("20. Quit");
 			
@@ -99,6 +100,9 @@ public class Main {
 				break;
 			case 18:
 				AirportsController.DeleteAirport(database, s);
+				break;
+			case 19:
+				FlightsController.AddNewFlight(database, s);
 				break;
 			
 			}

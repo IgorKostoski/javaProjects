@@ -169,6 +169,33 @@ public class EmployeesController {
 	}
 	
 	
+	public static Employee getEmployeeByID(Database database, int id) throws SQLException {
+		
+		
+		
+//		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email` FROM `Passengers` WHERE  `firstName` = \""+firstName+"\";";
+		String get = "SELECT `id`, `firstName`, `lastName`, `Phone`, `email`, `salary`, `position` FROM `employees` "
+				+ "WHERE `id` = "+id+";";
+		ResultSet rs = database.getStatement().executeQuery(get);
+//		Passenger passenger = new Passenger();
+		
+		
+		rs.next();
+		
+			
+		Employee p = new Employee();
+		p.setId(Integer.parseInt(rs.getString("id")));
+		p.setFirstName(rs.getString("firstName"));
+		p.setLastName(rs.getString("lastName"));
+		p.setPhone(rs.getString("Phone"));
+		p.setEmail(rs.getString("email"));
+		p.setSalary(rs.getDouble("salary"));
+		p.setPosition(rs.getString("position"));
+			
+		return p;
+	}
+	
+	
 	public static void findEmployeeByName(Database database, Scanner s) throws SQLException {
 		System.out.println("Enter first name: ");
 		String firstName = s.next();
