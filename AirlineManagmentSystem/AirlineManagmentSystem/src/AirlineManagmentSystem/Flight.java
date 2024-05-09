@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class Flight {
 	
+	
+	private int id;
 	private Airplane airplane;
 	
 	private Airport origin;
@@ -25,7 +27,20 @@ public class Flight {
 	
 	public Flight() {
 		delayed = false;
+		bookedEconomy = 0;
+		bookedBusiness = 0;
+		stuff = new Employee[10];
 		
+		
+		
+	}
+	
+	public int getID() {
+		return id;
+	}
+	
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 	public Airplane getAirplane() {
@@ -34,6 +49,8 @@ public class Flight {
 	
 	public void setAirplane(Airplane airplane) {
 		this.airplane = airplane;
+		int totalCapacity = airplane.getBusinessCapacity()+airplane.getEconomyCapacity();
+		passengers = new Passenger[totalCapacity];
 		
 	}
 	
