@@ -1,5 +1,6 @@
 package AirlineManagmentSystem;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -64,8 +65,38 @@ public class FlightsController {
 		
 	}
 	
-	public static ArrayList<Flight> getAllFlights() {
+	public static ArrayList<Flight> getAllFlights(Database database) throws SQLException {
 		ArrayList<Flight> flights = new ArrayList<>();
+		String select = "SELECT * FROM `flights`;";
+		
+		ResultSet rs = database.getStatement().executeQuery(select);
+		
+		while (rs.next()) {
+			Flight flight = new Flight();
+			flight.setID(rs.getInt("id"));
+			
+			
+			int planeID =  rs.getInt("airplane");
+			flight.setAirplane(AirplanesController.getPlaneByID(database, planeID));
+			
+			
+			int originID = rs.getInt("origin");
+			flight.setOriginAirport(AirportsController.GetAllAirport(database, originID));
+			
+			
+			int destID = rs.getInt("destination");
+			flight.setDestinationAirport(AirportsController.GetAllAirport(database, destID));
+			
+			String depTime = rs.getString("departure");
+			LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
+			flight.setDepartureTime(departure);
+			
+			String arrTime = rs.getString("arrival");
+			LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
+			flight.setArrivalTime(arrival);
+		}
+				
+				
 		return flights;
 		
 	}
