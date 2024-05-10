@@ -133,14 +133,14 @@ public class Flight {
 	
 	public void print() {
 		
-	
+		System.out.print(id+"\t");
 		System.out.print(airplane.getModel()+"\t\t");
 		System.out.print(origin.getCity()+"\t");
 		System.out.print(destination.getCity()+"\t\t");
 		System.out.print(formatter.format(departureTime)+"\t");
 		System.out.print(formatter.format(arrivalTime)+"\t");
 		if (delayed) {
-			System.out.print("delayed\t");
+			System.out.print("delayed\t\t");
 		} else {
 			System.out.print("estimated\t");
 		}
