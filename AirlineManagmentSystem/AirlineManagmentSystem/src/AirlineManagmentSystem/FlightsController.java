@@ -104,21 +104,42 @@ public class FlightsController {
 		
 		
 		while (rs.next()) {
+			
+			IDs.add(rs.getInt("id"));
+			planeIDs.add(rs.getInt("airplane"));
+			originIDs.add(rs.getInt("origin"));
+			destIDs.add(rs.getInt("destination"));
+			depTimes.add(rs.getString("departureTime"));
+			arrTimes.add(rs.getString("arrivalTime"));
+			dels.add(rs.getString("isDelayed"));
+			bookedEconomySeats.add(rs.getInt("bookedEconomy"));
+			bookedBusinessSeats.add(rs.getInt("bookedBusiness"));
+			sts.add(rs.getString("stuff"));
+			pass.add(rs.getString("passengers"));
+			
+			
+			
+			
+			
+			
+					
+		}
+		for (int i=0; i<IDs.size();i++) {
 			Flight flight = new Flight();
-			flight.setID(rs.getInt("id"));
+			flight.setID(IDs.get(i));
 			
 			
-			int planeID =  rs.getInt("airplane");
-			int originID = rs.getInt("origin");
-			int destID = rs.getInt("destination");
-			String depTime = rs.getString("departureTime");
-			String arrTime = rs.getString("arrivalTime");
-			String del = rs.getString("isDelayed");
+			int planeID = planeIDs.get(i) ;
+			int originID = originIDs.get(i);
+			int destID = destIDs.get(i);
+			String depTime = depTimes.get(i);
+			String arrTime = arrTimes.get(i);
+			String del = dels.get(i);
 			boolean delayed = Boolean.parseBoolean(del);
-			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
-			flight.setBookedBusiness(rs.getInt("bookedBusiness"));
-			String st = rs.getString("stuff");
-			String pas = rs.getString("passengers");
+			flight.setBookedEconomy(bookedEconomySeats.get(i));
+			flight.setBookedBusiness(bookedBusinessSeats.get(i));
+			String st = sts.get(i);
+			String pas = pass.get(i);
 			
 			
 			
@@ -150,9 +171,9 @@ public class FlightsController {
 			String[] stuffID = st.split("<%%/>");
 			Employee[] stuff = new Employee[10];
 			
-			for (int i=0; i<stuffID.length;i++) {
-				int id = Integer.parseInt(stuffID[i]);
-				stuff[i] = EmployeesController.getEmployeeByID(database, id);
+			for (int j=0; j<stuffID.length;j++) {
+				int id = Integer.parseInt(stuffID[j]);
+				stuff[j] = EmployeesController.getEmployeeByID(database, id);
 			}
 			flight.setStuff(stuff);
 			
@@ -171,8 +192,6 @@ public class FlightsController {
 			
 			
 			flights.add(flight);
-			
-					
 		}
 				
 				
