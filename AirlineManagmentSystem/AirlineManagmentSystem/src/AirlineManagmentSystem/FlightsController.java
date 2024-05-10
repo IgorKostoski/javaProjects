@@ -90,38 +90,63 @@ public class FlightsController {
 		
 		ResultSet rs = database.getStatement().executeQuery(select);
 		
+		ArrayList<Integer> IDs = new ArrayList<>();
+		ArrayList<Integer> planeIDs = new ArrayList<>();
+		ArrayList<Integer> originIDs = new ArrayList<>();
+		ArrayList<Integer> destIDs = new ArrayList<>();
+		ArrayList<String> depTimes = new ArrayList<>();
+		ArrayList<String> arrTimes = new ArrayList<>();
+		ArrayList<String> dels = new ArrayList<>();
+		ArrayList<Integer> bookedEconomySeats = new ArrayList<>();
+		ArrayList<Integer> bookedBusinessSeats = new ArrayList<>();
+		ArrayList<String> sts = new ArrayList<>();
+		ArrayList<String> pass = new ArrayList<>();
+		
+		
 		while (rs.next()) {
 			Flight flight = new Flight();
 			flight.setID(rs.getInt("id"));
 			
 			
 			int planeID =  rs.getInt("airplane");
+			int originID = rs.getInt("origin");
+			int destID = rs.getInt("destination");
+			String depTime = rs.getString("departureTime");
+			String arrTime = rs.getString("arrivalTime");
+			String del = rs.getString("isDelayed");
+			boolean delayed = Boolean.parseBoolean(del);
+			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
+			flight.setBookedBusiness(rs.getInt("bookedBusiness"));
+			String st = rs.getString("stuff");
+			String pas = rs.getString("passengers");
+			
+			
+			
 			Airplane plane = AirplanesController.getPlaneByID(database, planeID);
 			flight.setAirplane(plane);
 			
 			
-			int originID = rs.getInt("origin");
+			
 			flight.setOriginAirport(AirportsController.GetAllAirport(database, originID));
 			
 			
-			int destID = rs.getInt("destination");
+			
 			flight.setDestinationAirport(AirportsController.GetAllAirport(database, destID));
 			
-			String depTime = rs.getString("departure");
+		
 			LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
 			flight.setDepartureTime(departure);
 			
-			String arrTime = rs.getString("arrival");
+			
 			LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
 			flight.setArrivalTime(arrival);
 			
-			boolean delayed = rs.getBoolean("isDelayed");
+			
 			if (delayed) flight.delay();
 			
-			flight.setBookedEconomy(rs.getInt("bookedEconomy"));
-			flight.setBookedBusiness(rs.getInt("bookedBusiness"));
 			
-			String st = rs.getString("stuff");
+			
+			
 			String[] stuffID = st.split("<%%/>");
 			Employee[] stuff = new Employee[10];
 			
@@ -132,7 +157,7 @@ public class FlightsController {
 			flight.setStuff(stuff);
 			
 			
-			String pas = rs.getString("passengers");
+			
 			String[] passengersID = pas.split("<%%/>");
 			int totalCapacity = plane.getEconomyCapacity()+plane.getBusinessCapacity();
 			Passenger[] passengers = new Passenger[totalCapacity];
@@ -146,6 +171,7 @@ public class FlightsController {
 			
 			
 			flights.add(flight);
+			
 					
 		}
 				
