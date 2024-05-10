@@ -10,6 +10,8 @@ import java.util.Scanner;
 public class FlightsController {
 	
 	
+	
+	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd::HH:mm:ss");
 	
 	public static void AddNewFlight(Database database, Scanner s) throws SQLException {
@@ -150,6 +152,18 @@ public class FlightsController {
 				
 		return flights;
 		
+	}
+	
+	
+	public static void showAllFlights(Database database) throws SQLException {
+		ArrayList<Flight> flights = getAllFlights(database);
+		System.out.println("Airplane\tOrigin Airport\tDestination Airport\tDeparture Time"
+				+ "\tArrival Time\tstatus\tBooked Economy Seats\tBooked Business Seats");
+		
+		for (Flight f : flights) {
+			f.print();
+			
+		}
 	}
 
 }

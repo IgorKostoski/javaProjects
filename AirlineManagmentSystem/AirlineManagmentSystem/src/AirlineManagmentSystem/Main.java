@@ -42,8 +42,9 @@ public class Main {
 			System.out.println("17. Edit Airport");
 			System.out.println("18. Delete Airport");
 			System.out.println("19. Create new flight");
+			System.out.println("20. Show all flights");
 			
-			System.out.println("20. Quit");
+			System.out.println("25. Quit");
 			
 			i = s.nextInt();
 			
@@ -104,9 +105,12 @@ public class Main {
 			case 19:
 				FlightsController.AddNewFlight(database, s);
 				break;
+			case 20:
+				FlightsController.showAllFlights(database);
+				break;
 			
 			}
-		} while (i!=20);
+		} while (i!=25);
 
 
 		

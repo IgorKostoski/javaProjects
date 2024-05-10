@@ -1,6 +1,7 @@
 package AirlineManagmentSystem;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Flight {
 	
@@ -23,6 +24,8 @@ public class Flight {
 	
 	private Employee[] stuff;
 	private Passenger[] passengers;
+	
+	private  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd::HH:mm:ss");
 	
 	
 	public Flight() {
@@ -128,6 +131,24 @@ public class Flight {
 		this.passengers = passengers;
 	}
 	
+	public void print() {
+		
+	
+		System.out.println(airplane.getId()+" "+airplane.getModel()+"\t");
+		System.out.print(origin.getID()+" "+origin.getCity()+"\t");
+		System.out.print(destination.getID()+" "+destination.getCity()+"\t");
+		System.out.print(formatter.format(departureTime)+"\t");
+		System.out.print(formatter.format(arrivalTime)+"\t");
+		if (delayed) {
+			System.out.println("delayed\t");
+		} else {
+			System.out.println("estimated\t");
+		}
+		
+		System.out.print(bookedEconomy+"\t\t");
+		System.out.print(bookedBusiness);
+		
+	}
 	
 	
 
