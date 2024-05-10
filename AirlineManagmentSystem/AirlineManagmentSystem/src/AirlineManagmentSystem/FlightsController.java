@@ -202,8 +202,8 @@ public class FlightsController {
 	
 	public static void showAllFlights(Database database) throws SQLException {
 		ArrayList<Flight> flights = getAllFlights(database);
-		System.out.println("Airplane\tOrigin Airport\tDestination Airport\tDeparture Time"
-				+ "\tArrival Time\tstatus\tBooked Economy Seats\tBooked Business Seats");
+		System.out.println("Airplane\tOrigin\tDestination\tDeparture Time"
+				+ "\t\tArrival Time\t\tstatus\t\tAvailable Economy\tAvailable Business");
 		
 		for (Flight f : flights) {
 			f.print();
