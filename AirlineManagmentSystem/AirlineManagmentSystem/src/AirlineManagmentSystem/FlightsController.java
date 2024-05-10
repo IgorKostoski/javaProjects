@@ -210,5 +210,20 @@ public class FlightsController {
 			
 		}
 	}
+	
+	public static void delayFlight(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter flight id(int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) {
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		String update = "UPDATE `flights` SET `isDelayed`='true' WHERE `id` = "+id+";";
+		database.getStatement().execute(update);
+		System.out.println("Flight delayed succefully!");
+	}
 
 }
