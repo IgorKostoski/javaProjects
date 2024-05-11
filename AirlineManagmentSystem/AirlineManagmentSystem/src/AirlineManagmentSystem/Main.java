@@ -115,6 +115,9 @@ public class Main {
 			case 21:
 				FlightsController.delayFlight(database, s);
 				break;
+			case 22:
+				FlightsController.bookFlight(database, s);
+				break;
 				
 			
 			}

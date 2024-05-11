@@ -225,5 +225,33 @@ public class FlightsController {
 		database.getStatement().execute(update);
 		System.out.println("Flight delayed succefully!");
 	}
+	
+	public static void bookFlight(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) { 
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		Passenger passenger;
+		System.out.println("Enter passenger id (int): \n(-1 to get passenger by name)");
+		int passengerID = s.nextInt();
+		if (passengerID==-1) {
+			passenger = PassengersController.getPassengerByName(database, s);
+			
+		} else {
+			passenger = PassengersController.getPassengerByID(database, passengerID);
+		}
+		
+		System.out.println("1. Economy seat");
+		System.out.println("2. Business seat");
+		
+		int n = s.nextInt();
+		
+		
+	}
 
 }
