@@ -1,6 +1,7 @@
 package AirlineManagmentSystem;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -236,6 +237,10 @@ public class FlightsController {
 			id = s.nextInt();
 		}
 		
+		
+		
+		Flight flight = getFlight(database, id);
+		
 		Passenger passenger;
 		System.out.println("Enter passenger id (int): \n(-1 to get passenger by name)");
 		int passengerID = s.nextInt();
@@ -251,7 +256,115 @@ public class FlightsController {
 		
 		int n = s.nextInt();
 		
+		System.out.println("Enter number of seats (int): ");
+		int num = s.nextInt();
 		
+		if (n==1) {
+			flight.setBookedEconomy(flight.getBookedEconomy()-num);
+		} else {
+			flight.setBookedBusiness(flight.getBookedBusiness()-num);
+		}
+		
+		
+		Passenger[] passengers = flight.getPassengers();
+		
+		for (int i=0;i<passengers.length;i++) {
+			if (passengers[i]==null) {
+				passengers[i] = passenger;
+				break;
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		
+		for (Passenger p: flight.getPassengers()) {
+			if (p!=null) sb.append(p.getId()).append("<%%/>");
+			
+		}
+		
+		String update = "UPDATE `flights` SET `bookedEconomy`='"+flight.getBookedEconomy()+"',"
+				+ "`bookedBusiness`='"+flight.getBookedBusiness()+"',`passengers`='"+sb.toString()+"' WHERE `id` = "+flight.getID()+";";
+		
+		database.getStatement().execute(update);
+		System.out.println("Booked succesfully!");
+		
+		
+	}
+	
+	public static Flight getFlight(Database database, int id) throws SQLException {
+		Flight flight = new Flight();
+		String select = "SELECT `id`, `airplane`, `origin`, `destination`, `departureTime`, `arrivalTime`, `isDelayed`,"
+				+ " `bookedEconomy`, `bookedBusiness`, `stuff`, `passengers` FROM `flights` WHERE `id` = "+id+";";
+		
+		ResultSet rs = database.getStatement().executeQuery(select);
+		rs.next();
+		
+		
+		int ID = rs.getInt("id");
+		int planeID = rs.getInt("airplane");
+		int originID = rs.getInt("origin");
+		int destID = rs.getInt("destination");
+		String depTime = rs.getString("departureTime");
+		String arrTime = rs.getString("arrivalTime");
+		String del = rs.getString("isDelayed");
+		int bookedEconomy = rs.getInt("bookedEconomy");
+		int bookedBusiness = rs.getInt("bookedBusiness");
+		String st = rs.getString("stuff");
+		String pas = rs.getString("passengers");
+		boolean delayed = Boolean.parseBoolean(del);
+		
+		flight.setID(ID);
+		Airplane plane = AirplanesController.getPlaneByID(database, planeID);
+		flight.setAirplane(plane);
+		
+		
+		
+		flight.setOriginAirport(AirportsController.GetAllAirport(database, originID));
+		
+		
+		
+		flight.setDestinationAirport(AirportsController.GetAllAirport(database, destID));
+		
+	
+		LocalDateTime departure = LocalDateTime.parse(depTime, formatter);
+		flight.setDepartureTime(departure);
+		
+		
+		LocalDateTime arrival = LocalDateTime.parse(arrTime, formatter);
+		flight.setArrivalTime(arrival);
+		
+		
+		if (delayed) flight.delay();
+		
+		flight.setBookedEconomy(bookedEconomy);
+		flight.setBookedBusiness(bookedBusiness);
+		
+		
+		
+		
+		String[] stuffID = st.split("<%%/>");
+		Employee[] stuff = new Employee[10];
+		
+		for (int j=0; j<stuffID.length;j++) {
+			int idst = Integer.parseInt(stuffID[j]);
+			stuff[j] = EmployeesController.getEmployeeByID(database, idst);
+		}
+		flight.setStuff(stuff);
+		
+		
+		
+		String[] passengersID = pas.split("<%%/>");
+		int totalCapacity = plane.getEconomyCapacity()+plane.getBusinessCapacity();
+		Passenger[] passengers = new Passenger[totalCapacity];
+		for (int j=0;j<passengersID.length;j++) {
+			
+			int idpass = Integer.parseInt(passengersID[j]);
+			passengers[j] = PassengersController.getPassengerByID(database, idpass);
+		}
+		
+		flight.setPassengers(passengers);
+		
+		return flight;
 	}
 
 }
