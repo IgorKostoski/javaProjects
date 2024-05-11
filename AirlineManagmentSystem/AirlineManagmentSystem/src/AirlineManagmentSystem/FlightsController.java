@@ -260,9 +260,9 @@ public class FlightsController {
 		int num = s.nextInt();
 		
 		if (n==1) {
-			flight.setBookedEconomy(flight.getBookedEconomy()-num);
+			flight.setBookedEconomy(flight.getBookedEconomy()+num);
 		} else {
-			flight.setBookedBusiness(flight.getBookedBusiness()-num);
+			flight.setBookedBusiness(flight.getBookedBusiness()+num);
 		}
 		
 		
@@ -365,6 +365,47 @@ public class FlightsController {
 		flight.setPassengers(passengers);
 		
 		return flight;
+	}
+	public static void setFlightStuff(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) { 
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		
+		
+		Flight flight = getFlight(database, id);
+		
+		
+		System.out.println("1. Show all employees");
+		System.out.println("2. Continue");
+		int j = s.nextInt();
+		if (j==1) EmployeesController.printAllEmployees(database);
+		System.out.println("Enter employees ids: (int)");
+		Employee[] employees = new Employee[10];
+		for (int i=0; i<10;i++) {
+			System.out.println("id " +(i+1)+"/10");
+			
+			int ID = s.nextInt();
+			employees[i] = EmployeesController.getEmployeeByID(database, ID);
+		} 
+		
+		
+		flight.setStuff(employees);
+		
+		StringBuilder bd = new StringBuilder();
+		for (Employee e : flight.getStuff()) {
+			if (e!=null) bd.append(e.getId()).append("<%%/>");
+		}
+		
+		String update = "UPDATE `flights` SET `stuff`='"+bd.toString()+"' WHERE `id` = "+flight.getID()+";";
+		database.getStatement().execute(update);
+		System.out.println("Stuff updated successfully!");
+		
 	}
 
 }

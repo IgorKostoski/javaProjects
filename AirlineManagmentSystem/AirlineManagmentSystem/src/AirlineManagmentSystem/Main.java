@@ -47,8 +47,10 @@ public class Main {
 			System.out.println("22. Book flight");
 			System.out.println("23. Set flight stuff");
 			System.out.println("24. Delete Flight");
+			System.out.println("25. Show all flight stuff");
+			System.out.println("26. Show flight passengers");
 			
-			System.out.println("25. Quit");
+			System.out.println("27. Quit");
 			
 			i = s.nextInt();
 			
@@ -118,10 +120,14 @@ public class Main {
 			case 22:
 				FlightsController.bookFlight(database, s);
 				break;
+			case 23: 
+				FlightsController.setFlightStuff(database, s);
+				break;
+			
 				
 			
 			}
-		} while (i!=25);
+		} while (i!=27);
 
 
 		
