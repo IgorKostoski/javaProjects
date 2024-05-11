@@ -46,7 +46,7 @@ public class Main {
 			System.out.println("21. Delay flight");
 			System.out.println("22. Book flight");
 			System.out.println("23. Set flight stuff");
-			System.out.println("24. Delete Flight");
+			System.out.println("24. Cancel Flight");
 			System.out.println("25. Show all flight stuff");
 			System.out.println("26. Show flight passengers");
 			
@@ -122,6 +122,15 @@ public class Main {
 				break;
 			case 23: 
 				FlightsController.setFlightStuff(database, s);
+				break;
+			case 24:
+				FlightsController.cancelFlight(database, s);
+				break;
+			case 25:
+				FlightsController.printFlightStuff(database, s);
+				break;
+			case 26:
+				FlightsController.printFlightPassengers(database, s);
 				break;
 			
 				

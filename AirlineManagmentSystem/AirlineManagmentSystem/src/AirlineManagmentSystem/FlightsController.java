@@ -407,5 +407,77 @@ public class FlightsController {
 		System.out.println("Stuff updated successfully!");
 		
 	}
+	
+	public static void cancelFlight(Database database, Scanner s) throws SQLException {
+		
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) { 
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		String delete = "DELETE FROM `flights` WHERE `id` = "+id+";";
+		database.getStatement().execute(delete);
+		System.out.println("Flight cancelled successfully");
+		
+	}
+	
+	public static void printFlightStuff(Database database, Scanner s) throws SQLException {
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) { 
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		Flight f = getFlight(database, id);
+		
+		System.out.println("id\tFirst Name\tLast Name\tEmail\tTel\tPosition");
+		for (Employee e : f.getStuff()) {
+			System.out.print(e.getId()+"\t");
+			System.out.print(e.getFirstName()+"\t\t");
+			System.out.print(e.getLastName()+"\t\t");
+			System.out.print(e.getEmail()+"\t");
+			System.out.print(e.getPhone()+"\t");
+			System.out.print(e.getPosition());
+			System.out.println();
+			
+		}
+	}
+	
+	public static void printFlightPassengers(Database database, Scanner s) throws SQLException {
+		
+		System.out.println("Enter flight id (int): \n(-1 to show all flights)");
+		int id = s.nextInt();
+		
+		if (id==-1) { 
+			showAllFlights(database);
+			System.out.println("Enter flight id (int): ");
+			id = s.nextInt();
+		}
+		
+		Flight f = getFlight(database, id);
+		
+		System.out.println("id\tFirst Name\tLast Name\tEmail\tTel");
+		
+		for (Passenger p : f.getPassengers()) {
+			
+			System.out.print(p.getId()+"\t");
+			System.out.print(p.getFirstName()+"\t\t");
+			System.out.print(p.getLastName()+"\t\t");
+			System.out.print(p.getEmail()+"\t");
+			System.out.print(p.getPhone());
+			System.out.println();
+			
+		}
+		
+		
+		
+	}
 
 }
