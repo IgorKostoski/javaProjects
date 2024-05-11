@@ -437,15 +437,22 @@ public class FlightsController {
 		
 		Flight f = getFlight(database, id);
 		
-		System.out.println("id\tFirst Name\tLast Name\tEmail\tTel\tPosition");
+		System.out.println("id\tFirst Name\tLast Name\tEmail\tPhone\tPosition");
 		for (Employee e : f.getStuff()) {
-			System.out.print(e.getId()+"\t");
-			System.out.print(e.getFirstName()+"\t\t");
-			System.out.print(e.getLastName()+"\t\t");
-			System.out.print(e.getEmail()+"\t");
-			System.out.print(e.getPhone()+"\t");
-			System.out.print(e.getPosition());
-			System.out.println();
+			
+			if (e!=null) {
+				System.out.print(e.getId()+"\t");
+				System.out.print(e.getFirstName()+"\t\t");
+				System.out.print(e.getLastName()+"\t\t");
+				System.out.print(e.getEmail()+"\t");
+				System.out.print(e.getPhone()+"\t");
+				System.out.print(e.getPosition());
+				System.out.println();
+				
+			}
+			
+			
+			
 			
 		}
 	}
@@ -463,16 +470,18 @@ public class FlightsController {
 		
 		Flight f = getFlight(database, id);
 		
-		System.out.println("id\tFirst Name\tLast Name\tEmail\tTel");
+		System.out.println("id\tFirst Name\tLast Name\tEmail\t\tPhone");
 		
 		for (Passenger p : f.getPassengers()) {
 			
-			System.out.print(p.getId()+"\t");
-			System.out.print(p.getFirstName()+"\t\t");
-			System.out.print(p.getLastName()+"\t\t");
-			System.out.print(p.getEmail()+"\t");
-			System.out.print(p.getPhone());
-			System.out.println();
+			if (p!=null) {
+				System.out.print(p.getId()+"\t");
+				System.out.print(p.getFirstName()+"\t\t");
+				System.out.print(p.getLastName()+"\t\t");
+				System.out.print(p.getEmail()+"\t");
+				System.out.print(p.getPhone());
+				System.out.println();
+			}
 			
 		}
 		
