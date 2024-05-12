@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -15,7 +17,7 @@ public class Calendar extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar() {
+	public Calendar(int year, int month) {
 		
 		
 		setLayout(new BorderLayout(30, 30));
@@ -45,6 +47,35 @@ public class Calendar extends JPanel {
 		add(top, BorderLayout.NORTH);
 		
 		JPanel days = new JPanel(new GridLayout(7, 7));
+		days.setBackground(null); // Set a default background for readability
+		
+		Color header = Color.pink;
+		days.add(new DayLabel("Su", header, Color.white, false));
+		days.add(new DayLabel("Mo", header, Color.white, false));
+		days.add(new DayLabel("Tu", header, Color.white, false));
+		days.add(new DayLabel("We", header, Color.white, false));
+		days.add(new DayLabel("Th", header, Color.white, false));
+		days.add(new DayLabel("Fr", header, Color.white, false));
+		days.add(new DayLabel("Sa", header, Color.white, false));
+		
+		String[] weekDays = new String[] {"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY",
+				"FRIDAY", "SATURDAY"
+		};
+		
+		LocalDate firstDay = LocalDate.of(year, month, 1);
+		
+		int j = 0;
+		
+		while (!firstDay.getDayOfWeek().toString().equals(weekDays[j])) {
+			days.add(new DayLabel("", Color.white, Color.black, false));
+			j++;
+		}
+ 
+		for (int i = 0;i<(42-j);i++) {
+		    days.add(new DayLabel(i+"", Color.black, Color.white, true));
+		}
+
+		add(days, BorderLayout.CENTER);
 		
 	}
 
