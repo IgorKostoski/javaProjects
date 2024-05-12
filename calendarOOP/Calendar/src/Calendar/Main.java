@@ -17,6 +17,12 @@ public class Main {
 		JPanel mainPanel = new JPanel(new GridLayout(1, 2, 0, 0));
 		
 		
+		
+		mainPanel.add(new Calendar());
+		mainPanel.add(new Events());
+		
+		
+		
 		frame.getContentPane().add(mainPanel);
 		frame.setVisible(true);
 
