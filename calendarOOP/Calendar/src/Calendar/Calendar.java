@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
@@ -17,7 +19,7 @@ public class Calendar extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    public Calendar(int year, int month, LocalDate selectedDay) {
+    public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel) {
 
         setLayout(new BorderLayout(30, 30));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Adjust padding if needed
@@ -35,6 +37,49 @@ public class Calendar extends JPanel {
 
         JLabel left = new JLabel(new ImageIcon("pics/right-arrow.png"));
         left.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        left.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.removeAll();
+				if (month!=12) {
+					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel));
+				} else {
+					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel));
+
+				}
+				mainPanel.add(new Events());
+				mainPanel.revalidate();
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        	
+        	
+        });
         top.add(left, BorderLayout.EAST);
 
         JLabel right = new JLabel(new ImageIcon("pics/left-arrow.png"));
