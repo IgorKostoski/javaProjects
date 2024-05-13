@@ -70,7 +70,17 @@ public class Calendar extends JPanel {
         int daysNum = YearMonth.of(year, month).lengthOfMonth();
 
         for (int i = 1; i <= daysNum; i++) { // Use <= to include all days
-            days.add(new DayLabel(String.valueOf(i), Color.black, Color.white, true));
+        	
+        	DayLabel dayLabel;
+        	if (selectedDay.getYear()== year && selectedDay.getMonthValue()== month && selectedDay.getDayOfMonth()== i ) {
+        		dayLabel = new DayLabel(i+"", Color.white, Color.blue, true);
+        	} else if (i%5==0) {
+        		dayLabel = new DayLabel(i+"", Color.yellow, Color.red, true);
+        	} else {
+        		dayLabel = new DayLabel(i+"", Color.decode("#f0f0f0"), Color.gray, true);
+        	}
+        	
+            days.add(dayLabel);
         }
 
         for (int i = daysNum + j; i < 42; i++) {
