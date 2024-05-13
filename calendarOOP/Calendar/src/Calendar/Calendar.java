@@ -161,6 +161,8 @@ public class Calendar extends JPanel {
 
         for (int i = 1; i <= daysNum; i++) { // Use <= to include all days
         	
+        	final int day = i;
+        	
         	DayLabel dayLabel;
         	if (selectedDay.getYear()== year && selectedDay.getMonthValue()== month && selectedDay.getDayOfMonth()== i ) {
         		dayLabel = new DayLabel(i+"", Color.white, Color.blue, true);
@@ -169,6 +171,45 @@ public class Calendar extends JPanel {
         	} else {
         		dayLabel = new DayLabel(i+"", Color.decode("#f0f0f0"), Color.gray, true);
         	}
+        	dayLabel.addMouseListener(new MouseListener() {
+
+    			@Override
+    			public void mouseClicked(MouseEvent e) {
+    				mainPanel.removeAll();
+    				LocalDate selected = LocalDate.of(year, month, day);
+    				mainPanel.add(new Calendar(year, month, selected, mainPanel));
+    				mainPanel.add(new Events());
+    				mainPanel.revalidate();
+    				
+    			}
+
+    			@Override
+    			public void mousePressed(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseReleased(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseEntered(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+
+    			@Override
+    			public void mouseExited(MouseEvent e) {
+    				// TODO Auto-generated method stub
+    				
+    			}
+            	
+            	
+            	
+            });
         	
             days.add(dayLabel);
         }
