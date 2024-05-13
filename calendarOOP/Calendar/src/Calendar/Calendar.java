@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -28,16 +29,17 @@ public class Calendar extends JPanel {
         JPanel top = new JPanel(new BorderLayout(10, 10));
         top.setBackground(null);
 
-        JLabel date = new JLabel("May 2024");
+        JLabel date = new JLabel(LocalDate.of(year, month, 1).
+        		format(DateTimeFormatter.ofPattern("MMMM yyyy")));
         date.setHorizontalAlignment(JLabel.CENTER);
         date.setFont(new Font("Helvetica", Font.BOLD, 30));
         date.setForeground(Color.decode("#0ecf78"));
 
         top.add(date, BorderLayout.CENTER);
 
-        JLabel left = new JLabel(new ImageIcon("pics/right-arrow.png"));
-        left.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        left.addMouseListener(new MouseListener() {
+        JLabel right = new JLabel(new ImageIcon("pics/right-arrow.png"));
+        right.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        right.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -80,11 +82,54 @@ public class Calendar extends JPanel {
         	
         	
         });
-        top.add(left, BorderLayout.EAST);
+        top.add(right, BorderLayout.EAST);
 
-        JLabel right = new JLabel(new ImageIcon("pics/left-arrow.png"));
-        right.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        top.add(right, BorderLayout.WEST);
+        JLabel left = new JLabel(new ImageIcon("pics/left-arrow.png"));
+        left.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        left.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.removeAll();
+				if (month!=1) {
+					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel));
+				} else {
+					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel));
+
+				}
+				mainPanel.add(new Events());
+				mainPanel.revalidate();
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+        	
+        	
+        	
+        });
+        top.add(left, BorderLayout.WEST);
 
         add(top, BorderLayout.NORTH);
 
