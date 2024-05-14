@@ -23,9 +23,12 @@ public class Events extends JPanel{
 		
 		
 		JPanel event = new  JPanel(new GridLayout(2,1));
-		event.setBorder(BorderFactory.createCompoundBorder(getBorder(), getBorder()));
+		event.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createEmptyBorder(10, 10, 10, 10),
+				BorderFactory.createMatteBorder(0, 10, 0, 0, Color.black)));
 		
 		list.add(event);
+		add(list, BorderLayout.CENTER);
 		
 		
 		
