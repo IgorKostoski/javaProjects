@@ -10,7 +10,7 @@ public class Events extends JPanel{
 
 	public Events() {
 		
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(Color.white);
 		
 		
 		
