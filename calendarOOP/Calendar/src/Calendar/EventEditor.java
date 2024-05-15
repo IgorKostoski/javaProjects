@@ -66,13 +66,22 @@ public class EventEditor {
 		JPanel bottom = new JPanel(new GridLayout(1,2,20,20));
 		bottom.setBackground(null);
 		
-		JButton delete = new JButton("New");
+		JButton delete = new JButton("Delete");
 		delete.setFont(new Font("Helvetica", Font.PLAIN,20));
 		delete.setBackground(Color.CYAN);
 		delete.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		bottom.add(delete);
 		
+		JButton save = new JButton("Save");
+		save.setFont(new Font("Helvetica", Font.PLAIN,20));
+		save.setBackground(Color.CYAN);
+		save.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		bottom.add(save);
 		
+		
+		mainPanel.add(bottom, BorderLayout.SOUTH);
+		
+		frame.getContentPane().add(mainPanel);
 		
 		frame.setVisible(true);
 	}
