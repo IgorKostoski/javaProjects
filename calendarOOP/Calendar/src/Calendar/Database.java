@@ -39,11 +39,46 @@ public class Database {
 				e.setID(rs.getInt("ID"));
 				e.setTitle(rs.getString("Title"));
 				e.setDescription(rs.getString("Description"));
-				e.setDateTimeFromString(rs.getString("Date")+" "+rs.getString("Time"));
+				e.setDateTimeFromString(rs.getString("Date")+" | "+rs.getString("Time"));
+				events.add(e);
 			}
+		} catch (SQLException exception) {
+			exception.printStackTrace();
 		}
 		return events;
 		
+	}
+	
+	
+	public boolean hasEvent(String date) {
+
+		
+		boolean hasEvent = false;
+		String select = "SELECT * FROM `Calendar` WHERE  `Date` = '"+date+"';";
+		try {
+			ResultSet rs = statement.executeQuery(select);
+			hasEvent = rs.next();
+			
+			
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+		return hasEvent;
+	}
+	
+	public void createEvent(Event e) {
+		String insert = "INSERT INTO `Calendar`(`Title`, `Description`, `Date`, `Time`) "
+				+ "VALUES ('"+e.getTitle()+"','"+e.getDescription()+"','"+e.getDateToString()+"','"+e.getTimeToString()+"')";
+		
+		try {
+			statement.execute(insert);
+		} catch (SQLException exception) {
+			exception.printStackTrace();
+		}
+	}
+	
+	public void updateEvent(Event e) {
+		String update = "";
 	}
 
 }
