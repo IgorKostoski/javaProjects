@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class Database {
 	
-	private String url = "jdbc:mysql://localhost/Calendar";
+	private String url = "jdbc:mysql://localhost:3306/Calendar";
 	private String user = "igor";
 	private String pass = "";
 	
