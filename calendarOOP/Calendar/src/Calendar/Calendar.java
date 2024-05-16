@@ -20,7 +20,10 @@ public class Calendar extends JPanel {
 
     private static final long serialVersionUID = 1L;
 
-    public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel) {
+    public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel,
+    		Database database) {
+    	
+    	DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         setLayout(new BorderLayout(30, 30));
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Adjust padding if needed

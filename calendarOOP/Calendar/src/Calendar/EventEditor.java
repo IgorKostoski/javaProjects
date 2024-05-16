@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class EventEditor {
-	public EventEditor() {
+	public EventEditor(Event e, Database database, JPanel parent) {
 		
 		
 		JFrame frame = new JFrame("Calendar");
