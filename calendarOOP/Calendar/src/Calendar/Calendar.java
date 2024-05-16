@@ -48,12 +48,12 @@ public class Calendar extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				mainPanel.removeAll();
 				if (month!=12) {
-					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel, database));
 				} else {
-					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel, database));
 
 				}
-				mainPanel.add(new Events());
+				mainPanel.add(new Events(selectedDay, database, mainPanel));
 				mainPanel.revalidate();
 				
 			}
@@ -95,12 +95,12 @@ public class Calendar extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				mainPanel.removeAll();
 				if (month!=1) {
-					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel, database));
 				} else {
-					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel,database));
 
 				}
-				mainPanel.add(new Events());
+				mainPanel.add(new Events(selectedDay, database, mainPanel)); 
 				mainPanel.revalidate();
 				
 			}
@@ -169,7 +169,7 @@ public class Calendar extends JPanel {
         	DayLabel dayLabel;
         	if (selectedDay.getYear()== year && selectedDay.getMonthValue()== month && selectedDay.getDayOfMonth()== i ) {
         		dayLabel = new DayLabel(i+"", Color.white, Color.blue, true);
-        	} else if (i%5==0) {
+        	} else if (database.hasEvent(dateFormatter.format(LocalDate.of(year, month, i)))) {
         		dayLabel = new DayLabel(i+"", Color.yellow, Color.red, true);
         	} else {
         		dayLabel = new DayLabel(i+"", Color.decode("#f0f0f0"), Color.gray, true);
@@ -180,8 +180,8 @@ public class Calendar extends JPanel {
     			public void mouseClicked(MouseEvent e) {
     				mainPanel.removeAll();
     				LocalDate selected = LocalDate.of(year, month, day);
-    				mainPanel.add(new Calendar(year, month, selected, mainPanel));
-    				mainPanel.add(new Events());
+    				mainPanel.add(new Calendar(year, month, selected, mainPanel, database));
+    				mainPanel.add(new Events(selected,database,mainPanel));
     				mainPanel.revalidate();
     				
     			}
