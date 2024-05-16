@@ -78,6 +78,11 @@ public class EventEditor {
 		save.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		bottom.add(save);
 		
+		if (e.getTitle() != null) {
+			title.setText(e.getTitle());
+			description.setText(e.getDescription());
+		}
+		
 		
 		mainPanel.add(bottom, BorderLayout.SOUTH);
 		

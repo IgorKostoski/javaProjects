@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
@@ -97,6 +99,14 @@ public class Events extends JPanel{
 		newEvent.setFont(new Font("Helvetica", Font.PLAIN,20));
 		newEvent.setBackground(Color.CYAN);
 		newEvent.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		newEvent.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EventEditor(new Event(date), database, mainPanel);
+			}
+			
+		});
 		add(newEvent, BorderLayout.SOUTH);
 		
 		
