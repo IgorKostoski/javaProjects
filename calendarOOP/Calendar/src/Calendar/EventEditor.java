@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -76,11 +79,49 @@ public class EventEditor {
 		save.setFont(new Font("Helvetica", Font.PLAIN,20));
 		save.setBackground(Color.CYAN);
 		save.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		
+		
+		
 		bottom.add(save);
+		
+		time.setText(e.getTimeToString());
 		
 		if (e.getTitle() != null) {
 			title.setText(e.getTitle());
 			description.setText(e.getDescription());
+			
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent ev) {
+				if (title.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Title cannot be empty");
+					return;
+				}
+				e.setTitle(title.getText());
+				e.setDescription(description.getText());
+				
+				try {
+					e.setTime(time.getText());
+				} catch (Exception exception) {
+					JOptionPane.showMessageDialog(null, "Check time format HH:mm");
+					return;
+					
+					
+				}
+				
+				database.updateEvent(e);
+				
+				//refreshing main view(calendar & events)
+				
+				parent.removeAll();
+				parent.add(new Calendar());
+				
+				
+				} 
+				
+			});
+			
 		}
 		
 		
