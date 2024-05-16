@@ -18,6 +18,10 @@ import javax.swing.JTextField;
 public class EventEditor {
 	public EventEditor(Event e, Database database, JPanel parent) {
 		
+		int year = e.getDate().getYear();
+		
+		int month = e.getDate().getMonthValue();
+		
 		
 		JFrame frame = new JFrame("Calendar");
 		frame.setSize(700,350);
@@ -115,10 +119,32 @@ public class EventEditor {
 				//refreshing main view(calendar & events)
 				
 				parent.removeAll();
-				parent.add(new Calendar());
+				parent.add(new Calendar(year, month, e.getDate(), parent, database));
+				parent.add(new Events(e.getDate(), database, parent));
+				parent.revalidate();
+				frame.dispose();
 				
 				
 				} 
+				
+			});
+			
+			
+			delete.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					database.deleteEvent(e.getID());
+					
+					//refreshing main view(calendar & events)
+					
+					parent.removeAll();
+					parent.add(new Calendar(year, month, e.getDate(), parent, database));
+					parent.add(new Events(e.getDate(), database, parent));
+					parent.revalidate();
+					frame.dispose();
+					
+				}
 				
 			});
 			
