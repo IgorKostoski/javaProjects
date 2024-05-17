@@ -170,7 +170,41 @@ public class EventEditor {
 			
 			
 		} else {
-			time.setText(e.getTimeToString());
+			delete.setVisible(false);
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					if (title.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Title cannot be empty");
+						return;
+					}
+					e.setTitle(title.getText());
+					e.setDescription(description.getText());
+					
+					try {
+						e.setTime(time.getText());
+					} catch (Exception exception) {
+						JOptionPane.showMessageDialog(null, "Check time format HH:mm");
+						return;
+						
+						
+					}
+					
+					database.createEvent(e);
+					//refreshing main view(calendar & events)
+					
+					parent.removeAll();
+					parent.add(new Calendar(year, month, e.getDate(), parent, database));
+					parent.add(new Events(e.getDate(), database, parent));
+					parent.revalidate();
+					frame.dispose();
+				
+				
+				}
+				
+				
+			});
 		}
 		
 		
