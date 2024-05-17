@@ -25,7 +25,7 @@ public class EventEditor {
 		
 		JFrame frame = new JFrame("Calendar");
 		frame.setSize(700,350);
-		frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(parent);
 		frame.getContentPane().setBackground(Color.white);
 		JPanel mainPanel = new JPanel(new BorderLayout(20,20));
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(40,20,20,20));
