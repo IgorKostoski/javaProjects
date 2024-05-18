@@ -23,8 +23,7 @@ public class currencyConventer {
         System.out.println("Type quantity to convert");
         BigDecimal quantity = scanner.nextBigDecimal();
 
-        String urlString = "https://api.exchangeratesapi.io/v1/latest\n" +
-                "    ? access_key = 225650f2c8869c0a8f13a4027da15ee4" + convertFrom.toUpperCase();
+        String urlString = "https://api.exchangeratesapi.io/v1/latest?base=" + convertFrom.toUpperCase();
 
 
         OkHttpClient client = new OkHttpClient();
