@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class CurrencyConverter {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         HashMap<Integer, String> currencyCodes = new HashMap<Integer, String>();
 
@@ -22,11 +22,19 @@ public class CurrencyConverter {
         currencyCodes.put(5, "INR");
 
 
-        String fromCode, toCode;
+        String fromCode, toCode, apiKey;
         double amount;
 
 
+
+
+
+
+
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter your Exchangeratesapi.io Access Key:");
+        apiKey = scanner.nextLine();
 
         System.out.println("Welcome to the currency conventer!");
 
@@ -49,7 +57,12 @@ public class CurrencyConverter {
 
         amount = scanner.nextFloat();
 
-        String apiKey =  "http://api.exchangeratesapi.io/v1/latest?access_key=225650f2c8869c0a8f13a4027da15ee4";
+
+
+
+        sendHttpGetRequest(apiKey, fromCode, toCode, amount);
+
+
 
 
 //
@@ -63,9 +76,11 @@ public class CurrencyConverter {
 
     }
 
-    private static void sendHttpGetRequest(String apiKey, String fromCode,String toCode,String amount) throws IOException {
+    private static void sendHttpGetRequest(String apiKey,String fromCode,String toCode,double amount) throws IOException {
 
-        String GET_URL = "https://api.exchangeratesapi.io/latest?base=" + toCode + "&symbols=" +fromCode;
+
+        String GET_URL = "https://api.exchangeratesapi.io/latest?base=" + toCode + "&symbols=" + fromCode + "&access_key=" + apiKey;
+
 
         URL url = new URL(GET_URL);
         HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -85,7 +100,16 @@ public class CurrencyConverter {
             }in.close();
 
             JSONObject obj = new JSONObject(response.toString());
+
+            Double exchangeRate = obj.getJSONObject("rates").getDouble(fromCode);
+            System.out.println(obj.getJSONObject("rates")); //keep for debugging
+            System.out.println(exchangeRate); //keep for debugging
+            System.out.println();
+            System.out.println(amount + fromCode + " = " + amount/exchangeRate + toCode);
+        } else {
+            System.out.println("GET request failed!");
         }
+
 
     }
 }
