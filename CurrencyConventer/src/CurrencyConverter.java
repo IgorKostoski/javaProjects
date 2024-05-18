@@ -1,3 +1,10 @@
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -38,8 +45,47 @@ public class CurrencyConverter {
         toCode = currencyCodes.get(scanner.nextInt());
 
 
+        System.out.println("Amount you wish to convert?");
+
+        amount = scanner.nextFloat();
+
+        String apiKey =  "http://api.exchangeratesapi.io/v1/latest?access_key=225650f2c8869c0a8f13a4027da15ee4";
 
 
+//
+
+
+        System.out.println("Thank you for using the conventer!");
+
+
+
+
+
+    }
+
+    private static void sendHttpGetRequest(String apiKey, String fromCode,String toCode,String amount) throws IOException {
+
+        String GET_URL = "https://api.exchangeratesapi.io/latest?base=" + toCode + "&symbols=" +fromCode;
+
+        URL url = new URL(GET_URL);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+
+        httpURLConnection.setRequestMethod("GET");
+
+        int responseCode = httpURLConnection.getResponseCode();
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String inputLine;
+
+            StringBuffer response = new StringBuffer();
+
+            while((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }in.close();
+
+            JSONObject obj = new JSONObject(response.toString());
+        }
 
     }
 }
