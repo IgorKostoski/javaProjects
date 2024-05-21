@@ -8,8 +8,19 @@ import javax.swing.*;
 
 public class SnakeGame extends JPanel{
 	
+	private class Tile {
+		int x;
+		int y;
+		
+		Tile(int x, int y){
+			this.x = x;
+			this.y = y;
+		}
+	}
+	
 	int boardWith;
 	int boardHeight;
+	int tileSize = 25;
 	
 	SnakeGame(int boardWidth, int boardHeight) {
 		
