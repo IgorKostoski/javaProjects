@@ -53,6 +53,29 @@ public class Post {
 	}
 	
 	
+	public ArrayList<Comment> getComments() {
+		return comments;
+	}
+	
+	public void setComment(ArrayList<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public ArrayList<User> getLikes() {
+		return likes;
+	}
+	
+	public void setLikes(ArrayList<User> likes) {
+		this.likes = likes;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 
