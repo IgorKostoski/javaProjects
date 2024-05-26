@@ -22,6 +22,20 @@ public class Welcome {
 		center.setBackground(null);
 		center.setBorder(BorderFactory.createEmptyBorder(22,231,17,231));
 		
+		JTextField firstName = new JTextField("First Name");
+		center.add(firstName);
+		JTextField lastName = new JTextField("Last Name");
+		center.add(lastName);
+		JTextField email = new JTextField("E-Mail");
+		center.add(email);
+		JTextField password = new JTextField("Password");
+		center.add(password);
+		JTextField confirmPassword = new JTextField("Confirm Password");
+		center.add(confirmPassword);
+		
+		
+		
+		
 	}
 
 }

@@ -5,9 +5,12 @@ import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.BorderFactory;
 
+@SuppressWarnings("serial")
 public class JTextField extends javax.swing.JTextField{
 	
 	private Shape shape;
@@ -73,6 +76,14 @@ public class JTextField extends javax.swing.JTextField{
 		g.setColor(GUIConstants.red);
 		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
 		
+	}
+	
+	
+	public boolean contains(int x, int y) {
+		if (shape == null || !shape.getBounds().equals(getBounds())) {
+			shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 45, 45);
+		}
+		return shape.contains(x, y);
 	}
 
 }
