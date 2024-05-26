@@ -86,5 +86,10 @@ public class JTextField extends javax.swing.JTextField{
 		}
 		return shape.contains(x, y);
 	}
+	
+	
+	public boolean isEmpty() {
+		return getText().equals(hint) || getText().equals("");
+	}
 
 }
