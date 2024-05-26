@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -54,6 +55,23 @@ public class JTextField extends javax.swing.JTextField{
 			
 		});
 		
+		
+	}
+	
+	//for rounded corners
+	
+	protected void paintComponent(Graphics g) {
+		
+		g.setColor(GUIConstants.white);
+		g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
+		super.paintComponent(g);
+		
+	}
+	
+	//for rounded border
+	protected void paintBorder(Graphics g) {
+		g.setColor(GUIConstants.red);
+		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
 		
 	}
 
