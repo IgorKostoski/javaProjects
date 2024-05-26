@@ -35,9 +35,10 @@ public class JTextField extends javax.swing.JTextField{
 			public void focusGained(FocusEvent e) {
 				if(getText().equals("")) {
 					setText(hint);
-					setForeground(GUIConstants.red);
+					setForeground(GUIConstants.black);
 					
 				}
+				
 				
 				
 			}
@@ -73,7 +74,7 @@ public class JTextField extends javax.swing.JTextField{
 	
 	//for rounded border
 	protected void paintBorder(Graphics g) {
-		g.setColor(GUIConstants.red);
+		g.setColor(GUIConstants.black);
 		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
 		
 	}

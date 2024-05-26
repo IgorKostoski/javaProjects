@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 
@@ -32,6 +33,24 @@ public class Welcome {
 		center.add(password);
 		JTextField confirmPassword = new JTextField("Confirm Password");
 		center.add(confirmPassword);
+		JButton createAcc = new JButton("Create Account", 45,20);
+		center.add(createAcc);
+		
+		
+		panel.add(center, BorderLayout.CENTER);
+		
+		JLabel login = new JLabel("Already have an account? Login", 20, GUIConstants.black, Font.BOLD);
+		
+		
+		login.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		login.setHorizontalAlignment(JLabel.CENTER);
+		
+		panel.add(login, BorderLayout.SOUTH);
+		
+		frame.getContentPane().add(panel);
+		
+		frame.setVisible(true);
+		frame.requestFocus();
 		
 		
 		

@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 
+@SuppressWarnings("serial")
 public class JButton extends javax.swing.JLabel{
 	
 	private Shape shape;
@@ -28,16 +29,16 @@ public class JButton extends javax.swing.JLabel{
 	
 	protected void paintComponent(Graphics g) {
 		
-		g.setColor(GUIConstants.white);
-		g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
+		g.setColor(GUIConstants.blue);
+		g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, radius, radius);
 		super.paintComponent(g);
 		
 	}
 	
 	//for rounded border
 	protected void paintBorder(Graphics g) {
-		g.setColor(GUIConstants.red);
-		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 45, 45);
+		g.setColor(GUIConstants.black);
+		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, radius, radius);
 		
 	}
 	
