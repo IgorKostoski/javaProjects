@@ -2,6 +2,7 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Model.Database;
 import Model.User;
@@ -48,6 +49,30 @@ public class CreateUser {
 		}
 		
 		return used;
+	}
+	
+	
+	public User getUser() {
+		
+		u.setComments(new ArrayList<> ());
+		u.setFriends(new ArrayList<>());
+		u.setLikes(new ArrayList<>());
+		u.setPosts(new ArrayList<>());
+		
+		String select = "SELECT `ID` FROM `Users` WHERE `Email` = '"+u.getEmail()+"' AND `Password` = '"+u.getPassword()+"';";
+		try {
+			ResultSet rs = database.getStatement().executeQuery(select);
+			rs.next();
+			u.setID(rs.getInt("ID"));
+			
+		} catch (SQLException e) {
+			
+			new Alert(e.getMessage(), null);
+			
+		}
+		
+		
+		return u;
 	}
 
 }

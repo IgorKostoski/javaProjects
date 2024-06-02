@@ -10,9 +10,13 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import Controller.CreateUser;
+import Model.Database;
+import Model.User;
+
 public class Welcome {
 	
-	public Welcome() {
+	public Welcome(Database database) {
 		JFrame frame = new JFrame();
 		
 		
@@ -98,6 +102,16 @@ public class Welcome {
 					new Alert("Password doesn't match", frame);
 					return;
 				}
+				
+				User u = new User();
+				u.setFirstName(firstName.getText());
+				u.setLastName(lastName.getText());
+				u.setEmail(email.getText());
+				u.setPassword(password.getText());
+				
+				
+				new CreateUser(u, database);
+				
 				
 				
 			}
