@@ -10,7 +10,9 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import Controller.ReadUser;
 import Model.Database;
+import Model.User;
 
 
 public class Login {
@@ -46,6 +48,14 @@ public class Login {
 				if (password.isEmpty() ) {
 					new Alert("Password cannot be empty", frame);
 					return;
+				}
+				
+				ReadUser read = new ReadUser(email.getText(), password.getText(), database);
+				if (read.loggedIn()) {
+					User user = read.getUser();
+					new Alert("Logged in succesfully, ID: " +user.getID(), frame);
+				} else {
+					new Alert("Incorrect email or passowrd", frame);
 				}
 				
 				
