@@ -110,7 +110,18 @@ public class Welcome {
 				u.setPassword(password.getText());
 				
 				
-				new CreateUser(u, database);
+				CreateUser create = new CreateUser(u, database);
+				
+				
+				if(!create.isEmailUsed()) {
+					create.create();
+					u = create.getUser();
+					new Alert("Account created successfully, ID " +u.getID(), frame);
+					
+				} else {
+					new Alert("This email has already been used", frame);
+					
+				}
 				
 				
 				
