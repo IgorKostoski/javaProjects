@@ -140,6 +140,31 @@ public class Welcome {
 		JLabel login = new JLabel("Already have an account? Login", 20, GUIConstants.black, Font.BOLD);
 		
 		
+		login.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Login();
+				frame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
+		
+		
+		
+		
 		login.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		login.setHorizontalAlignment(JLabel.CENTER);
 		
