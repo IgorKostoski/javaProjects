@@ -144,7 +144,7 @@ public class Welcome {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new Login();
+				new Login(database);
 				frame.dispose();
 			}
 
