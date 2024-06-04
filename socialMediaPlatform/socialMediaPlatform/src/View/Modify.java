@@ -66,13 +66,13 @@ public class Modify {
 				UpdateUser update = new UpdateUser(user,database);
 				
 				
-				if (!email.getText().equals(user.getEmail()) && update.isEmailUsed(email.getText())) {
+				if (!email.getText().equals(user.getEmail()) && update.isEmailUsed()) {
 					new Alert("This email has been used before", frame);
 					return;
 					
 				}
 				
-				new UpdateUser(user, database);
+				update.update();
 			}
 
 			@Override
