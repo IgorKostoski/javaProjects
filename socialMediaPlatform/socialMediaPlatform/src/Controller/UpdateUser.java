@@ -11,7 +11,7 @@ public class UpdateUser {
 	private Database database;
 	private User user;
 	
-	public UpdateUser(User user, Database databae) {
+	public UpdateUser(User user, Database database) {
 		this.database = database;
 		this.user = user;
 		

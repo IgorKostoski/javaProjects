@@ -73,6 +73,7 @@ public class Modify {
 				}
 				
 				update.update();
+				frame.dispose();
 			}
 
 			@Override
