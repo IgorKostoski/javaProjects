@@ -58,12 +58,14 @@ public class Modify {
 					return;
 				}
 				
+				User updatedUser = user;
 				
-				user.setFirstName(firstName.getText());
-				user.setLastName(lastName.getText());
-				user.setEmail(email.getText());
 				
-				UpdateUser update = new UpdateUser(user,database);
+				updatedUser.setFirstName(firstName.getText());
+				updatedUser.setLastName(lastName.getText());
+				updatedUser.setEmail(email.getText());
+				
+				UpdateUser update = new UpdateUser(updatedUser,database);
 				
 				
 				if (!email.getText().equals(user.getEmail()) && update.isEmailUsed()) {
@@ -72,8 +74,14 @@ public class Modify {
 					
 				}
 				
-				update.update();
-				frame.dispose();
+				if (update.update()) {
+					new Alert("Profile updated successfully", frame);
+					frame.dispose();
+					//Use updated user
+				} else {
+					//Use old user
+				}
+				
 			}
 
 			@Override

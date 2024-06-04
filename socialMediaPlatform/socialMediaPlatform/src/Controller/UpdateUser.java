@@ -25,16 +25,21 @@ public class UpdateUser {
 	
 	
 	
-	public void update() {
+	public boolean update() {
+		boolean updated = false;
 		String update = "UPDATE `Users` SET `FirstName`='"+user.getFirstName()+"',"
 				+ "`LastName`='"+user.getLastName()+"',`Email`='"+user.getEmail()+"' WHERE `ID` = "+user.getID()+";";
 		
 		
 		try {
 			database.getStatement().execute(update);
+			updated = true;
 		} catch (SQLException e) {
 			new Alert(e.getMessage(),null);
+			updated = false;
 		}
+		return updated;
 	}
+	
 
 }
