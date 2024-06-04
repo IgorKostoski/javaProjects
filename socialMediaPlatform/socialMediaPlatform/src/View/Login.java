@@ -88,6 +88,7 @@ public class Login {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new Welcome(database);
+				frame.dispose();
 			}
 
 			@Override
