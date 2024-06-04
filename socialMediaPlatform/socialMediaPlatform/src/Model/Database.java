@@ -1,6 +1,9 @@
 package Model;
 
 import java.sql.Statement;
+
+import View.Alert;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +26,7 @@ public class Database {
 			statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			new Alert(e.getMessage(),null);
 		}
 	}
 	

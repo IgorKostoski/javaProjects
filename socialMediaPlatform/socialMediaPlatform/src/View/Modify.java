@@ -1,16 +1,20 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import Model.Database;
+import Model.User;
+
 public class Modify {
 	
 	
-	public Modify() {
+	public Modify(User user, Database database) {
 		JFrame frame = new JFrame();
 		
 		JPanel panel = new JPanel(new BorderLayout());
@@ -32,6 +36,17 @@ public class Modify {
 		JButton submit = new JButton("Submit", 45, 20);
 		center.add(submit);
 		panel.add(center, BorderLayout.CENTER);
+		
+		JLabel changePassword = new JLabel("Change Password",0,GUIConstants.black, Font.BOLD);
+		changePassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		changePassword.setHorizontalAlignment(JLabel.CENTER);
+		
+		
+		panel.add(changePassword, BorderLayout.SOUTH);
+		
+		frame.getContentPane().add(panel);
+		frame.setVisible(true);
+		frame.requestFocus();
 		
 		
 	}
