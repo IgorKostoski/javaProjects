@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import Controller.CreateUser;
+import Controller.UpdateUser;
 import Model.Database;
 import Model.User;
 
@@ -42,7 +44,36 @@ public class Modify {
 		submit.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+				if(firstName.isEmpty()) {
+					new Alert("First Name cannot be empty", frame);
+					return;
+				}
+				if (lastName.isEmpty()) {
+					new Alert("Last Name cannot be empty", frame);
+					return;
+				}
+				if (email.isEmpty()) {
+					new Alert("Email cannot be empty", frame);
+					return;
+				}
+				
+				
+				user.setFirstName(firstName.getText());
+				user.setLastName(lastName.getText());
+				user.setEmail(email.getText());
+				
+				UpdateUser update = new UpdateUser(user,database);
+				
+				
+				if (!email.getText().equals(user.getEmail()) && update.isEmailUsed(email.getText())) {
+					new Alert("This email has been used before", frame);
+					return;
+					
+				}
+				
+				new UpdateUser(user, database);
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}
