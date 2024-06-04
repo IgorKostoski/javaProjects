@@ -32,12 +32,15 @@ public class Modify {
 		
 		JTextField firstName = new JTextField("First Name");
 		firstName.setText(user.getFirstName());
+		firstName.setForeground(GUIConstants.black);
 		center.add(firstName);
 		JTextField lastName = new JTextField("Last Name");
 		lastName.setText(user.getLastName());
+		lastName.setForeground(GUIConstants.black);
 		center.add(lastName);
 		JTextField email = new JTextField("Email");
 		email.setText(user.getEmail());
+		email.setForeground(GUIConstants.black);
 		center.add(email);
 		
 		JButton submit = new JButton("Submit", 45, 20);
