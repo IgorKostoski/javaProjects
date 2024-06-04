@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -27,13 +29,34 @@ public class Modify {
 		center.setBorder(BorderFactory.createEmptyBorder(50,231,17,231));
 		
 		JTextField firstName = new JTextField("First Name");
+		firstName.setText(user.getFirstName());
 		center.add(firstName);
 		JTextField lastName = new JTextField("Last Name");
+		lastName.setText(user.getLastName());
 		center.add(lastName);
 		JTextField email = new JTextField("Email");
+		email.setText(user.getEmail());
 		center.add(email);
 		
 		JButton submit = new JButton("Submit", 45, 20);
+		submit.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		center.add(submit);
 		panel.add(center, BorderLayout.CENTER);
 		
