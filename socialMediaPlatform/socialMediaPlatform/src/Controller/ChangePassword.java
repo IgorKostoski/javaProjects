@@ -1,6 +1,9 @@
 package Controller;
 
+import java.sql.SQLException;
+
 import Model.Database;
+import View.Alert;
 
 public class ChangePassword {
 	
@@ -18,9 +21,19 @@ public class ChangePassword {
 	
 	public boolean change() {
 		
-		boolean matches = false ;
-		String select = "";
-		
+		boolean changed = false;
+		String update = "UPDATE `Users` SET `Password`='"+password+"' WHERE `ID` = "+ID+";";
+		try {
+			database.getStatement().execute(update);
+			changed = true;
+		}
+		catch (SQLException e) {
+			new Alert(e.getMessage(), null);
+			changed = false;
+			
+			
+		}
+		return changed;
 	}
 
 }
