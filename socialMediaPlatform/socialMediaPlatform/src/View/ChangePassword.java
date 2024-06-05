@@ -3,6 +3,8 @@ package View;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -37,6 +39,46 @@ public class ChangePassword {
 		center.add(confirmPassword);
 		
 		JButton submit = new JButton("Submit", 45,20);
+		submit.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (oldPassword.isEmpty() ) {
+					new Alert("Please enter your old password", frame);
+					return;
+				}
+				if (newPassword.isEmpty() ) {
+					new Alert("Please enter your new password", frame);
+					return;
+				}
+				if (newPassword.getText().length()<6) {
+					new Alert("Password must contain at least 6 characters", frame);
+					return;
+				}
+				
+				if (confirmPassword.isEmpty()) {
+					new Alert("Please confirm your password", frame);
+					return;
+				}
+				if (!newPassword.getText().equals(confirmPassword.getText())) {
+					new Alert("Password doesn't match", frame);
+					return;
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		center.add(submit);
 		
 		panel.add(center, BorderLayout.CENTER);
