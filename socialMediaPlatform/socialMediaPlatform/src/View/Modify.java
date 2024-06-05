@@ -103,12 +103,12 @@ public class Modify {
 		center.add(submit);
 		panel.add(center, BorderLayout.CENTER);
 		
-		JLabel changePassword = new JLabel("Change Password",0,GUIConstants.black, Font.BOLD);
+		JLabel changePassword = new JLabel("Change Password",40,GUIConstants.black, Font.BOLD);
 		changePassword.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				new ChangePassword();
+				new ChangePassword(user, database);
 				frame.dispose();
 			
 			}

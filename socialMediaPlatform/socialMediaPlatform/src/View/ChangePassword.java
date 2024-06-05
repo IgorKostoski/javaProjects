@@ -21,7 +21,7 @@ public class ChangePassword {
 		panel.setBackground(null);
 		panel.setBorder(BorderFactory.createEmptyBorder(83,99,175,99));
 		
-		panel.add(new JLabel ("Change Password", 40, GUIConstants.black, Font.BOLD)
+		panel.add(new JLabel ("Change Password", 30, GUIConstants.black, Font.BOLD)
 				,BorderLayout.NORTH);
 		
 		
@@ -30,6 +30,20 @@ public class ChangePassword {
 		center.setBorder(BorderFactory.createEmptyBorder(58,216,0,216));
 		
 		JTextField oldPassword = new JTextField("Old Password");
+		center.add(oldPassword);
+		JTextField newPassword = new JTextField("New Password");
+		center.add(newPassword);
+		JTextField confirmPassword = new JTextField("Confirm Password");
+		center.add(confirmPassword);
+		
+		JButton submit = new JButton("Submit", 45,20);
+		center.add(submit);
+		
+		panel.add(center, BorderLayout.CENTER);
+		
+		frame.getContentPane().add(panel);
+		frame.setVisible(true);
+		frame.requestFocus();
 		
 		
 	}
