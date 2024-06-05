@@ -11,7 +11,7 @@ public class ChangePassword {
 	private int ID;
 	private Database database;
 	
-	public ChangePassword(String password, String newP, int ID, Database database) {
+	public ChangePassword(String password, int ID, Database database) {
 		this.ID = ID;
 		this.password = password;
 		this.database = database;

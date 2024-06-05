@@ -43,12 +43,12 @@ public class ChangePassword {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (oldPassword.isEmpty() ) {
+				if (oldPassword.isEmpty()) {
 					new Alert("Please enter your old password", frame);
 					return;
 				}
 				
-				if (oldPassword.getText().equals(user.getPassword())) {
+				if (!oldPassword.getText().equals(user.getPassword())) {
 					new Alert("Old password doesn't match", frame);
 					return;
 				}
@@ -71,6 +71,11 @@ public class ChangePassword {
 					new Alert("Password doesn't match", frame);
 					return;
 				}
+				Controller.ChangePassword change = new Controller.ChangePassword(newPassword.getText(),user.getID(), database);
+				if (change.change()) {
+					new Alert("Password changed succesffully", frame);
+					frame.dispose();				}
+				
 			}
 
 			@Override
