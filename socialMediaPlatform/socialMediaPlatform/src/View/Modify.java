@@ -104,6 +104,36 @@ public class Modify {
 		panel.add(center, BorderLayout.CENTER);
 		
 		JLabel changePassword = new JLabel("Change Password",0,GUIConstants.black, Font.BOLD);
+		changePassword.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new ChangePassword();
+				frame.dispose();
+			
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			
+			}
+			
+		});
 		changePassword.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		changePassword.setHorizontalAlignment(JLabel.CENTER);
 		
