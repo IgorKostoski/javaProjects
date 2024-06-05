@@ -47,6 +47,13 @@ public class ChangePassword {
 					new Alert("Please enter your old password", frame);
 					return;
 				}
+				
+				if (oldPassword.getText().equals(user.getPassword())) {
+					new Alert("Old password doesn't match", frame);
+					return;
+				}
+				
+				
 				if (newPassword.isEmpty() ) {
 					new Alert("Please enter your new password", frame);
 					return;
