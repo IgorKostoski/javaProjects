@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -81,6 +82,13 @@ public class Home {
 		header.setPreferredSize(dimension);
 		header.setMaximumSize(dimension);
 		header.setMinimumSize(dimension);
+		header.setBorder(BorderFactory.createEmptyBorder(10,15,10,15));
+		
+		JPanel north = new JPanel(new BorderLayout());
+		north.setBackground(null);
+		north.add(new JLabel("Home", 20, GUIConstants.black, Font.BOLD)
+				,BorderLayout.WEST);
+		header.add(north, BorderLayout.NORTH);
 		
 		
 		
