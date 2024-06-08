@@ -70,6 +70,23 @@ public class Home {
 		
 		
 		
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBackground(null);
+		
+		JPanel header = new JPanel(new BorderLayout());
+		header.setBackground(GUIConstants.white);
+		
+		Dimension dimension = new Dimension(500, 159);
+		header.setPreferredSize(dimension);
+		header.setMaximumSize(dimension);
+		header.setMinimumSize(dimension);
+		
+		
+		
+		
+		
+		
 		
 		
 		
