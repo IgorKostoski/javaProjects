@@ -1,11 +1,14 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
 import javax.swing.BorderFactory;
 
+@SuppressWarnings("serial")
 public class JTextArea extends javax.swing.JTextArea{
 	
 	public JTextArea(String hint, int textSize, int padding) {
@@ -19,12 +22,32 @@ public class JTextArea extends javax.swing.JTextArea{
 		addFocusListener(new FocusListener() {
 
 			@Override
-			public void focusGained(FocusEvent e) {}
+			public void focusGained(FocusEvent e) {
+				if (getText().equals("") ) {
+					setText("");
+					setForeground(GUIConstants.black);
+				}
+			}
 
 			@Override
-			public void focusLost(FocusEvent e) {}
+			public void focusLost(FocusEvent e) {
+				if (getText().equals("")) {
+					setText(hint);
+					setForeground(GUIConstants.textAreaHint);
+				}
+			}
 			
 		});
+	}
+	
+	public JTextArea(String text, int textSize, Color color, int style) {
+		super();
+		setFont(new Font("Segoe UI",style,textSize));
+		setText(text);
+		setForeground(color);
+		setEditable(false);
+		setPreferredSize(new Dimension(1000, (int) getPreferredSize().getHeight()));
+		
 	}
 	
 	
