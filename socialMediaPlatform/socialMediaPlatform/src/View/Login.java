@@ -53,8 +53,8 @@ public class Login {
 				ReadUser read = new ReadUser(email.getText(), password.getText(), database);
 				if (read.loggedIn()) {
 					User user = read.getUser();
-					new Alert("Logged in succesfully, ID: " +user.getID(), frame);
-					new Modify(user, database);
+					
+					new Home(user, database);
 					frame.dispose();
 				} else {
 					new Alert("Incorrect email or passowrd", frame);
