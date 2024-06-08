@@ -91,7 +91,22 @@ public class Home {
 		header.add(north, BorderLayout.NORTH);
 		
 		
+		JTextArea postIn = new JTextArea("Share your thoughts..." ,18, 20);
+		header.add(new JScrollPane(postIn), BorderLayout.CENTER);
 		
+		JPanel south = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		south.setBackground(null);
+		
+		JButton postBtn = new JButton("Post", 35,16);
+		postBtn.setPreferredSize(new Dimension(81,37));
+		south.add(postBtn);
+		header.add(south, BorderLayout.SOUTH);
+		
+		panel.add(header);
+		panel.add(Box.createVerticalStrut(7));
+		
+		frame.getContentPane().add(new JScrollPane(panel), BorderLayout.CENTER);	
+		frame.getContentPane().add(Box.createHorizontalStrut(182), BorderLayout.EAST);
 		
 		
 		

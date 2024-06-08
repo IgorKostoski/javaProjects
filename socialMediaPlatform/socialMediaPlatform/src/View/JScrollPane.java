@@ -8,6 +8,7 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class JScrollPane extends javax.swing.JScrollPane{
 	
 	public JScrollPane(JComponent component) {
@@ -21,7 +22,7 @@ public class JScrollPane extends javax.swing.JScrollPane{
 		scrollBar.setBorder(null);
 		scrollBar.setUI(new BasicScrollBarUI() {
 			
-			
+			// to change scroll bar color
 			
 			@Override
 			protected void configureScrollBarColors() {
@@ -51,6 +52,14 @@ public class JScrollPane extends javax.swing.JScrollPane{
 			}
 			
 		});
+		
+		setVerticalScrollBar(scrollBar);
+		
+		//to hide horizontal scroll bar
+		setHorizontalScrollBarPolicy(HORIZONTAL_SCROLLBAR_NEVER);
+		
+		getVerticalScrollBar().setPreferredSize(new Dimension(5,0));
+		getHorizontalScrollBar().setPreferredSize(new Dimension(0,5));
 		
 		
 	}
