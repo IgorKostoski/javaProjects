@@ -81,8 +81,10 @@ public class Modify {
 					new Alert("Profile updated successfully", frame);
 					frame.dispose();
 					//Use updated user
+					new Home(updatedUser, database);
 				} else {
 					//Use old user
+					new Home(user, database);
 				}
 				
 			}

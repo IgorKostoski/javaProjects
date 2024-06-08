@@ -1,9 +1,12 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,9 +34,40 @@ public class Home {
 		JPanel profile = new JPanel(new FlowLayout(FlowLayout.CENTER,10,10));
 		profile.setMaximumSize(new Dimension(182,50));
 		profile.setBackground(GUIConstants.white);
+		profile.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		profile.add(new JLabel(user.getName(),19, GUIConstants.black, Font.BOLD));
+		profile.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Modify(user, database);
+				frame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		sideBar.add(profile);
 		sideBar.add(Box.createVerticalStrut(3));
+		sideBar.add(new SideButton("Posts", "myposts"));
+		sideBar.add(Box.createVerticalStrut(3));
+		sideBar.add(new SideButton("Comments", "mycomments"));
+		sideBar.add(Box.createVerticalStrut(3));
+		sideBar.add(new SideButton("Likes", "mylikes"));
+		sideBar.add(Box.createVerticalStrut(3));
+		sideBar.add(new SideButton("Friends", "friends"));
+		
 		
 		
 		
