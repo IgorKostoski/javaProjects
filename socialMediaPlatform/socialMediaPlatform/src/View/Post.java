@@ -27,7 +27,7 @@ public class Post extends JPanel{
 		JLabel author = new JLabel("User Name", 20, GUIConstants.post, Font.BOLD);
 		header.add(author, BorderLayout.WEST);
 		
-		JLabel date = new JLabel("Thu, 0 Jan 2000", 15, GUIConstants.post, Font.PLAIN);
+		JLabel date = new JLabel("Thu, 0 Juni 2024", 15, GUIConstants.post, Font.PLAIN);
 		header.add(date, BorderLayout.EAST);
 		
 		add(header);

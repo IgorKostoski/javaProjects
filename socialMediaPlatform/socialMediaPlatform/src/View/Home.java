@@ -106,6 +106,13 @@ public class Home {
 		panel.add(Box.createVerticalStrut(7));
 		panel.add(new Post());
 		
+		
+		for (int i=0; i<10; i++) {
+			panel.add(Box.createVerticalStrut(7));
+			panel.add(new Post());
+			
+		}
+		
 		frame.getContentPane().add(new JScrollPane(panel), BorderLayout.CENTER);	
 		frame.getContentPane().add(Box.createHorizontalStrut(182), BorderLayout.EAST);
 		
