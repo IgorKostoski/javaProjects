@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Post {
@@ -13,11 +14,21 @@ public class Post {
 	private LocalDateTime dateTime;
 	private ArrayList<Comment> comments;
 	private ArrayList<User> likes;
+	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
 	
 	
 	public Post() {
 		
 	}
+	
+	
+	public Post(String content, User user) {
+		this.content = content;
+		this.user = user;
+		dateTime = LocalDateTime.now();
+	}
+	
+	
 	
 	
 	public int getID() {
@@ -67,6 +78,15 @@ public class Post {
 	
 	public void setLikes(ArrayList<User> likes) {
 		this.likes = likes;
+	}
+	
+	
+	public String getDateTimeToString() {
+		return dateTimeFormatter.format(dateTime);
+	}
+	
+	public void setDateTimeFromString(String dateTime) {
+		this.dateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
 	}
 	
 	

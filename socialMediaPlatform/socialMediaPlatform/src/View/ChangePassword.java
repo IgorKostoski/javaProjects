@@ -73,6 +73,7 @@ public class ChangePassword {
 				}
 				Controller.ChangePassword change = new Controller.ChangePassword(newPassword.getText(),user.getID(), database);
 				if (change.change()) {
+					new Home(user, database);
 					new Alert("Password changed succesffully", frame);
 					frame.dispose();				}
 				

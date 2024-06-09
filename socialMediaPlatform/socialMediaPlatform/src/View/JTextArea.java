@@ -11,8 +11,11 @@ import javax.swing.BorderFactory;
 @SuppressWarnings("serial")
 public class JTextArea extends javax.swing.JTextArea{
 	
+	private String hint;
+	
 	public JTextArea(String hint, int textSize, int padding) {
 		super();
+		this.hint = hint;
 		setFont(new Font("Segoe UI", Font.BOLD, textSize));
 		setBackground(null);
 		setText(hint);
@@ -48,6 +51,10 @@ public class JTextArea extends javax.swing.JTextArea{
 		setEditable(false);
 		setPreferredSize(new Dimension(1000, (int) getPreferredSize().getHeight()));
 		
+	}
+	
+	public boolean isEmpty() {
+		return getText().equals(hint) || getText().equals("");
 	}
 	
 	

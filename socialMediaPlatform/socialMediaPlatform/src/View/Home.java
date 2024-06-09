@@ -13,6 +13,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Controller.CreatePost;
 import Model.Database;
 import Model.User;
 
@@ -101,7 +102,17 @@ public class Home {
 		postBtn.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+				if (postIn.isEmpty()) {
+					new Alert("Cannot publish Empty post",frame);
+					return;
+				}
+				Model.Post post = new Model.Post(postIn.getText(), user);
+				if (new CreatePost(post,database).posted() ) {
+					new Alert("Posted succesffully", frame);
+					postIn.setText("");
+				}
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}
