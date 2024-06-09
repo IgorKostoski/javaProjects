@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
@@ -10,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 
+@SuppressWarnings("serial")
 public class Post extends JPanel{
 	
 	public Post() {
@@ -48,7 +50,17 @@ public class Post extends JPanel{
 		likes.add(new JLabel("0 Likes", 15, GUIConstants.textAreaHint, Font.BOLD));
 		bottom.add(likes, BorderLayout.WEST);
 		JLabel comments = new JLabel("0 Comments", 15, GUIConstants.textAreaHint, Font.BOLD);
-		bottom.add(comments);
+		bottom.add(comments, BorderLayout.EAST);
+		add(bottom);
+		
+		
+		int height = (int) (115+content.getPreferredSize().getHeight());
+		
+		
+		Dimension dimension = new Dimension(500, height);
+		setPreferredSize(dimension);
+		setMaximumSize(dimension);
+		setMinimumSize(dimension);
 		
 		
 	}
