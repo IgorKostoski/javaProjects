@@ -8,6 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class Post extends JPanel{
 	
@@ -40,6 +41,14 @@ public class Post extends JPanel{
 		
 		JPanel bottom = new JPanel(new BorderLayout());
 		bottom.setBackground(null);
+		
+		JPanel likes = new JPanel(new FlowLayout(FlowLayout.LEFT, 13,13));
+		likes.setBackground(null);
+		likes.add(new javax.swing.JLabel(new ImageIcon("pics/like.png")));
+		likes.add(new JLabel("0 Likes", 15, GUIConstants.textAreaHint, Font.BOLD));
+		bottom.add(likes, BorderLayout.WEST);
+		JLabel comments = new JLabel("0 Comments", 15, GUIConstants.textAreaHint, Font.BOLD);
+		bottom.add(comments);
 		
 		
 	}
