@@ -15,6 +15,7 @@ public class GUIConstants {
 	public static Color background = Color.decode("#F5F5F5");
 	public static Color textAreaHint = Color.decode("#858585");
 	public static Color hover = Color.decode("#f0f0f0");
+	public static Color post = Color.decode("#606060");
 	
 	
 
