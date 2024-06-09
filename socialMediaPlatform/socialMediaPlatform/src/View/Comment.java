@@ -39,6 +39,11 @@ public class Comment extends JPanel{
 		
 		int height = (int) (90 + content.getPreferredSize().getHeight());
 		
-		Dimension dimension = new Dimension();
+		Dimension dimension = new Dimension(500, height);
+		setPreferredSize(dimension);
+		setMaximumSize(dimension);
+		setMinimumSize(dimension);
+		
+		
 	}
 }
