@@ -57,6 +57,7 @@ public class CustomView {
 		
 		frame.getContentPane().add(new JScrollPane(panel));
 		frame.setVisible(true);
+		frame.requestFocus();
 	}
 
 }

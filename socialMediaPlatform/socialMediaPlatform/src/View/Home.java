@@ -98,6 +98,24 @@ public class Home {
 		south.setBackground(null);
 		
 		JButton postBtn = new JButton("Post", 35,16);
+		postBtn.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		postBtn.setPreferredSize(new Dimension(81,37));
 		south.add(postBtn);
 		header.add(south, BorderLayout.SOUTH);
