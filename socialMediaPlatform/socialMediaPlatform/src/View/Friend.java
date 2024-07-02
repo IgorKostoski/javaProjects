@@ -5,42 +5,47 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
+
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
+
 import javax.swing.JPanel;
+
+
 
 @SuppressWarnings("serial")
 public class Friend extends JPanel{
 	
 
 	public Friend() {
-//		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		setLayout(new BorderLayout());
 		setBackground(GUIConstants.white);
 		setBorder(BorderFactory.createEmptyBorder(15,15,15,25));
 		
-		JPanel header  = new JPanel(new BorderLayout());
-		header.setBackground(null);
-		
 		JLabel author = new JLabel("User Name", 20, GUIConstants.post, Font.BOLD);
-		header.add(author, BorderLayout.WEST);
-		add(header);
+		add(author, BorderLayout.WEST);
+	
 		
-		JPanel center = new JPanel(new FlowLayout(FlowLayout.LEADING));
-		center.setBackground(null);
-		JTextArea  content = new JTextArea("\"Lorem ipsum dolor sit amet, \","
-				,18, GUIConstants.post, Font.PLAIN);
-		center.add(content);
-		add(center);
 		
-		JPanel bottom = new JPanel(new BorderLayout());
-		bottom.setBackground(null);
-		bottom.add(new JLabel("Thu, 0 Jun 2024", 15, GUIConstants.post, Font.PLAIN), BorderLayout.EAST);
-		add(bottom);
 		
-		int height = (int) (90 + content.getPreferredSize().getHeight());
 		
-		Dimension dimension = new Dimension(500, height);
+		
+		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		right.setBackground(null);
+		
+		
+		JButton addFriend = new JButton("Post", 35,16);
+		addFriend.setPreferredSize(new Dimension(81,37));
+		right.add(addFriend);
+		
+		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
+		right.add(remove);
+		
+		
+		add(right);
+		
+		
+		Dimension dimension = new Dimension(500, 90);
 		setPreferredSize(dimension);
 		setMaximumSize(dimension);
 		setMinimumSize(dimension);
