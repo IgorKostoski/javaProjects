@@ -53,6 +53,13 @@ public class CustomView {
 		case "Friends":
 			ArrayList<User> users = new ReadAllUsers(database, user).getList();
 			
+			for(User u : users) {
+				
+				panel.add(Box.createVerticalStrut(7));
+				panel.add(new Friend(user, u));
+				
+			}
+			
 			break;
 			
 		}

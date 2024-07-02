@@ -38,6 +38,10 @@ public class ReadAllUsers {
 		
 	}
 	
+	public ArrayList<User> getList() {
+		return users;
+	}
+	
 	
 
 }

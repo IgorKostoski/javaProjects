@@ -11,13 +11,15 @@ import javax.swing.BorderFactory;
 
 import javax.swing.JPanel;
 
+import Model.User;
+
 
 
 @SuppressWarnings("serial")
 public class Friend extends JPanel{
 	
 
-	public Friend() {
+	public Friend(User mainUser, User u) {
 
 		setLayout(new BorderLayout());
 		setBackground(GUIConstants.white);
@@ -37,16 +39,30 @@ public class Friend extends JPanel{
 		
 		JButton addFriend = new JButton("Add", 35,16);
 		addFriend.setPreferredSize(new Dimension(81,37));
+		addFriend.setVisible(false);
 		right.add(addFriend);
 		
 		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
 		remove.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-		addFriend.setVisible(false);
+		
 		right.add(remove);
 		
 		
+		if(mainUser.isFriend(u)) {
+			addFriend.setVisible(false);
+			remove.setVisible(true);
+		} else {
+			addFriend.setVisible(true);
+			remove.setVisible(false);
+			
+			
+		}
+		
+		
 		add(right);
+		
+		
 		
 		
 		Dimension dimension = new Dimension(500, 67);

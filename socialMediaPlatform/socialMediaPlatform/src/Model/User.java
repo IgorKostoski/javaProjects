@@ -14,6 +14,7 @@ public class User {
 	private ArrayList<Comment> comments;
 	private ArrayList<Post> likes;
 	private ArrayList<User> friends;
+	private ArrayList<Integer> friendsIDs;
 	
 	
 	
@@ -96,6 +97,12 @@ public class User {
 	
 	public void setFriends(ArrayList<User> friends) {
 		this.friends = friends;
+		friendsIDs = new ArrayList<>();
+		for (User u : friends) {
+			friendsIDs.add(u.getID());
+		}
+		
+		
 	}
 	
 	
@@ -105,6 +112,10 @@ public class User {
 			ids.add(friend.getID());
 		}
 		return ids;
+	}
+	
+	public boolean isFriend(User u) {
+		return friendsIDs.contains(u.getID());
 	}
 	
 	
