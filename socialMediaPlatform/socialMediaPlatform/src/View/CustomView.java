@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -40,13 +42,35 @@ public class CustomView {
 		
 		JPanel north = new JPanel(new BorderLayout());
 		north.setBackground(null);
-		north.add(new JLabel("My Comments", 20, GUIConstants.black, Font.BOLD),
+		north.add(new JLabel(view, 20, GUIConstants.black, Font.BOLD),
 				BorderLayout.WEST);
 		javax.swing.JLabel home = new  javax.swing.JLabel (new ImageIcon("pics/home.png"));
 		home.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		home.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				new Home(user, database);
+				frame.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			
+		});
 		north.add(home, BorderLayout.EAST);
 		header.add(north, BorderLayout.NORTH);
-		
+		 
 		panel.add(header);
 		
 		switch(view) {

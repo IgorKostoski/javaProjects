@@ -112,12 +112,8 @@ public class User {
 	}
 	
 	
-	public ArrayList<Integer> getFriendsIDs() {
-		ArrayList<Integer> ids = new ArrayList<>();
-		for (User friend : friends) {
-			ids.add(friend.getID());
-		}
-		return ids;
+	public void setFriendsIDs (ArrayList<Integer> friendsIDs){
+		this.friendsIDs = friendsIDs;
 	}
 	
 	public boolean isFriend(User u) {

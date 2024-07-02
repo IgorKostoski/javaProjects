@@ -39,6 +39,8 @@ public class ReadUser {
 					
 				}
 				
+				user.setFriendsIDs(friendsIDs);
+				
 			}
 			
 			
