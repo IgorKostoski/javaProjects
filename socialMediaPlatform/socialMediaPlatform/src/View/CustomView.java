@@ -4,12 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Controller.ReadAllUsers;
 import Model.Database;
 import Model.User;
 
@@ -49,8 +51,7 @@ public class CustomView {
 		
 		switch(view) {
 		case "Friends":
-			
-			
+			ArrayList<User> users = new ReadAllUsers(database, user).getList();
 			
 			break;
 			
