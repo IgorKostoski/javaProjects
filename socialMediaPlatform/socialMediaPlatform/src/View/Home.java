@@ -7,6 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import Controller.CreatePost;
+import Controller.GenerateTimeline;
 import Model.Database;
 import Model.User;
 
@@ -132,13 +134,14 @@ public class Home {
 		header.add(south, BorderLayout.SOUTH);
 		
 		panel.add(header);
-		panel.add(Box.createVerticalStrut(7));
-		panel.add(new Post());
 		
 		
-		for (int i=0; i<10; i++) {
+		ArrayList<Model.Post> posts = new GenerateTimeline(user, database).getPosts();
+		
+		
+		for (int i=0; i<posts.size(); i++) {
 			panel.add(Box.createVerticalStrut(7));
-			panel.add(new Post());
+			panel.add(new Post(posts.get(i)));
 			
 		}
 		

@@ -14,7 +14,8 @@ public class Post {
 	private LocalDateTime dateTime;
 	private ArrayList<Comment> comments;
 	private ArrayList<User> likes;
-	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
+	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
 	
 	
 	public Post() {
@@ -89,6 +90,10 @@ public class Post {
 		this.dateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
 	}
 	
+	
+	public String getDateToString() {
+		return dateFormatter.format(dateTime);
+	}
 	
 	
 	

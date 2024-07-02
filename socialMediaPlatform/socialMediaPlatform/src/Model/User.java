@@ -116,6 +116,10 @@ public class User {
 		this.friendsIDs = friendsIDs;
 	}
 	
+	public ArrayList<Integer> getFriendsIDs(){
+		return friendsIDs;
+	}
+	
 	public boolean isFriend(User u) {
 		return friendsIDs.contains(u.getID());
 	}

@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 @SuppressWarnings("serial")
 public class Post extends JPanel{
 	
-	public Post() {
+	public Post(Model.Post post) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(GUIConstants.white);
 		setBorder(BorderFactory.createEmptyBorder(15,15,15,25));
@@ -24,10 +24,10 @@ public class Post extends JPanel{
 		header.setBackground(null);
 		
 		
-		JLabel author = new JLabel("User Name", 20, GUIConstants.post, Font.BOLD);
+		JLabel author = new JLabel(post.getUser().getName(), 20, GUIConstants.post, Font.BOLD);
 		header.add(author, BorderLayout.WEST);
 		
-		JLabel date = new JLabel("Thu, 0 Juni 2024", 15, GUIConstants.post, Font.PLAIN);
+		JLabel date = new JLabel(post.getDateToString(), 15, GUIConstants.post, Font.PLAIN);
 		header.add(date, BorderLayout.EAST);
 		
 		add(header);
@@ -35,8 +35,7 @@ public class Post extends JPanel{
 		
 		JPanel center = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		center.setBackground(null);
-		JTextArea content = new JTextArea("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Risus feugiat in ante metus dictum."
-				,18,GUIConstants.post, Font.PLAIN);
+		JTextArea content = new JTextArea(post.getContent(),18,GUIConstants.post, Font.PLAIN);
 		center.add(content);
 		add(center);
 		add(Box.createVerticalStrut(7));
