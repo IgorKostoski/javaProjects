@@ -125,6 +125,11 @@ public class User {
 	}
 	
 	
+	public void addFriend(User f) {
+		friends.add(f);
+		friendsIDs.add(f.getID());
+	}
+	
 	
 
 }

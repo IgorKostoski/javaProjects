@@ -12,6 +12,8 @@ import javax.swing.BorderFactory;
 
 import javax.swing.JPanel;
 
+import Controller.AddFriend;
+import Model.Database;
 import Model.User;
 
 
@@ -20,7 +22,7 @@ import Model.User;
 public class Friend extends JPanel{
 	
 
-	public Friend(User mainUser, User u) {
+	public Friend(User mainUser,Database database, User u) {
 
 		setLayout(new BorderLayout());
 		setBackground(GUIConstants.white);
@@ -48,7 +50,13 @@ public class Friend extends JPanel{
 		addFriend.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+				if(new AddFriend(mainUser, database, u).isAdded()) {
+					mainUser.addFriend(u);
+					addFriend.setVisible(false);
+					remove.setVisable(true);
+				}
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}
