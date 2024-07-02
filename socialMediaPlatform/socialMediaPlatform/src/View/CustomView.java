@@ -46,19 +46,28 @@ public class CustomView {
 		header.add(north, BorderLayout.NORTH);
 		
 		panel.add(header);
-		panel.add(Box.createVerticalStrut(7));
 		
-		panel.add(new Post());
+		switch(view) {
+		case "Friends":
+			
+			
+			
+			break;
+			
+		}
 		
-		for (int i=0;i<10;i++) {
-			panel.add(Box.createVerticalStrut(7));
-			panel.add(new Friend());
+		
+	
+		
+//		for (int i=0;i<10;i++) {
+//			panel.add(Box.createVerticalStrut(7));
+//			panel.add(new Friend());
 //			if(i%2==0){
 //				panel.add(new Post());
 //				} else {
 //					panel.add(new Comment());
 //				}
-			}
+//			}
 		
 		frame.getContentPane().add(new JScrollPane(panel));
 		frame.setVisible(true);
