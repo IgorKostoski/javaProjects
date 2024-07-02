@@ -19,6 +19,12 @@ public class User {
 	
 	
 	public User() {
+		posts = new ArrayList<>();
+		
+		comments = new ArrayList<> ();
+		likes = new ArrayList<> ();
+		friends = new ArrayList<> ();
+		friendsIDs = new ArrayList<> ();
 		
 	}
 	
