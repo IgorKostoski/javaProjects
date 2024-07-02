@@ -132,7 +132,7 @@ public class User {
 	
 	public void removeFriend(User f) {
 		friends.remove(f);
-		friendsIDs.remove(f.getID());
+		friendsIDs.remove((Integer)f.getID());
 	}
 	
 	

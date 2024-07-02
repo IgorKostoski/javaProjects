@@ -45,13 +45,13 @@ public class Friend extends JPanel{
 		
 		
 		
-		JButton addFriend = new JButton("Add", 35,16);
+		JButton addFriend = new JButton("Follow", 35,16);
 		addFriend.setPreferredSize(new Dimension(81,37));
 		addFriend.setVisible(false);
 		
 		right.add(addFriend);
 		
-		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
+		JLabel remove = new JLabel("Unfollow", 16, GUIConstants.blue,Font.BOLD);
 		remove.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		remove.setVisible(false);
 		

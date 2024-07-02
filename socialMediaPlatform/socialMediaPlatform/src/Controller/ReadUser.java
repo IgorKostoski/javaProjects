@@ -2,6 +2,7 @@ package Controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Model.Database;
 import Model.User;
@@ -27,7 +28,20 @@ public class ReadUser {
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("Password"));
 				
+				String findFriends = "SELECT * FROM `Friends` WHERE `User` = "+user.getID()+";";
+				
+				ResultSet rs2 = database.getStatement().executeQuery(findFriends);
+				
+				
+				ArrayList<Integer> friendsIDs = new ArrayList<> ();
+				while (rs2.next()) {
+					friendsIDs.add(rs2.getInt("Friend"));
+					
+				}
+				
 			}
+			
+			
 			
 		} catch (SQLException e) {
 			new Alert(e.getMessage(), null);
