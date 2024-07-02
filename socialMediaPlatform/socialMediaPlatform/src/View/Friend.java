@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -20,7 +21,7 @@ public class Friend extends JPanel{
 
 		setLayout(new BorderLayout());
 		setBackground(GUIConstants.white);
-		setBorder(BorderFactory.createEmptyBorder(15,15,15,25));
+		setBorder(BorderFactory.createEmptyBorder(10,15,10,15));
 		
 		JLabel author = new JLabel("User Name", 20, GUIConstants.post, Font.BOLD);
 		add(author, BorderLayout.WEST);
@@ -34,18 +35,21 @@ public class Friend extends JPanel{
 		right.setBackground(null);
 		
 		
-		JButton addFriend = new JButton("Post", 35,16);
+		JButton addFriend = new JButton("Add", 35,16);
 		addFriend.setPreferredSize(new Dimension(81,37));
 		right.add(addFriend);
 		
 		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
+		remove.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		addFriend.setVisible(false);
 		right.add(remove);
 		
 		
 		add(right);
 		
 		
-		Dimension dimension = new Dimension(500, 90);
+		Dimension dimension = new Dimension(500, 67);
 		setPreferredSize(dimension);
 		setMaximumSize(dimension);
 		setMinimumSize(dimension);

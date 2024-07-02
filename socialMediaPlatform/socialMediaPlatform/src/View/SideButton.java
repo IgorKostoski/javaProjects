@@ -8,6 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
+
+import Model.Database;
+import Model.User;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 
@@ -15,7 +19,7 @@ import javax.swing.ImageIcon;
 @SuppressWarnings("serial")
 public class SideButton extends JPanel{
 	
-	public SideButton(String text, String pic) {
+	public SideButton(String text, String pic, User user, Database database) {
 		super(new FlowLayout(FlowLayout.LEFT, 10, 10));
 		setMaximumSize(new Dimension(182, 50));
 		setBackground(GUIConstants.white);
@@ -30,7 +34,9 @@ public class SideButton extends JPanel{
 		addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+				new CustomView(text,  user,  database);
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}

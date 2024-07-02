@@ -9,11 +9,15 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+
+import Model.Database;
+import Model.User;
+
 import javax.swing.ImageIcon;
 
 public class CustomView {
 	
-	public CustomView() {
+	public CustomView(String view, User user, Database database) {
 		JFrame frame = new JFrame();
 		
 		
