@@ -5,7 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 
@@ -37,9 +38,31 @@ public class Friend extends JPanel{
 		right.setBackground(null);
 		
 		
+		
+		
+		
+		
 		JButton addFriend = new JButton("Add", 35,16);
 		addFriend.setPreferredSize(new Dimension(81,37));
 		addFriend.setVisible(false);
+		addFriend.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		right.add(addFriend);
 		
 		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
@@ -47,6 +70,25 @@ public class Friend extends JPanel{
 		remove.setVisible(false);
 		
 		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
+		
+		remove.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		
 		right.add(remove);
 		
