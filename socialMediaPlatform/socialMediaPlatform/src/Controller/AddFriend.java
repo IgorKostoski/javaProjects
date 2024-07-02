@@ -1,7 +1,10 @@
 package Controller;
 
+import java.sql.SQLException;
+
 import Model.Database;
 import Model.User;
+import View.Alert;
 
 
 public class AddFriend {
@@ -20,7 +23,18 @@ public class AddFriend {
 	
 	public boolean isAdded() {
 		boolean added = false;
-		String insert = "INSERT INTO `Friends`(`User`, `Friend`) VALUES ('"+user.getID()+"','"+f.getID()+"');";
+		String insert = "INSERT INTO `Friends`(`User`, `Friend`) VALUES "
+				+ "('"+user.getID()+"','"+f.getID()+"');";
+		
+		try {
+			database.getStatement().execute(insert);
+			added = true;
+		} catch (SQLException e) {
+			new Alert(e.getMessage(), null);
+			added = false;
+		}
+		
+		return added;
 	}
 	
 	
