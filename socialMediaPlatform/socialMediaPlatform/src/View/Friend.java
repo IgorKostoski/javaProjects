@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import Controller.AddFriend;
+import Controller.RemoveFriend;
 import Model.Database;
 import Model.User;
 
@@ -47,30 +48,7 @@ public class Friend extends JPanel{
 		JButton addFriend = new JButton("Add", 35,16);
 		addFriend.setPreferredSize(new Dimension(81,37));
 		addFriend.setVisible(false);
-		addFriend.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(new AddFriend(mainUser, database, u).isAdded()) {
-					mainUser.addFriend(u);
-					addFriend.setVisible(false);
-					remove.setVisable(true);
-				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {}
-
-			@Override
-			public void mouseExited(MouseEvent e) {}
-			
-		});
+		
 		right.add(addFriend);
 		
 		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
@@ -78,11 +56,16 @@ public class Friend extends JPanel{
 		remove.setVisible(false);
 		
 		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-		
 		remove.addMouseListener(new MouseListener() {
 
 			@Override
-			public void mouseClicked(MouseEvent e) {}
+			public void mouseClicked(MouseEvent e) {
+				if (new RemoveFriend(mainUser, database, u).isRemoved()) {
+					mainUser.removeFriend(u);
+					remove.setVisible(false);
+					addFriend.setVisible(true);
+				}
+			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {}
@@ -110,6 +93,31 @@ public class Friend extends JPanel{
 			
 			
 		}
+		
+		addFriend.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(new AddFriend(mainUser, database, u).isAdded()) {
+					mainUser.addFriend(u);
+					addFriend.setVisible(false);
+					remove.setVisible(true);
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+		});
 		
 		
 		add(right);

@@ -130,6 +130,11 @@ public class User {
 		friendsIDs.add(f.getID());
 	}
 	
+	public void removeFriend(User f) {
+		friends.remove(f);
+		friendsIDs.remove(f.getID());
+	}
+	
 	
 
 }

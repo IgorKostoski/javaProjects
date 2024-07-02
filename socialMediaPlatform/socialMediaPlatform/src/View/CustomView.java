@@ -56,7 +56,7 @@ public class CustomView {
 			for(User u : users) {
 				
 				panel.add(Box.createVerticalStrut(7));
-				panel.add(new Friend(user, u)); 
+				panel.add(new Friend(user, database,  u)); 
 				
 			}
 			

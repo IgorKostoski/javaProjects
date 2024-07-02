@@ -62,13 +62,13 @@ public class Home {
 		});
 		sideBar.add(profile);
 		sideBar.add(Box.createVerticalStrut(3));
-		sideBar.add(new SideButton("Posts", "myposts", user, database));
+		sideBar.add(new SideButton("Posts", "myposts", user, database,frame));
 		sideBar.add(Box.createVerticalStrut(3));
-		sideBar.add(new SideButton("Comments", "mycomments", user, database));
+		sideBar.add(new SideButton("Comments", "mycomments", user, database,frame));
 		sideBar.add(Box.createVerticalStrut(3));
-		sideBar.add(new SideButton("Likes", "mylikes", user, database));
+		sideBar.add(new SideButton("Likes", "mylikes", user, database,frame));
 		sideBar.add(Box.createVerticalStrut(3));
-		sideBar.add(new SideButton("Friends", "friends", user, database));
+		sideBar.add(new SideButton("Friends", "friends", user, database,frame));
 		
 		
 		

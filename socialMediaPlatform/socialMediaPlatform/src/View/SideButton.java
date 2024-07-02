@@ -19,7 +19,7 @@ import javax.swing.ImageIcon;
 @SuppressWarnings("serial")
 public class SideButton extends JPanel{
 	
-	public SideButton(String text, String pic, User user, Database database) {
+	public SideButton(String text, String pic, User user, Database database, JFrame f) {
 		super(new FlowLayout(FlowLayout.LEFT, 10, 10));
 		setMaximumSize(new Dimension(182, 50));
 		setBackground(GUIConstants.white);
@@ -36,6 +36,7 @@ public class SideButton extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				new CustomView(text,  user,  database);
+				f.dispose();
 			}
 
 			@Override
