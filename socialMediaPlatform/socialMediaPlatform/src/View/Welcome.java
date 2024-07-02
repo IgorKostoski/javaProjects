@@ -116,7 +116,7 @@ public class Welcome {
 				if(!create.isEmailUsed()) {
 					create.create();
 					u = create.getUser();
-					new Alert("Account created successfully, ID " +u.getID(), frame);
+					new Home(u, database);
 					
 				} else {
 					new Alert("This email has already been used", frame);

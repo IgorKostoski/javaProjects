@@ -25,7 +25,7 @@ public class Friend extends JPanel{
 		setBackground(GUIConstants.white);
 		setBorder(BorderFactory.createEmptyBorder(10,15,10,15));
 		
-		JLabel author = new JLabel("User Name", 20, GUIConstants.post, Font.BOLD);
+		JLabel author = new JLabel(u.getName(), 20, GUIConstants.post, Font.BOLD);
 		add(author, BorderLayout.WEST);
 	
 		
@@ -44,6 +44,8 @@ public class Friend extends JPanel{
 		
 		JLabel remove = new JLabel("Remove", 16, GUIConstants.blue,Font.BOLD);
 		remove.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		remove.setVisible(false);
+		
 		setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 		
 		right.add(remove);
