@@ -1,8 +1,11 @@
 package Controller;
 
+import java.sql.SQLException;
+
 import Model.Database;
 import Model.Post;
 import Model.User;
+import View.Alert;
 
 public class LikePost {
 	
@@ -20,6 +23,20 @@ public class LikePost {
 	
 	public boolean isLiked() {
 		boolean liked = false;
+		String insert = "INSERT INTO `Likes`(`User`, `Post`) VALUES ('"+u.getID()+"','"+p.getID()+"');";
+		
+		
+		try {
+			database.getStatement().execute(insert);
+			liked = true;
+		} catch (SQLException e) {
+			new Alert(e.getMessage(), null);
+			liked = false;
+		}
+		
+		return liked;
 	}
+	
+	
 
 }
