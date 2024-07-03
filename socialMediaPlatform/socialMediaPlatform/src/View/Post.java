@@ -12,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Controller.DislakePost;
 import Controller.LikePost;
 import Model.Database;
 import Model.User;
@@ -55,13 +56,33 @@ public class Post extends JPanel{
 		
 		
 		javax.swing.JLabel like = new javax.swing.JLabel(new ImageIcon("pics/like.png"));
+		
+		
+
+		if(u.liked(post)) {
+			like.setIcon(new ImageIcon("pics/liked.png"));
+			
+		} else {
+			like.setIcon(new ImageIcon("pics/like.png"));
+		}
 		like.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (new LikePost(u, post, database).isLiked()) {
-					like.setIcon(new ImageIcon("pics/liked.png"));
+				if(!u.liked(post)) {
+					if (new LikePost(u, post, database).isLiked()) {
+						like.setIcon(new ImageIcon("pics/liked.png"));
+						u.like(post);
+						
+					}
+					
+				} else {
+					if (new DislakePost(u,post,database).isDisiked()) {
+						like.setIcon(new ImageIcon("pics/like.png"));
+						u.dislike(post);
+					}
 				}
+				
 			}
 
 			@Override

@@ -41,6 +41,16 @@ public class ReadUser {
 				
 				user.setFriendsIDs(friendsIDs);
 				
+				
+				String findLikedPosts = "SELECT * FROM `Likes` WHERE `User` = "+user.getID()+" ;";
+				
+				ResultSet rs3 = database.getStatement().executeQuery(findLikedPosts);
+				ArrayList<Integer> likedPostsIDs = new ArrayList<>();
+				while(rs.next()) {
+					likedPostsIDs.add(rs3.getInt("Post"));
+				}
+				
+				user.setLikesIDs(likedPostsIDs);
 			}
 			
 			

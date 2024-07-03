@@ -12,8 +12,9 @@ public class User {
 	private String password;
 	private ArrayList<Post> posts;
 	private ArrayList<Comment> comments;
-	private ArrayList<Post> likes;
-	private ArrayList<User> friends;
+//	private ArrayList<Post> likes;
+	private ArrayList<Integer> likesIDs;
+//	private ArrayList<User> friends;
 	private ArrayList<Integer> friendsIDs;
 	
 	
@@ -22,8 +23,9 @@ public class User {
 		posts = new ArrayList<>();
 		
 		comments = new ArrayList<> ();
-		likes = new ArrayList<> ();
-		friends = new ArrayList<> ();
+//		likes = new ArrayList<> ();
+		likesIDs = new ArrayList<> ();
+//		friends = new ArrayList<> ();
 		friendsIDs = new ArrayList<> ();
 		
 	}
@@ -89,20 +91,41 @@ public class User {
 		this.comments = comments;
 	}
 	
-	public ArrayList<Post> getLikes(){
-		return likes;
+//	public ArrayList<Post> getLikes(){
+//		return likes;
+//	}
+	
+//	public void setLikes(ArrayList<Post> likes) {
+//		this.likes = likes;
+//	}
+	
+	
+	public ArrayList<Integer> getLikesIDs(){
+		return likesIDs;
 	}
 	
-	public void setLikes(ArrayList<Post> likes) {
-		this.likes = likes;
+	public void setLikesIDs(ArrayList<Integer> likesIDs) {
+		this.likesIDs = likesIDs;
 	}
 	
-	public ArrayList<User> getFriends() {
-		return friends;
+	public boolean liked(Post p) {
+		return likesIDs.contains(p.getID());
 	}
+	
+	public void like(Post p) {
+		likesIDs.add(p.getID());
+	}
+	
+	public void dislike(Post p) {
+		likesIDs.remove((Integer) p.getID());
+	}
+	
+//	public ArrayList<User> getFriends() {
+//		return friends;
+//	}
 	
 	public void setFriends(ArrayList<User> friends) {
-		this.friends = friends;
+//		this.friends = friends;
 		friendsIDs = new ArrayList<>();
 		for (User u : friends) {
 			friendsIDs.add(u.getID());
@@ -126,12 +149,12 @@ public class User {
 	
 	
 	public void addFriend(User f) {
-		friends.add(f);
+//		friends.add(f);
 		friendsIDs.add(f.getID());
 	}
 	
 	public void removeFriend(User f) {
-		friends.remove(f);
+//		friends.remove(f);
 		friendsIDs.remove((Integer)f.getID());
 	}
 	

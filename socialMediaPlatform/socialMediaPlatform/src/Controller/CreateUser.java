@@ -56,7 +56,7 @@ public class CreateUser {
 		
 		u.setComments(new ArrayList<> ());
 		u.setFriends(new ArrayList<>());
-		u.setLikes(new ArrayList<>());
+	
 		u.setPosts(new ArrayList<>());
 		
 		String select = "SELECT `ID` FROM `Users` WHERE `Email` = '"+u.getEmail()+"' AND `Password` = '"+u.getPassword()+"';";
