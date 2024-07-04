@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 
 import Controller.DislakePost;
 import Controller.LikePost;
+import Controller.ReadPostLikes;
 import Model.Database;
 import Model.User;
 
@@ -21,6 +23,8 @@ import javax.swing.ImageIcon;
 
 @SuppressWarnings("serial")
 public class Post extends JPanel{
+	
+	private JLabel likesCounter;
 	
 	public Post(User u,Model.Post post, Database database) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -56,6 +60,7 @@ public class Post extends JPanel{
 		
 		
 		javax.swing.JLabel like = new javax.swing.JLabel(new ImageIcon("pics/like.png"));
+		like.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		
 
@@ -100,8 +105,21 @@ public class Post extends JPanel{
 		});
 		likes.add(like);
 		
+		int likesCount = new ReadPostLikes(post, database).getLikesCount();
 		
-		likes.add(new JLabel("0 Likes", 15, GUIConstants.textAreaHint, Font.BOLD));
+		String likesSt = "";
+		if (likesCount < 2) {
+			likesSt = likesCount + " Like";
+			
+		} else {
+			likesSt = likesCount + " Likes";
+		}
+		
+		
+		likesCounter = new JLabel(likesSt,15, GUIConstants.textAreaHint, Font.BOLD);
+		
+		
+		likes.add(likesCounter);
 		bottom.add(likes, BorderLayout.WEST);
 		JLabel comments = new JLabel("0 Comments", 15, GUIConstants.textAreaHint, Font.BOLD);
 		bottom.add(comments, BorderLayout.EAST);
