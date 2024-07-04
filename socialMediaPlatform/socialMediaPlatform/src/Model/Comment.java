@@ -11,6 +11,8 @@ public class Comment {
 	private User user;
 	private LocalDateTime dateTime;
 	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
+
 
 	
 	
@@ -69,6 +71,9 @@ public class Comment {
 
 	
 	
+	public String getDateToString() {
+		return dateFormatter.format(dateTime);
+	}
 	
 	
 	

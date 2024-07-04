@@ -6,6 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -13,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import Controller.CreateComment;
+import Controller.ReadPostComments;
 import Model.Database;
 import Model.User;
 
@@ -77,12 +79,10 @@ public class Comments {
 		});
 		newComment.add(commentBtn, BorderLayout.EAST);
 		
-		panel.add(newComment);
-		panel.add(Box.createVerticalStrut(7));
+		ArrayList<Model.Comment> comments = new ReadPostComments(post, database).getComments();
 		
-		
-		for (int i=0;i<10;i++) {
-			panel.add(new Comment());
+		for (Model.Comment c :comments) {
+			panel.add(new Comment(c));
 			panel.add(Box.createVerticalStrut(7));
 		}
 		
