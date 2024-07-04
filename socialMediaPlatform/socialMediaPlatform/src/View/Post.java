@@ -25,8 +25,12 @@ import javax.swing.ImageIcon;
 public class Post extends JPanel{
 	
 	private JLabel likesCounter;
+	private Model.Post post;
+	private Database database;
 	
 	public Post(User u,Model.Post post, Database database) {
+		this.post = post;
+		this.database = database;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setBackground(GUIConstants.white);
 		setBorder(BorderFactory.createEmptyBorder(15,15,15,25));
@@ -87,6 +91,7 @@ public class Post extends JPanel{
 						u.dislike(post);
 					}
 				}
+				refreshLikesCounter();
 				
 			}
 
@@ -105,18 +110,11 @@ public class Post extends JPanel{
 		});
 		likes.add(like);
 		
-		int likesCount = new ReadPostLikes(post, database).getLikesCount();
-		
-		String likesSt = "";
-		if (likesCount < 2) {
-			likesSt = likesCount + " Like";
-			
-		} else {
-			likesSt = likesCount + " Likes";
-		}
 		
 		
-		likesCounter = new JLabel(likesSt,15, GUIConstants.textAreaHint, Font.BOLD);
+		
+		likesCounter = new JLabel("",15, GUIConstants.textAreaHint, Font.BOLD);
+		refreshLikesCounter();
 		
 		
 		likes.add(likesCounter);
@@ -135,6 +133,17 @@ public class Post extends JPanel{
 		setMinimumSize(dimension);
 		
 		
+	}
+	
+	private void refreshLikesCounter() {
+		int likesCount = new ReadPostLikes(post, database).getLikesCount();
+		if (likesCount < 2) {
+			likesCounter.setText(likesCount + " Like");
+			
+		} else {
+			likesCounter.setText(likesCount + " Likes");
+			
+		}
 	}
 
 	
