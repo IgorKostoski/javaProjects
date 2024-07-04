@@ -4,12 +4,15 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Controller.CreateComment;
 import Model.Database;
 import Model.User;
 
@@ -40,6 +43,38 @@ public class Comments {
 		
 		JButton commentBtn = new JButton("Post", 35, 16);
 		commentBtn.setPreferredSize(new Dimension(81,37));
+		commentBtn.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(commentIn.isEmpty()) {
+					new Alert("Cannot publish empty comment", frame);
+					return;
+				}
+				Model.Comment c = new Model.Comment(commentIn.getText(), user);
+				
+				if (new CreateComment(c, post, user, database).commented()) {
+					new Alert("Comment published successfully", frame);
+					
+					panel.add(new Comment(c));
+				}
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			
+			
+		});
 		newComment.add(commentBtn, BorderLayout.EAST);
 		
 		panel.add(newComment);

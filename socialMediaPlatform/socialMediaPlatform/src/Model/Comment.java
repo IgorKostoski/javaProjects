@@ -18,6 +18,12 @@ public class Comment {
 		
 	}
 	
+	public Comment(String content, User user) {
+		this.content = content;
+		this.user = user;
+		dateTime = LocalDateTime.now();
+	}
+	
 	
 	public int getID() {
 		return ID;
@@ -31,7 +37,7 @@ public class Comment {
 		return content;
 	}
 	
-	public void getContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 	
@@ -60,6 +66,8 @@ public class Comment {
 	public void setDateTimeFromString(String dateTime) {
 		this.dateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
 	}
+
+	
 	
 	
 	
