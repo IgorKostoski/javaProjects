@@ -1,6 +1,7 @@
 package Model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Comment {
 	
@@ -9,6 +10,8 @@ public class Comment {
 	private String content;
 	private User user;
 	private LocalDateTime dateTime;
+	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
 	
 	
 	public Comment() {
@@ -49,6 +52,18 @@ public class Comment {
 	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
+	
+	public String getDateTimeToString() {
+		return dateTimeFormatter.format(dateTime);
+	}
+	
+	public void setDateTimeFromString(String dateTime) {
+		this.dateTime = LocalDateTime.parse(dateTime, dateTimeFormatter);
+	}
+	
+	
+	
+	
 	
 	
 	
