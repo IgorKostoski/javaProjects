@@ -22,6 +22,7 @@ public class Comments {
 	
 	public Comments(User user, Model.Post post, Database database) {
 		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -78,6 +79,9 @@ public class Comments {
 			
 		});
 		newComment.add(commentBtn, BorderLayout.EAST);
+		panel.add(Box.createVerticalStrut(7));
+		
+		panel.add(newComment);
 		
 		ArrayList<Model.Comment> comments = new ReadPostComments(post, database).getComments();
 		

@@ -126,6 +126,8 @@ public class Post extends JPanel{
 		
 		JLabel comments = new JLabel("0 Comments", 15, GUIConstants.textAreaHint, Font.BOLD);
 		
+		comments.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
 		if(commentsCount<2) {
 			comments.setText(commentsCount+" Comment");
 		} else {
@@ -137,7 +139,7 @@ public class Post extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				
 				new Comments(u,post,database);
-				f.dispose();
+				 
 			}
 
 			@Override
