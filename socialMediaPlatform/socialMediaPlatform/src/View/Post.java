@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import Controller.DislakePost;
 import Controller.LikePost;
+import Controller.ReadPostComments;
 import Controller.ReadPostLikes;
 import Model.Database;
 import Model.User;
@@ -28,7 +29,7 @@ public class Post extends JPanel{
 	private Model.Post post;
 	private Database database;
 	
-	public Post(User u,Model.Post post, Database database) {
+	public Post(User u,Model.Post post, Database database, JFrame f) {
 		this.post = post;
 		this.database = database;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -119,7 +120,41 @@ public class Post extends JPanel{
 		
 		likes.add(likesCounter);
 		bottom.add(likes, BorderLayout.WEST);
+		
+		
+		int commentsCount = new ReadPostComments(post,database).getCommentsCount();
+		
 		JLabel comments = new JLabel("0 Comments", 15, GUIConstants.textAreaHint, Font.BOLD);
+		
+		if(commentsCount<2) {
+			comments.setText(commentsCount+" Comment");
+		} else {
+			comments.setText(commentsCount+" Comments");
+		}
+		comments.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				new Comments(u,post,database);
+				f.dispose();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			
+		});
+		
 		bottom.add(comments, BorderLayout.EAST);
 		add(bottom);
 		

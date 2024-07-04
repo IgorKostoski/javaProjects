@@ -10,17 +10,20 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import Model.Database;
+import Model.User;
+
 public class Comments {
 	
-	public Comments() {
+	public Comments(User user, Model.Post post, Database database) {
 		JFrame frame = new JFrame();
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.setBackground(null);
 		
-//		panel.add(new Post());
-//		panel.add(Box.createVerticalStrut(7));
+		panel.add(new Post(user, post, database, frame));
+		panel.add(Box.createVerticalStrut(7));
 		
 		JPanel newComment = new JPanel(new BorderLayout());
 		newComment.setBackground(GUIConstants.white);
