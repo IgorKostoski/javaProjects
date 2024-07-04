@@ -139,6 +139,7 @@ public class Post extends JPanel{
 			public void mouseClicked(MouseEvent e) {
 				
 				new Comments(u,post,database);
+				f.dispose();
 				 
 			}
 

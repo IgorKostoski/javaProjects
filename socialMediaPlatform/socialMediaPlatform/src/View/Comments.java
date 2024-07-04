@@ -6,6 +6,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -57,9 +59,11 @@ public class Comments {
 				Model.Comment c = new Model.Comment(commentIn.getText(), user);
 				
 				if (new CreateComment(c, post, user, database).commented()) {
-					new Alert("Comment published successfully", frame);
 					
-					panel.add(new Comment(c));
+					commentIn.setText("");
+					new Comments(user, post, database);
+					
+					frame.dispose();
 				}
 			}
 
@@ -95,6 +99,32 @@ public class Comments {
 		
 		
 		frame.getContentPane().add(new JScrollPane(panel));
+		frame.addWindowListener(new WindowListener() {
+
+			@Override
+			public void windowOpened(WindowEvent e) {}
+
+			@Override
+			public void windowClosing(WindowEvent e) {}
+
+			@Override
+			public void windowClosed(WindowEvent e) {
+				new Home(user,database);
+			}
+
+			@Override
+			public void windowIconified(WindowEvent e) {}
+
+			@Override
+			public void windowDeiconified(WindowEvent e) {}
+
+			@Override
+			public void windowActivated(WindowEvent e) {}
+
+			@Override
+			public void windowDeactivated(WindowEvent e) {}
+			
+		});
 		frame.setVisible(true);
 		frame.requestFocus();
 		
