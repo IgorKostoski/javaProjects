@@ -61,9 +61,10 @@ public class Comments {
 				if (new CreateComment(c, post, user, database).commented()) {
 					
 					commentIn.setText("");
-					new Comments(user, post, database);
+					panel.add(new Comment(c));
+					panel.revalidate();
 					
-					frame.dispose();
+					
 				}
 			}
 
