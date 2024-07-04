@@ -12,25 +12,32 @@ import View.Alert;
 
 public class ReadPostComments {
 	
-	private int comments;
+	private int commentsCounter;
+	private ArrayList<Comment> comments;
 	
 	public ReadPostComments(Post p, Database database) {
 		
-		comments = 0;
+		commentsCounter = 0;
 		
 		String select = "SELECT * FROM `Comments` WHERE `Post` = "+p.getID()+";";
 		ArrayList<Integer> usersIDs = new ArrayList<>();
+		comments = new ArrayList<>();
 		
 		try {
 			ResultSet rs = database.getStatement().executeQuery(select);
 			while (rs.next()) {
-				comments++;
+				commentsCounter++;
 				Comment c = new Comment();
 				c.setID(rs.getInt("ID"));
 				c.setContent(rs.getString("Content"));
 				usersIDs.add(rs.getInt("User"));
 				c.setDateTimeFromString(rs.getString("DateTime"));
+				comments.add(c);
 				
+			}
+			
+			for (int i=0;i<comments.size();i++) {
+				comments.get(i).setUser(new ReadUserByID(usersIDs.get(i), database).getUser());
 			}
 		} catch (SQLException e) {
 			new Alert(e.getMessage(), null);
@@ -40,6 +47,10 @@ public class ReadPostComments {
 	}
 	
 	public int getCommentsCount() {
+		return commentsCounter;
+	}
+	
+	public ArrayList<Comment> getComments() {
 		return comments;
 	}
 
