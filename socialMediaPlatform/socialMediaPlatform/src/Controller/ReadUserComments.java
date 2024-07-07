@@ -11,6 +11,7 @@ import Model.Database;
 
 import Model.User;
 import View.Alert;
+import View.JFrame;
 import View.Post;
 
 
@@ -19,7 +20,7 @@ public class ReadUserComments {
 	private ArrayList<JPanel> panels;
 	
 	
-	public ReadUserComments(User u, Database database) {
+	public ReadUserComments(User u, Database database,JFrame f) {
 		
 		panels = new ArrayList<>();
 		
@@ -27,18 +28,26 @@ public class ReadUserComments {
 		
 		try {
 			ResultSet rs = database.getStatement().executeQuery(select); 
+			ArrayList<Comment> comments = new ArrayList<>();
+			ArrayList<Integer> postIDs = new ArrayList<>();
 			while (rs.next()) {
 				Comment p = new Comment();
 				p.setID(rs.getInt("ID"));
 				p.setContent(rs.getString("Content"));
 				p.setUser(u);
 				p.setDateTimeFromString(rs.getString("DateTime"));
-				int postsID = rs.getInt("Post");
-				Model.Post post = new ReadPostByID(postsID, database).getPost();
+				comments.add(p);
+				postIDs.add(rs.getInt("Post"));
+			
+				
+				
+			}
+			
+			for (int i=0;i<comments.size();i++) {
+				
+				Model.Post post = new ReadPostByID(postIDs.get(i), database).getPost();
 				panels.add(new Post(u, post, database, null));
-				panels.add(new View.Comment(p));
-				
-				
+				panels.add(new View.Comment(comments.get(i)));
 			}
 		} catch (SQLException e) {
 			new Alert(e.getMessage(), null);

@@ -96,7 +96,7 @@ public class CustomView {
 			}
 			break;
 		case "Comments":
-			for (JPanel p : new ReadUserComments(user, database).getPostsWithComments()) {
+			for (JPanel p : new ReadUserComments(user, database, frame).getPostsWithComments()) {
 				panel.add(Box.createVerticalStrut(7));
 				panel.add(p);
 				
