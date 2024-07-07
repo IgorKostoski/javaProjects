@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import Controller.ReadAllUsers;
+import Controller.ReadUserComments;
 import Controller.ReadUserPosts;
 import Model.Database;
 import Model.User;
@@ -92,6 +93,13 @@ public class CustomView {
 			for (Model.Post p : posts) {
 				panel.add(Box.createVerticalStrut(7));
 				panel.add(new View.Post(user, p, database, frame));
+			}
+			break;
+		case "Comments":
+			for (JPanel p : new ReadUserComments(user, database).getPostsWithComments()) {
+				panel.add(Box.createVerticalStrut(7));
+				panel.add(p);
+				
 			}
 			break;
 			
