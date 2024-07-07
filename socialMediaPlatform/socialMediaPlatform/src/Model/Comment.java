@@ -10,6 +10,7 @@ public class Comment {
 	private String content;
 	private User user;
 	private LocalDateTime dateTime;
+	
 	private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	private DateTimeFormatter dateFormatter  = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy");
 
