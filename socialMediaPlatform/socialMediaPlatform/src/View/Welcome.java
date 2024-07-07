@@ -117,6 +117,7 @@ public class Welcome {
 					create.create();
 					u = create.getUser();
 					new Home(u, database);
+					frame.dispose();
 					
 				} else {
 					new Alert("This email has already been used", frame);

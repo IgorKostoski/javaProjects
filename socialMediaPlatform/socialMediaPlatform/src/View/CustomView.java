@@ -14,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import Controller.ReadAllUsers;
+import Controller.ReadUserPosts;
 import Model.Database;
 import Model.User;
 
@@ -84,6 +85,14 @@ public class CustomView {
 				
 			}
 			
+			break;
+			
+		case "Posts":
+			ArrayList<Model.Post> posts  = new ReadUserPosts(user, database).getPosts();
+			for (Model.Post p : posts) {
+				panel.add(Box.createVerticalStrut(7));
+				panel.add(new View.Post(user, p, database, frame));
+			}
 			break;
 			
 		}
