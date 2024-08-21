@@ -1,10 +1,10 @@
-package com.igor;
+package com.mario;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FoodOrderingAppApplicationTests {
+class HotelDemoApplicationTests {
 
 	@Test
 	void contextLoads() {

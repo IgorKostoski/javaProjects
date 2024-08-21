@@ -1,19 +1,14 @@
-package com.igor;
+package com.mario;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FoodOrderingAppApplication {
+public class HotelDemoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FoodOrderingAppApplication.class, args);
-		System.out.println("Hello World");
-
-
+		SpringApplication.run(HotelDemoApplication.class, args);
+		System.out.println("Hello");
 	}
-
-
-
 
 }
