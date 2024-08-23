@@ -1,6 +1,7 @@
 package com.mario.repo;
 
 import java.time.LocalDate;
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,7 +24,7 @@ public interface RoomRepository extends JpaRepository <Room, Long>{
 			LocalDate checkOutDate, String roomType);
 	
 	
-	@Query("SELECT r FROM r WHERE r.id NOT IN (SELECT b.room.id FROM Booking b)")
+	@Query("SELECT r FROM Room r WHERE r.id NOT IN (SELECT b.room.id FROM Booking b)")
 	List<Room> getAllAvailableRooms();
 	
 	
