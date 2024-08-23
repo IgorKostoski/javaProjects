@@ -1,6 +1,7 @@
 package com.mario.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -20,18 +21,22 @@ public class Response {
 	
 	
 	private String role;
+	private String expirationTime;
 	
 	private String bookingConfirmationCode;
 	
 
 	private UserDTO user;
 	
-	
-	
-
 	private RoomDTO room;
 	
-	private String expirationTime;
+	private BookingDTO booking;
+	
+	private List<UserDTO> userList;
+	private List<RoomDTO> roomList;
+	private List<BookingDTO> bookingList;
+	
+	
 	
 
 	

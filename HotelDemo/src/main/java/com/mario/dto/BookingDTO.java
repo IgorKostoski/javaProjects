@@ -41,11 +41,11 @@ private Long id;
 	private String bookingConfirmationCode;
 	
 	
-	private User user;
+	private UserDTO user;
 	
 	
 	
 
-	private Room room;
+	private RoomDTO room;
 
 }
