@@ -6,30 +6,19 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import inputs.KeyboardInputs;
+import inputs.MouseInputs;
+
 public class GamePanel extends JPanel {
+	
+	private MouseInputs mouseInputs;
 
     public GamePanel() {
         // Initialize game components here if needed
-    	addKeyListener(new KeyListener(){
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-    	});
+    	mouseInputs = new MouseInputs();
+    	addKeyListener(new KeyboardInputs());
+    	addMouseListener(mouseInputs);
+    	addMouseMotionListener(mouseInputs);
     		
     	
     }
