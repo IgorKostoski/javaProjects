@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.mario.service.CustomUserDetailsService;
+import com.mario.security.JWTAuthFilter;
 
 @Configuration
 @EnableMethodSecurity
