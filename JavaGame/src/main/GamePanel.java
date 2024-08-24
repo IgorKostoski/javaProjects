@@ -12,11 +12,11 @@ import inputs.MouseInputs;
 public class GamePanel extends JPanel {
 	
 	private MouseInputs mouseInputs;
-	private int xDelta = 0, yDelta = 0;
+	private int xDelta = 100, yDelta = 100;
 
     public GamePanel() {
         // Initialize game components here if needed
-    	mouseInputs = new MouseInputs();
+    	mouseInputs = new MouseInputs(this);
     	addKeyListener(new KeyboardInputs(this));
     	addMouseListener(mouseInputs);
     	addMouseMotionListener(mouseInputs);
@@ -33,10 +33,16 @@ public class GamePanel extends JPanel {
     	this.yDelta += value;
     	repaint();
     }
+    
+    public void setRectPos(int x, int y) {
+    	this.xDelta = x;
+    	this.yDelta = y;
+    	repaint();
+    }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);  // Clear the panel and call the superclass's method
-        g.fillRect(100 + xDelta, 100 + yDelta, 200, 50);  // Draw the rectangle
+        g.fillRect(xDelta,yDelta, 200, 50);  // Draw the rectangle
     }
 }
