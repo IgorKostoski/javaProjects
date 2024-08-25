@@ -17,7 +17,8 @@ public class GamePanel extends JPanel {
 	
 	private MouseInputs mouseInputs;
 	private float xDelta = 100, yDelta = 100;
-	private BufferedImage img, subImg;
+	private BufferedImage img;
+	private BufferedImage[] idleAni;
 	
 	
 	
@@ -36,6 +37,7 @@ public class GamePanel extends JPanel {
     	mouseInputs = new MouseInputs(this);
     	
     	importImg();
+    	loadAnimations();
     	
     	setPanelSize();
     	addKeyListener(new KeyboardInputs(this));
@@ -45,7 +47,24 @@ public class GamePanel extends JPanel {
     	
     }
     
-    private void importImg() {
+    private void loadAnimations() {
+		idleAni = new BufferedImage[5];
+		
+		for(int i=0; i< idleAni.length; i++) {
+			idleAni[i] = img.getSubimage(i*64, 0, 64, 40);		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+	private void importImg() {
 		InputStream is = getClass().getResourceAsStream("/player_sprites.png");
 		
 		try {
@@ -53,6 +72,12 @@ public class GamePanel extends JPanel {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				is.close();
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -88,8 +113,8 @@ public class GamePanel extends JPanel {
     	
         super.paintComponent(g);  // Clear the panel and call the superclass's method
         
-        subImg = img.getSubimage(1*64,8*40, 64, 40);
-        g.drawImage(subImg, (int)xDelta,(int) yDelta,128,80, null);
+        
+        g.drawImage(idleAni[2], (int)xDelta,(int) yDelta,128,80, null);
         
     
     }
