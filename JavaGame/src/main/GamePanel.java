@@ -96,8 +96,8 @@ public class GamePanel extends JPanel {
     
     private Color getRndColor() {
     	int r = random.nextInt(255) ;
-    	int b = random.nextInt(120);
-    	int g = random.nextInt(255);
+    	int g = random.nextInt(120);
+    	int b = random.nextInt(255);
     	
     	return new Color(r,g,b);
     	
