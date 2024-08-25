@@ -112,14 +112,14 @@ public class GamePanel extends JPanel {
     
     
 	private void updateAnimationTick() {
-//	aniTick ++;
-//	if(aniTick >= aniSpeed) {
-//		aniTick = 0;
-//		aniIndex++;
-//		if (aniIndex >= idleAni.length)
-//			aniIndex = 0;
-//	}
-//	
+	aniTick ++;
+	if(aniTick >= aniSpeed) {
+		aniTick = 0;
+		aniIndex++;
+		if (aniIndex >= 6)
+			aniIndex = 0;
+	}
+	
 	
 }
    
@@ -133,7 +133,7 @@ public class GamePanel extends JPanel {
         updateAnimationTick();
         
         
-        g.drawImage(animations[7][1], (int)xDelta,(int) yDelta,128,80, null);
+        g.drawImage(animations[1][aniIndex], (int) xDelta,(int) yDelta,128,80, null);
         
     
     }
