@@ -153,6 +153,16 @@ public class GamePanel extends JPanel {
 		}
 	}
 
+	
+	public void updateGame() {
+		 updateAnimationTick();
+	        setAnimation();
+	        updatePos();
+		
+	}
+   
+
+
    
 
     @Override
@@ -161,9 +171,7 @@ public class GamePanel extends JPanel {
     	
         super.paintComponent(g);  // Clear the panel and call the superclass's method
         
-        updateAnimationTick();
-        setAnimation();
-        updatePos();
+       
         
         
         g.drawImage(animations[playerAction][aniIndex], 
@@ -172,6 +180,7 @@ public class GamePanel extends JPanel {
     
     }
     
+	
     
 
 
