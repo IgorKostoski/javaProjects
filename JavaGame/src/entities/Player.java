@@ -16,7 +16,7 @@ public class Player extends Entity {
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
 
-    private boolean moving = false;
+    private boolean moving = false, attacking = false;
     private boolean left, up, right, down;
     private float playerSpeed = 2.0f;
 
@@ -43,19 +43,38 @@ public class Player extends Entity {
             aniIndex++;
             if (aniIndex >= GetSpriteAmount(playerAction)) {
                 aniIndex = 0;
+                attacking = false;
             }
         }
     }
 
     private void setAnimation() {
+    	
+    	int startAni = playerAction;
+    	
+    	
         if (moving) {
             playerAction = RUNNING;
         } else {
             playerAction = IDLE;
+            
+            
+            if (attacking) 
+            	playerAction = ATTACK_1;
+            
+            
+            if (startAni != playerAction)
+            	resetAniTick();
         }
     }
 
-    private void updatePos() {
+    private void resetAniTick() {
+		aniTick = 0;
+		aniIndex = 0;
+		
+	}
+
+	private void updatePos() {
         moving = false;
 
         // Horizontal movement
@@ -71,7 +90,7 @@ public class Player extends Entity {
         if (up && !down) {
             y -= playerSpeed;
             moving = true;
-        } else if (down && !up) {  // Fixed: Corrected condition for moving down
+        } else if (down && !up) {  // Corrected condition for moving down
             y += playerSpeed;
             moving = true;
         }
@@ -134,5 +153,17 @@ public class Player extends Entity {
 
     public void setDown(boolean down) {
         this.down = down;
+    }
+
+    // **New Method: Reset Direction Booleans**
+    public void resetDirBooleans() {
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
+    }
+    
+    public void setAttacking(boolean attacking) {
+    	this.attacking = attacking;
     }
 }
