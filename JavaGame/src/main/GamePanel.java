@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.Color;
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -45,9 +47,12 @@ public class GamePanel extends JPanel {
 
 
 	private void setPanelSize() {
-    	Dimension size = new Dimension(1280, 800); 
+    	Dimension size = new Dimension(GAME_WIDTH, GAME_HEIGHT); 
+    	
     	
     	setPreferredSize(size);
+    	
+    	System.out.println("size: " + GAME_WIDTH + " : " + GAME_HEIGHT); 
     	
     	
     }
