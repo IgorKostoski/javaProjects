@@ -1,5 +1,7 @@
 package entities;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public abstract class Entity {
@@ -17,6 +19,14 @@ public abstract class Entity {
 	
 		initHitbox();
 		
+		
+	}
+	
+	protected void drawHitbox(Graphics g) {
+		//for debugging the hitbox
+		
+		g.setColor(Color.pink);
+		g.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 		
 	}
 	private void initHitbox() {
