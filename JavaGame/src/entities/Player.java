@@ -1,158 +1,144 @@
 package entities;
 
-import static utilz.Constants.Directions.*;
 import static utilz.Constants.PlayerConstants.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-
 import javax.imageio.ImageIO;
 
 import utilz.LoadSave;
 
 public class Player extends Entity {
+	private BufferedImage[][] animations;
+	private int aniTick, aniIndex, aniSpeed = 25;
+	private int playerAction = IDLE;
+	private boolean moving = false, attacking = false;
+	private boolean left, up, right, down;
+	private float playerSpeed = 2.0f;
 
-    private BufferedImage[][] animations;
-    private int aniTick, aniIndex, aniSpeed = 25;
-    private int playerAction = IDLE;
+	public Player(float x, float y, int width, int height) {
+		super(x, y, width, height);
+		loadAnimations();
+	}
 
-    private boolean moving = false, attacking = false;
-    private boolean left, up, right, down;
-    private float playerSpeed = 2.0f;
+	public void update() {
+		updatePos();
+		updateAnimationTick();
+		setAnimation();
+	}
 
-    public Player(float x, float y, int i, int j) {
-        super(x, y);
-        loadAnimations();
-    }
+	public void render(Graphics g) {
+		g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, width, height, null);
+	}
 
-    public void update() {
-        updatePos();
-        updateAnimationTick();
-        setAnimation();
-    }
+	private void updateAnimationTick() {
+		aniTick++;
+		if (aniTick >= aniSpeed) {
+			aniTick = 0;
+			aniIndex++;
+			if (aniIndex >= GetSpriteAmount(playerAction)) {
+				aniIndex = 0;
+				attacking = false;
+			}
 
-    public void render(Graphics g) {
-        // Drawing the current frame of the player's animation
-        g.drawImage(animations[playerAction][aniIndex], (int) x, (int) y, 256, 160, null);
-    }
+		}
 
-    private void updateAnimationTick() {
-        aniTick++;
-        if (aniTick >= aniSpeed) {
-            aniTick = 0;
-            aniIndex++;
-            if (aniIndex >= GetSpriteAmount(playerAction)) {
-                aniIndex = 0;
-                attacking = false;
-            }
-        }
-    }
+	}
 
-    private void setAnimation() {
-    	
-    	int startAni = playerAction;
-    	
-    	
-        if (moving) {
-            playerAction = RUNNING;
-        } else {
-            playerAction = IDLE;
-            
-            
-            if (attacking) 
-            	playerAction = ATTACK_1;
-            
-            
-            if (startAni != playerAction)
-            	resetAniTick();
-        }
-    }
+	private void setAnimation() {
+		int startAni = playerAction;
 
-    private void resetAniTick() {
+		if (moving)
+			playerAction = RUNNING;
+		else
+			playerAction = IDLE;
+
+		if (attacking)
+			playerAction = ATTACK_1;
+
+		if (startAni != playerAction)
+			resetAniTick();
+	}
+
+	private void resetAniTick() {
 		aniTick = 0;
 		aniIndex = 0;
-		
 	}
 
 	private void updatePos() {
-        moving = false;
+		moving = false;
 
-        // Horizontal movement
-        if (left && !right) {
-            x -= playerSpeed;
-            moving = true;
-        } else if (right && !left) {
-            x += playerSpeed;
-            moving = true;
-        }
+		if (left && !right) {
+			x -= playerSpeed;
+			moving = true;
+		} else if (right && !left) {
+			x += playerSpeed;
+			moving = true;
+		}
 
-        // Vertical movement
-        if (up && !down) {
-            y -= playerSpeed;
-            moving = true;
-        } else if (down && !up) {  // Corrected condition for moving down
-            y += playerSpeed;
-            moving = true;
-        }
-    }
+		if (up && !down) {
+			y -= playerSpeed;
+			moving = true;
+		} else if (down && !up) {
+			y += playerSpeed;
+			moving = true;
+		}
+	}
 
-    private void loadAnimations() {
-       
-            BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+	private void loadAnimations() {
 
-            animations = new BufferedImage[9][6];
+		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
 
-            for (int j = 0; j < animations.length; j++) 
-                for (int i = 0; i < animations[j].length; i++) 
-                    animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
-                
-       
-    }
+		animations = new BufferedImage[9][6];
+		for (int j = 0; j < animations.length; j++)
+			for (int i = 0; i < animations[j].length; i++)
+				animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
 
-    // Getters and setters for movement directions
-    public boolean isLeft() {
-        return left;
-    }
+	}
 
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
+	public void resetDirBooleans() {
+		left = false;
+		right = false;
+		up = false;
+		down = false;
+	}
 
-    public boolean isUp() {
-        return up;
-    }
+	public void setAttacking(boolean attacking) {
+		this.attacking = attacking;
+	}
 
-    public void setUp(boolean up) {
-        this.up = up;
-    }
+	public boolean isLeft() {
+		return left;
+	}
 
-    public boolean isRight() {
-        return right;
-    }
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
 
-    public void setRight(boolean right) {
-        this.right = right;
-    }
+	public boolean isUp() {
+		return up;
+	}
 
-    public boolean isDown() {
-        return down;
-    }
+	public void setUp(boolean up) {
+		this.up = up;
+	}
 
-    public void setDown(boolean down) {
-        this.down = down;
-    }
+	public boolean isRight() {
+		return right;
+	}
 
-    // **New Method: Reset Direction Booleans**
-    public void resetDirBooleans() {
-        this.left = false;
-        this.right = false;
-        this.up = false;
-        this.down = false;
-    }
-    
-    public void setAttacking(boolean attacking) {
-    	this.attacking = attacking;
-    }
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
 }
