@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalDate;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -15,7 +16,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar() {
+	public Calendar(int year, int month) {
 		
 		
 		setLayout(new BorderLayout(30,30));
@@ -58,7 +59,20 @@ public class Calendar extends JPanel{
 		days.add(new DayLabel("Fr", header, Color.white, false));
 		days.add(new DayLabel("Sa", header, Color.white, false));
 		
-		for (int i=0; i<42; i++) {
+		String[] weekDays = new String[] {"SUNDAY", "MONDAY", "TUESDAY",
+				"WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"
+		};
+		
+		LocalDate firstDay = LocalDate.of(year,month,1);
+		
+		int j = 0;
+		while (firstDay.getDayOfWeek().toString().equals(weekDays[j])) {
+			days.add(new DayLabel("", Color.decode("#f0f0f0"), Color.black, false));
+		}
+		
+		
+		
+		for (int i=0; i<42-j; i++) {
 			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
 			
 		}
