@@ -49,16 +49,17 @@ public class Calendar extends JPanel{
 		JPanel days = new JPanel(new GridLayout(7,7));
 		days.setBackground(null);
 		
-		for (int i=0; i<49; i++) {
-			JLabel lb = new JLabel(i+"");
-			lb.setHorizontalAlignment(JLabel.CENTER);
-			lb.setFont(new Font("Helvetica", Font.PLAIN, 20));
-			
-			lb.setOpaque(true);
-			lb.setBackground(Color.decode("#f0f0f0"));
-			lb.setForeground(Color.black);
-			lb.setCursor(new Cursor(Cursor.HAND_CURSOR));
-			days.add(lb);
+		Color header = Color.decode("#f90069");
+		days.add(new DayLabel("Su", header, Color.white, false));
+		days.add(new DayLabel("Mo", header, Color.white, false));
+		days.add(new DayLabel("Tu", header, Color.white, false));
+		days.add(new DayLabel("We", header, Color.white, false));
+		days.add(new DayLabel("Th", header, Color.white, false));
+		days.add(new DayLabel("Fr", header, Color.white, false));
+		days.add(new DayLabel("Sa", header, Color.white, false));
+		
+		for (int i=0; i<42; i++) {
+			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
 			
 		}
 		
