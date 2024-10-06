@@ -6,6 +6,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar(int year, int month) {
+	public Calendar(int year, int month, LocalDate selectedDay) {
 		
 		
 		setLayout(new BorderLayout(30,30));
@@ -66,20 +67,54 @@ public class Calendar extends JPanel{
 		LocalDate firstDay = LocalDate.of(year,month,1);
 		
 		int j = 0;
-		while (firstDay.getDayOfWeek().toString().equals(weekDays[j])) {
+		while (!firstDay.getDayOfWeek().toString().equals(weekDays[j])) {
 			days.add(new DayLabel("", Color.decode("#f0f0f0"), Color.black, false));
+			j++;
 		}
 		
+		int daysNum = YearMonth.of(year, month).lengthOfMonth();
+		
+		for (int i=1; i<=daysNum; i++) {
+			
+			
+			DayLabel dayLabel;
+			
+			if(selectedDay.getYear()==year && selectedDay.getMonthValue()==month && selectedDay.getDayOfMonth()==i) {
+				
+				
+				
+				days.add(new DayLabel(i+"", Color.decode("#0ecf78"), Color.black, true));
+				
+			} else if (i%5==0) {
+				
+				days.add(new DayLabel(i+"", Color.decode("#00d1e8"), Color.black, true));
+				
+			} else {
+				
+				days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
+				
+			} 
+			days.add(dayLabel);
+			
+		}
+			
+			
+			
+			
+	
 		
 		
-		for (int i=0; i<42-j; i++) {
-			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
+		
+		for (int i=0; i<(42-(j+daysNum)); i++) {
+			days.add(new DayLabel("", Color.decode("#f0f0f0"), Color.black, true));
 			
 		}
 		
 		add(days, BorderLayout.CENTER);
 		
 		
+		}
+		
 	}
+	
 
-}
