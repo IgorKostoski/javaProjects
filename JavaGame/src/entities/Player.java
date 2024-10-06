@@ -1,7 +1,10 @@
 package entities;
 
 import static utilz.Constants.PlayerConstants.*;
+
 import static utilz.HelpMethods.CanMoveHere;
+import static utilz.HelpMethods.*;
+
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -122,7 +125,7 @@ public class Player extends Entity {
 		
 
 		} else {
-			hitbox.x = GetEntityXPosNextToWall(hitbox, xSpeed);
+			hitbox.x = (int) GetEntityXPosNextToWall(hitbox, xSpeed);
 		}
 		
 	}
