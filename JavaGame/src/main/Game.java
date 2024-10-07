@@ -3,6 +3,7 @@ package main;
 import java.awt.Graphics;
 
 import entities.Player;
+import gameStates.Gamestate;
 import levels.LevelManager;
 
 public class Game implements Runnable{
@@ -57,14 +58,38 @@ public class Game implements Runnable{
     
     public void update() {
     	
-    	player.update();
-    	levelManager.update();
+    	
+    	
+    	switch(Gamestate.state) {
+		case MENU:
+		
+			break;
+		case PLAYING:
+			player.update();
+	    	levelManager.update();
+			break;
+		default:
+			break;
+    	
+    	}
     }
     
     public void render(Graphics g) {
     	
-    	levelManager.draw(g);
-    	player.render(g);
+    	switch(Gamestate.state) {
+		case MENU:
+		
+			break;
+		case PLAYING:
+			levelManager.draw(g);
+	    	player.render(g);
+			break;
+		default:
+			break;
+    	
+    	}
+    	
+    	
     	
     }
     
