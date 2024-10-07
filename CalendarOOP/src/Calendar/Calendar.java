@@ -17,7 +17,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar(int year, int month, LocalDate selectedDay) {
+	public Calendar(int year, int month) {
 		
 		
 		setLayout(new BorderLayout(30,30));
@@ -77,7 +77,7 @@ public class Calendar extends JPanel{
 		for (int i=1; i<=daysNum; i++) {
 			
 			
-			DayLabel dayLabel;
+			DayLabel dayLabel = null;
 			
 			if(selectedDay.getYear()==year && selectedDay.getMonthValue()==month && selectedDay.getDayOfMonth()==i) {
 				

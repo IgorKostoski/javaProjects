@@ -24,10 +24,10 @@ public class Main {
 		
 		
 		
-		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue(), date));
+		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue()));
 		frame.getContentPane().add(mainPanel);
 		
-		mainPanel.add(new Calendar(2024,10, ));
+		mainPanel.add(new Calendar(2024,10));
 		mainPanel.add(new Events());
 		
 		
