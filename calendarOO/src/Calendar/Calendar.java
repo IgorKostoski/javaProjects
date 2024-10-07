@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -32,7 +33,8 @@ public class Calendar extends JPanel{
 		top.setBackground(null);
 		
 		
-		JLabel date = new JLabel("October 2024");
+		JLabel date = new JLabel(LocalDate.of(year, month, 1).format(DateTimeFormatter.ofPattern("MMMM "
+				+ "YYYY")));
 		date.setHorizontalAlignment(JLabel.CENTER);
 		date.setFont(new Font("Helvetica",Font.BOLD, 30));
 		date.setForeground(Color.decode("#0ecf78"));
@@ -73,6 +75,8 @@ public class Calendar extends JPanel{
 			}
 			
 		});
+		
+		
 		top.add(left,BorderLayout.EAST);
 		
 		JLabel right = new JLabel(new ImageIcon("pics/left.png"));
@@ -148,6 +152,8 @@ public class Calendar extends JPanel{
 		
 		for (int i=1; i<=daysNum;i++) {
 			
+			final int day = i;
+			
 			
 			DayLabel dayLabel;
 			
@@ -163,6 +169,35 @@ public class Calendar extends JPanel{
 				dayLabel =  new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true);
 				
 			}
+			dayLabel.addMouseListener(new MouseListener() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					mainPanel.removeAll();
+					
+					LocalDate selected = LocalDate.of(year, month, day);
+					mainPanel.add(new Calendar(year, month, selected,mainPanel));
+					mainPanel.add(new Events());
+					mainPanel.revalidate();
+				}
+
+				@Override
+				public void mousePressed(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseReleased(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseExited(MouseEvent e) {
+				}
+				
+			});
 			
 			days.add(dayLabel);
 		}
