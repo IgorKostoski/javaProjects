@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
@@ -17,7 +19,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar(int year, int month) {
+	public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel) {
 		
 		
 		
@@ -38,10 +40,76 @@ public class Calendar extends JPanel{
 		
 		JLabel left = new JLabel(new ImageIcon("pics/right.png"));
 		left.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		left.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.removeAll();
+				
+				if(month!= 12) {
+					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel));
+				} else {
+					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel));
+
+				}
+				mainPanel.add(new Events());
+				mainPanel.revalidate();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			
+		});
 		top.add(left,BorderLayout.EAST);
 		
 		JLabel right = new JLabel(new ImageIcon("pics/left.png"));
-		left.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		right.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		right.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mainPanel.removeAll();
+				
+				if(month!= 1) {
+					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel));
+				} else {
+					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel));
+
+				}
+				mainPanel.add(new Events());
+				mainPanel.revalidate();
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+			
+		});
 		top.add(right,BorderLayout.WEST);
 		
 		
@@ -80,7 +148,23 @@ public class Calendar extends JPanel{
 		
 		for (int i=1; i<=daysNum;i++) {
 			
-			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
+			
+			DayLabel dayLabel;
+			
+			if (selectedDay.getYear()==year && selectedDay.getMonthValue()==month && selectedDay.getDayOfMonth()==i) {
+				
+				dayLabel =  new DayLabel(i+"", Color.decode("#0ecf78"), Color.black, true);
+				
+			} else if(i%5==0) {
+				dayLabel =  new DayLabel(i+"", Color.decode("#00d1e8"), Color.black, true);
+				
+			} else {
+				
+				dayLabel =  new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true);
+				
+			}
+			
+			days.add(dayLabel);
 		}
 		
 		
