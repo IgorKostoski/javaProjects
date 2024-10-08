@@ -73,12 +73,6 @@ public class Events extends JPanel{
 		
 		add(sp, BorderLayout.CENTER);
 		
-		JButton newEvent = new JButton("New");
-		
-		newEvent.setFont(new Font("Helvetica", Font.PLAIN, 20));
-		newEvent.setBackground(Color.decode("#00d1e8"));
-		newEvent.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		add(newEvent, BorderLayout.SOUTH);
 		
 		
 	}
