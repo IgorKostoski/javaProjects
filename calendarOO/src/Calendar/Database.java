@@ -84,6 +84,27 @@ public class Database {
 	
 	public void updateEvent(Event e) {
 		
+		String update = "UPDATE `Calendar` SET `Title`='"+e.getTitle()+"',`Description`='"+e.getDescription()+"',"
+				+ "`Date`='"+e.getDateToString()+"',`Time`='"+e.getTimeToString()+"' WHERE `ID` = "+e.getID()+"  ;";
+		
+		try {
+			statement.execute(update);
+		} catch (SQLException exception) {
+			
+			exception.printStackTrace();
+		}
+	}
+	
+	public void deleteEvent(int ID) {
+		String delete = "DELETE FROM `Calendar` WHERE `ID` = "+ID+" ;";
+		
+		try {
+			statement.execute(delete);
+		} catch (SQLException exception) {
+			
+			exception.printStackTrace();
+		}
+		
 	}
 	
 	
