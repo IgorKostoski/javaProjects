@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import gameStates.Gamestate;
@@ -13,6 +14,7 @@ public class MenuButton {
 	private Gamestate state;
 	private BufferedImage[] imgs;
 	private boolean mouseOver, mousePressed;
+	private Rectangle bounds;
 	
 	public MenuButton(int Xpos, int yPos, int rowIndex, Gamestate state) {
 		this.xPos = xPos;
@@ -22,8 +24,15 @@ public class MenuButton {
 		
 		
 		loadImgs();
+		
+		initBounds();
 	}
 	
+	private void initBounds() {
+		bounds = new Rectangle(xPos- xOffsetCenter, yPos, B_WIDTH, B_HEIGHT);
+		
+	}
+
 	private void loadImgs() {
 		imgs = new BufferedImage[3];
 		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.MENU_BUTTONS);
@@ -49,4 +58,37 @@ public class MenuButton {
 		
 	}
 
+	public boolean isMouseOver() {
+		return mouseOver;
+	}
+
+	public void setMouseOver(boolean mouseOver) {
+		this.mouseOver = mouseOver;
+	}
+
+	public boolean isMousePressed() {
+		return mousePressed;
+	}
+
+	public void setMousePressed(boolean mousePressed) {
+		this.mousePressed = mousePressed;
+	}
+	
+	public Rectangle getBounds() {
+		return bounds;
+	}
+	
+	public void applyGameState() {
+		Gamestate.state = state;
+	}
+	
+	public void resetBools() {
+		mouseOver = false;
+		mousePressed = true;
+	}
+	
+	
+	
+
+	
 }
