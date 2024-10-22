@@ -46,7 +46,7 @@ public class Playing extends State implements Statemethods {
 		smallCloudsPos = new int[8];
 		
 		for(int i=0; i< smallCloudsPos.length; i++)
-			smallCloudsPos[i] = (int) (70*Game.SCALE) + rnd.nextInt((int)(150*Game.SCALE));
+			smallCloudsPos[i] = (int) (90*Game.SCALE) + rnd.nextInt((int)(100*Game.SCALE));
 	}
 
 	private void initClasses() {
@@ -105,7 +105,7 @@ public class Playing extends State implements Statemethods {
 		g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * Game.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
 		
 		for(int i=0; i<smallCloudsPos.length; i++)
-		g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i, smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
+		g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
 
 		
 	}
