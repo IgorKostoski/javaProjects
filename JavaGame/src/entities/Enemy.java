@@ -1,10 +1,13 @@
 package entities;
 
 import static utilz.Constants.EnemyConstants.*;
+import static utilz.HelpMethods.IsEntityOnFloor;
 
 public abstract class Enemy extends Entity {
 	private int aniIndex, enemyState, enemyType;
 	private int aniTick, aniSpeed = 25;
+	private boolean firstUpdate = true;
+	private boolean inAir;
 
 	public Enemy(float x, float y, int width, int height, int enemyType) {
 		super(x, y, width, height);
@@ -24,8 +27,23 @@ public abstract class Enemy extends Entity {
 		}
 	}
 
-	public void update() {
+	public void update(int[][] lvlData) {
+		updateMove(lvlData);
 		updateAnimationTick();
+		
+	}
+	
+	private void updateMove(int[][] lvlData) {
+		if(firstUpdate) 
+			if(!IsEntityOnFloor(hitbox, lvlData)) 
+				inAir = true;
+			
+			
+		if(inAir) {
+			
+		}
+		
+		
 	}
 
 	public int getAniIndex() {
