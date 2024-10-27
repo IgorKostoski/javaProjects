@@ -13,6 +13,9 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
 	private Playing playing;
 	private BufferedImage[][]  crabbyArr;
+	private ArrayList<Crabby> crabbies = new ArrayList<>();
+	
+	
 	
 	public EnemyManager(Playing playing) {
 		this.playing = playing ;
@@ -21,10 +24,19 @@ public class EnemyManager {
 	}
 	
 	public void update() {
-		
+		for (Crabby c : crabbies)
+			c.update();
 	}
+
 	
-	public void draw(Graphics g) {
+	public void draw(Graphics g, int xLvlOffset) {
+		drawCrabs(g, xLvlOffset);
+	}
+
+	private void drawCrabs(Graphics g, int xLvlOffset) {
+		for (Crabby c : crabbies)
+			g.drawImage(crabbyArr[c.getEnemyState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset, (int) c.getHitbox().y, CRABBY_WIDTH, CRABBY_HEIGHT, null);
+
 		
 	}
 
