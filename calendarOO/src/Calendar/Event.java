@@ -24,7 +24,7 @@ public class Event {
 	
 	
 	
-	public Event(LocalDate date) {
+	public Event(LocalDate date) {// Title ==> null(new Event)
 		
 		dateTime = LocalDateTime.of(date, LocalTime.now());
 		
