@@ -1,13 +1,17 @@
 package entities;
 
 import static utilz.Constants.EnemyConstants.*;
-import static utilz.HelpMethods.IsEntityOnFloor;
+import static utilz.HelpMethods.*;
+
+import main.Game;
 
 public abstract class Enemy extends Entity {
 	private int aniIndex, enemyState, enemyType;
 	private int aniTick, aniSpeed = 25;
 	private boolean firstUpdate = true;
 	private boolean inAir;
+	private float fallSpeed;
+	private float gravity = 0.04f * Game.SCALE;
 
 	public Enemy(float x, float y, int width, int height, int enemyType) {
 		super(x, y, width, height);
@@ -40,6 +44,15 @@ public abstract class Enemy extends Entity {
 			
 			
 		if(inAir) {
+			if(CanMoveHere(hitbox.x, hitbox.y + fallSpeed,hitbox.width,hitbox.height, lvlData)) {
+				hitbox.y += fallSpeed;
+				fallSpeed += gravity;
+			} else {
+				inAir = false;
+				hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, aniSpeed);
+			}
+			
+		} else {
 			
 		}
 		
