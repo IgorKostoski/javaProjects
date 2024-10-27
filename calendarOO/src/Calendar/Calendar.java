@@ -20,8 +20,10 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel) {
+	public Calendar(int year, int month, LocalDate selectedDay, JPanel mainPanel, Database database) {
 		
+		
+		DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		
 		
 		setLayout(new BorderLayout(30,30));
@@ -49,12 +51,12 @@ public class Calendar extends JPanel{
 				mainPanel.removeAll();
 				
 				if(month!= 12) {
-					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year, month+1, selectedDay, mainPanel, database));
 				} else {
-					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year+1, 1, selectedDay, mainPanel, database));
 
 				}
-				mainPanel.add(new Events());
+				mainPanel.add(new Events(selectedDay, database, mainPanel));
 				mainPanel.revalidate();
 			}
 
@@ -88,12 +90,12 @@ public class Calendar extends JPanel{
 				mainPanel.removeAll();
 				
 				if(month!= 1) {
-					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year, month-1, selectedDay, mainPanel, database));
 				} else {
-					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel));
+					mainPanel.add(new Calendar(year-1, 12, selectedDay, mainPanel, database));
 
 				}
-				mainPanel.add(new Events());
+				mainPanel.add(new Events(selectedDay, database, mainPanel));
 				mainPanel.revalidate();
 			}
 
@@ -161,7 +163,7 @@ public class Calendar extends JPanel{
 				
 				dayLabel =  new DayLabel(i+"", Color.decode("#0ecf78"), Color.black, true);
 				
-			} else if(i%5==0) {
+			} else if(database.hasEvent(dateFormatter.format(LocalDate.of(year, month, i)))) {
 				dayLabel =  new DayLabel(i+"", Color.decode("#00d1e8"), Color.black, true);
 				
 			} else {
@@ -176,8 +178,8 @@ public class Calendar extends JPanel{
 					mainPanel.removeAll();
 					
 					LocalDate selected = LocalDate.of(year, month, day);
-					mainPanel.add(new Calendar(year, month, selected,mainPanel));
-					mainPanel.add(new Events());
+					mainPanel.add(new Calendar(year, month, selected,mainPanel,database));
+					mainPanel.add(new Events(selected,database,mainPanel));
 					mainPanel.revalidate();
 				}
 

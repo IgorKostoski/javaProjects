@@ -23,13 +23,14 @@ public class Main {
 		
 		
 		
-		JPanel mainPanel = new JPanel(new GridLayout(1,2,0,0));
+		JPanel mainPanel = new JPanel(new GridLayout(1,2));
 		
 		
 		LocalDate date = LocalDate.now();
+		Database database = new Database();
 		
-		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue(), date, mainPanel));
-		mainPanel.add(new Events());
+		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue(), date, mainPanel, database));
+		mainPanel.add(new Events(date, database, mainPanel));
 		
 		
 		

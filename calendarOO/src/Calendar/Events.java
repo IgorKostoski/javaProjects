@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -17,7 +18,7 @@ public class Events extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Events() {
+	public Events(LocalDate date, Database database, JPanel mainPanel) {
 		
 		ArrayList<Event> events = new ArrayList<>();
 		
