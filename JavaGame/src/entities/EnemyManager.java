@@ -20,9 +20,15 @@ public class EnemyManager {
 	public EnemyManager(Playing playing) {
 		this.playing = playing ;
 		loadEnemyImgs();
+		addEnemies();
 		
 	}
 	
+	private void addEnemies() {
+		crabbies = LoadSave.GetCrabs();
+		
+	}
+
 	public void update() {
 		for (Crabby c : crabbies)
 			c.update();
