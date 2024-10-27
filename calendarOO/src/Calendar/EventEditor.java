@@ -12,10 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class EventsEditor {
+public class EventEditor {
 	
 	
-	public EventsEditor(Event e, Database database, JPanel parent) {
+	public EventEditor(Event e, Database database, JPanel parent) {
 		
 		
 		JFrame frame = new JFrame("Calendar");
