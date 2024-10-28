@@ -117,7 +117,7 @@ public class EventEditor {
 					
 					try {
 						e.setTime(time.getText());
-					} catch (Exception exceptioon) {
+					} catch (Exception exception) {
 						JOptionPane.showMessageDialog(null, "Check time format HH:mm");
 						return;
 					}
