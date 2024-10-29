@@ -2,11 +2,14 @@ package Calendar;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
 public class Calendar extends JPanel{
 	
@@ -33,7 +36,40 @@ public class Calendar extends JPanel{
 		top.add(date, BorderLayout.CENTER);
 		
 		
+		JLabel right = new JLabel(new ImageIcon("pics/right.png"));
+		right.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		top.add(right, BorderLayout.EAST);
+		
+		
+		JLabel left = new JLabel(new ImageIcon("pics/left.png"));
+		left.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		top.add(left, BorderLayout.WEST);
+		
+		
 		add(top, BorderLayout.NORTH);
+		
+		
+		
+		
+		
+		JPanel days = new JPanel(new GridLayout(7,7));
+		
+		days.setBackground(null);
+		
+		for (int i=0; i< 49; i++) {
+			JLabel lb = new JLabel(i+"");
+			lb.setHorizontalAlignment(JLabel.CENTER);
+			lb.setFont(new Font("Helvetica", Font.PLAIN, 20));
+			lb.setOpaque(true);
+			lb.setBackground(Color.decode("#f0f0f0"));
+			lb.setForeground(Color.black);
+			
+			days.add(lb);
+
+	}
+		
+		add(days, BorderLayout.CENTER);
+		
 	}
 
 }
