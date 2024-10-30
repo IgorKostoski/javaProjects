@@ -63,6 +63,7 @@ public class Calendar extends JPanel{
 			lb.setOpaque(true);
 			lb.setBackground(Color.decode("#f0f0f0"));
 			lb.setForeground(Color.black);
+			lb.setCursor(new Cursor(Cursor.HAND_CURSOR));
 			
 			days.add(lb);
 
