@@ -17,7 +17,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar(int year, int month) {
+	public Calendar(int year, int month, LocalDate selectedDay) {
 		
 		
 		
@@ -86,7 +86,24 @@ public class Calendar extends JPanel{
 		
 		
 		for (int i=1; i<= daysNum; i++) {
-			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
+			
+			DayLabel dayLabel;
+			
+			if (selectedDay.getYear()== year && selectedDay.getMonthValue()== month && selectedDay.getDayOfMonth() == i) {
+				
+				
+				dayLabel =  new DayLabel(i+"", Color.decode("#0ecf78"), Color.black, true);
+			}  else if (i%5==0) {
+				
+				dayLabel =  new DayLabel(i+"", Color.decode("#00d1e8"), Color.black, true);
+				
+			} else {
+				
+				dayLabel =  new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true);
+				
+			}
+			
+			days.add(dayLabel);
 			
 
 	}
