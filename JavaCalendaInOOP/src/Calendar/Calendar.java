@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -33,7 +34,7 @@ public class Calendar extends JPanel{
 		top.setBackground(null);
 		
 		
-		JLabel date = new JLabel("November 2024");
+		JLabel date = new JLabel(LocalDate.of(year, month, 1).format(DateTimeFormatter.ofPattern("MMMM yyyy")));
 		date.setHorizontalAlignment(JLabel.CENTER);
 		date.setFont(new Font("Helvetica", Font.BOLD, 30));
 		date.setForeground(Color.decode("#0ecf78"));
