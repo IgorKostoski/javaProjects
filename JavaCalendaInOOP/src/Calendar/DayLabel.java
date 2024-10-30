@@ -18,7 +18,7 @@ public class DayLabel extends JLabel{
 		setOpaque(true);
 		setBackground(background);
 		setForeground(foreground);
-		setCursor(new Cursor(Cursor.HAND_CURSOR));
+		if (btn) setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	
 		

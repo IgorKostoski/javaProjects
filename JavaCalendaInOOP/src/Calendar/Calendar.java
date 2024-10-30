@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.time.LocalDate;
+import java.time.YearMonth;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -15,7 +17,7 @@ public class Calendar extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 
-	public Calendar() {
+	public Calendar(int year, int month) {
 		
 		
 		
@@ -56,16 +58,43 @@ public class Calendar extends JPanel{
 		
 		days.setBackground(null);
 		
-		for (int i=0; i< 49; i++) {
-			JLabel lb = new JLabel(i+"");
-			lb.setHorizontalAlignment(JLabel.CENTER);
-			lb.setFont(new Font("Helvetica", Font.PLAIN, 20));
-			lb.setOpaque(true);
-			lb.setBackground(Color.decode("#f0f0f0"));
-			lb.setForeground(Color.black);
-			lb.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		Color header = Color.decode("#f90069");
+		
+		days.add(new DayLabel("Su", header, Color.white, false));
+		days.add(new DayLabel("Mo", header, Color.white, false));
+		days.add(new DayLabel("Tu", header, Color.white, false));
+		days.add(new DayLabel("We", header, Color.white, false));
+		days.add(new DayLabel("Th", header, Color.white, false));
+		days.add(new DayLabel("Fr", header, Color.white, false));
+		days.add(new DayLabel("Sa", header, Color.white, false));
+		
+		
+		String[] weekDays = new String[] {"SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY",
+				"THURSDAY","FRIDAY", "SATURDAY"};
+		
+		
+		LocalDate firstDay = LocalDate.of(year, month, 1);
+		
+		int j = 0;
+		
+		while (!firstDay.getDayOfWeek().toString().equals(weekDays[j])) {
+			days.add(new DayLabel("", Color.decode("#f0f0f0"), Color.black, false));
+			j++;
+		}
+		
+		int daysNum = YearMonth.of(year, month).lengthOfMonth();
+		
+		
+		for (int i=1; i<= daysNum; i++) {
+			days.add(new DayLabel(i+"", Color.decode("#f0f0f0"), Color.black, true));
 			
-			days.add(lb);
+
+	}
+		
+		
+		for (int i=0; i< (42-(j+daysNum)); i++) {
+			days.add(new DayLabel("", Color.decode("#f0f0f0"), Color.black, true));
+			
 
 	}
 		
