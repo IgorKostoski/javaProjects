@@ -25,7 +25,7 @@ public class Main {
 		LocalDate date = LocalDate.now();		
 		
 		
-		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue(), date));
+		mainPanel.add(new Calendar(date.getYear(), date.getMonthValue(), date, mainPanel));
 		mainPanel.add(new Events());
 	
 		
