@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -65,6 +66,42 @@ public class EventEditor {
 		description.setFont(new Font("Helvetica", Font.PLAIN, 20));
 		description.setHorizontalAlignment(JLabel.CENTER);
 		center.add(description);
+		
+		
+		mainPanel.add(center, BorderLayout.CENTER);
+		
+		
+		JPanel bottom = new JPanel(new GridLayout(1,2,20,20));
+		bottom.setBackground(null);
+		
+		
+		
+		JButton delete = new JButton("Delete");
+		
+		delete.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		delete.setBackground(Color.decode("#00d1e8"));
+		
+		delete.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		bottom.add(delete);
+		
+		
+		JButton save = new JButton("Save");
+		
+		save.setFont(new Font("Helvetica", Font.PLAIN, 20));
+		save.setBackground(Color.decode("#00d1e8"));
+		
+		save.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		bottom.add(save);
+		
+		
+		
+		mainPanel.add(bottom, BorderLayout.SOUTH);
+		
+		
+		frame.getContentPane().add(mainPanel);
+		
+		
+		
 		
 		
 		
