@@ -86,14 +86,14 @@ public class Events extends JPanel{
 			});
 			
 			
-			JLabel title = new JLabel(events.get(i).getTItle());
+			JLabel title = new JLabel(events.get(i).getTitle());
 			title.setBorder(BorderFactory.createEmptyBorder(0,15,0,15));
 			title.setFont(new Font("Helvetica", Font.PLAIN,18));
 			title.setBackground(Color.black);
 			event.add(title);
 			
 			
-			JLabel time = new JLabel(events.get(i).getDateTImeTostring());
+			JLabel time = new JLabel(events.get(i).getDateTimeTostring());
 			time.setBorder(BorderFactory.createEmptyBorder(5,15,4,15));
 			time.setFont(new Font("Helvetica", Font.PLAIN,14));
 			time.setBackground(Color.DARK_GRAY);

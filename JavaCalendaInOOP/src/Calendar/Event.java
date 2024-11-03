@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event {
 	
@@ -38,7 +39,7 @@ public class Event {
 		this.ID = ID;
 	}
 	
-	public String getTItle() {
+	public String getTitle() {
 		return title;
 	}
 	
@@ -54,12 +55,12 @@ public class Event {
 		this.description = description;
 	}
 	
-	public LocalDateTime getDateTIme() {
+	public LocalDateTime getDateTime() {
 		return dateTime;
 	}
 	
-	public String getDateTImeTostring() {
-		return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yy | HH:mm"));
+	public String getDateTimeTostring() {
+		return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm"));
 	}
 	
 	public String getDateToString() {
@@ -70,11 +71,28 @@ public class Event {
 		return dateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 	}
 	
-	public void setDateTImeFromString(String dateTime) {
-		this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd-MM-yy | HH:mm"));
-	}
+//	public void setDateTimeFromString(String dateTime) {
+//		this.dateTime = LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("dd-MM-yyyy | HH:mm"));
+//	}
 	
-	public void setDateTIme(LocalDateTime dateTime) {
+	
+	public void setDateTimeFromString(String dateTime) {
+	    try {
+	        // Replace multiple spaces with a single space to standardize the input
+	        String standardizedDateTimeStr = dateTime.replaceAll("\\s+", " ");
+	        
+	        // Use a formatter that tolerates one or more spaces after the '|'
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy |[ ]HH:mm");
+	        
+	        // Parse the standardized date-time string
+	        this.dateTime = LocalDateTime.parse(standardizedDateTimeStr, formatter);
+	    } catch (DateTimeParseException e) {
+	        System.err.println("Error parsing date and time: " + e.getMessage());
+	    }
+	}
+
+	
+	public void setDateTime(LocalDateTime dateTime) {
 		this.dateTime = dateTime;
 	}
 	

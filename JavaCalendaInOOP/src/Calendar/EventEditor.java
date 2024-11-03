@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -16,11 +19,14 @@ public class EventEditor {
 	
 	public EventEditor(Event e, Database database, JPanel parent) {
 		
+		int year = e.getDate().getYear();
+		int month = e.getDate().getMonthValue();
+		
 		
 		JFrame frame = new JFrame("Calendar");
 		
 		frame.setSize(700, 350);
-		frame.setLocationRelativeTo(null);
+		frame.setLocationRelativeTo(parent);
 		frame.getContentPane().setBackground(Color.white);
 		
 		
@@ -57,7 +63,7 @@ public class EventEditor {
 		
 		
 		
-		JLabel l3 = new JLabel("Descripiton: ");
+		JLabel l3 = new JLabel("Description: ");
 		l3.setFont(new Font("Helvetica", Font.PLAIN, 20));
 		l3.setHorizontalAlignment(JLabel.CENTER);
 		center.add(l3);
@@ -92,6 +98,107 @@ public class EventEditor {
 		
 		save.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		bottom.add(save);
+		
+		// used in both update and create
+		time.setText(e.getTimeToString());
+		
+		
+		if (e.getTitle() != null) {
+			title.setText(e.getTitle());
+			description.setText(e.getDescription());
+			
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent ev) {
+					if (title.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Title cannot be empty");
+						return;
+					}
+					
+					e.setTitle(title.getText());
+					e.setDescription(description.getText());
+					
+					try {
+						e.setTime(time.getText());
+					} catch (Exception exception) {
+						JOptionPane.showMessageDialog(null, "Check time format HH:mm");
+						return;
+					}
+					
+					database.updateEvent(e);
+					
+					//refreshing main view (calendar & events)
+					
+					
+					parent.removeAll();
+					
+					parent.add(new Calendar(year, month, e.getDate(), parent, database ));
+					parent.add(new Events(e.getDate(), database, parent));
+					parent.revalidate();
+					frame.dispose();
+				}
+				
+			});
+			
+			delete.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					database.deleteEvent(e.getID());
+					
+					parent.removeAll();
+					
+					parent.add(new Calendar(year, month, e.getDate(), parent, database ));
+					parent.add(new Events(e.getDate(), database, parent));
+					parent.revalidate();
+					frame.dispose();
+				
+				}
+				
+			});
+			
+			
+			
+		} else {
+			delete.setVisible(false);
+			save.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent event) {
+				
+					if (title.getText().equals("")) {
+						JOptionPane.showMessageDialog(null, "Title cannot be empty");
+						return;
+					}
+					
+					e.setTitle(title.getText());
+					e.setDescription(description.getText());
+					
+					try {
+						e.setTime(time.getText());
+					} catch (Exception exception) {
+						JOptionPane.showMessageDialog(null, "Check time format HH:mm");
+						return;
+					}
+					
+					database.createEvent(e);
+					
+					parent.removeAll();
+					
+					parent.add(new Calendar(year, month, e.getDate(), parent, database ));
+					parent.add(new Events(e.getDate(), database, parent));
+					parent.revalidate();
+					frame.dispose();
+					
+					
+				}
+				
+			});
+			
+			
+			
+		}
 		
 		
 		
